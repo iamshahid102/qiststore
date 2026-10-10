@@ -1,0 +1,401 @@
+================================================================================
+ QISTSTORE — PLAN vs BUILD REPORT
+ Project : QistStore (BNPL installment e-commerce marketplace, MERN)
+ Source plan : ./plan.md   (generated from live analysis of qistbazaar.pk)
+ Repo root   : D:\Coding\QistStore   (ALL work confined to this root folder)
+ Date        : 2026-10-11
+================================================================================
+
+1. SUMMARY
+--------------------------------------------------------------------------------
+The project was built as a working full-stack MERN application: a Next.js 16
+(App Router, SSR) storefront + Express 5 / MongoDB (Mongoose 9) REST API, sharing
+one npm-workspaces monorepo with the pre-existing `client/` and `server/` folders.
+
+Status by area:
+  Phase 0 — Foundation ..................... DONE
+  Phase 1 — Catalog & Content MVP .......... DONE
+  Phase 2 — Auth, Cart, Checkout, Tracking . DONE
+  Phase 3 — Verification + Installments +    PARTIAL (API complete, no admin UI)
+            Admin Core
+  Phase 4 — Marketplace (Vendor) ........... PARTIAL (public stores + vendor data,
+                                             no vendor dashboard/self-service)
+  Phase 5 — Content & SEO polish ........... MOSTLY DONE (all CMS pages, blogs,
+                                             stores, visit-us, sitemap/robots,
+                                             JSON-LD; SEO landing-page generator
+                                             and spec facets not built)
+  Phase 6 — Hardening & Launch ............. NOT DONE (no CI/CD, no Redis/BullMQ,
+                                             no Sentry, no load testing)
+
+Everything listed as DONE was verified by executable checks (section 5).
+
+
+2. WHAT WAS BUILT — MAPPED TO THE PLAN
+--------------------------------------------------------------------------------
+
+2.1 Foundation (plan §3, §4) — DONE
+    - npm workspaces monorepo: root package.json orchestrates client + server
+      (`npm run dev`, `build`, `start`, `typecheck`, `test`, `seed`).
+    - `server/`: TypeScript (NodeNext ESM, strict, noUncheckedIndexedAccess),
+      layered architecture routes -> controllers/handlers -> models, zod-validated
+      env, pino logging, helmet/cors/compression/cookie-parser, rate limiting,
+      central error middleware with a consistent response envelope.
+    - `client/`: Next.js App Router + TypeScript strict, Tailwind CSS v4 via
+      @tailwindcss/postcss with design tokens in globals.css (@theme), ESLint
+      flat config (core-web-vitals + TS).
+    - `.env.example` files for both apps + a working `client/.env.local`.
+
+2.2 Data model (plan §5) — DONE (with one deliberate deviation, see §3.1)
+    Collections implemented: User, Category (2-level self-ref), Brand, Product
+    (embedded installment plans, specs, tags, delivery, stock), Order (embedded
+    items, pricing snapshot, verification, installment schedule, timeline/
+    state history), Counter (order-number sequence), CmsPage (block-based),
+    Blog (blog/press), Branch, Vendor (public store), Deal, HomeSection.
+    Indexes: unique slugs/SKUs, category+brand+price compound, text index on
+    name/specs, order status, customer phone.
+
+2.3 Installment engine (plan §1.3, §6) — DONE
+    `server/src/modules/engine/installment.ts` is pure (no IO) and fully unit
+    tested:
+      - computePlan(): totalPayable = advance + monthly * term, markup,
+        markupPercent
+      - input guards: integer paisa only, valid term set (3/6/9/12/18/24),
+        advance >= 10% of cash price and plausibility cap
+      - buildSchedule(): month-by-month due dates, last installment absorbs the
+        rounding remainder, with a hard invariant check that
+        SUM(amounts) === monthly * term
+      - order state machine: explicit transition table + assertTransition()
+      - generateOrderNumber(): QST-YYYY-NNNNNN (plus a Counter-backed service
+        used by the API)
+
+2.4 API (plan §7) — DONE
+    Catalog   : GET /categories/tree, /brands, /products (category, brand, tag,
+                min/maxPrice, q, sort, page, limit), /products/:slug (plans +
+                related + sameBrand), /deals/active, /home/sections,
+                /facets/:categorySlug
+    Content   : GET /pages/:slug, /blogs, /blogs/:slug, /branches (grouped by
+                city), /stores, /stores/:slug
+    Checkout  : POST /checkout/quote (server-side pricing), POST /checkout/order
+                (guest-friendly, returns orderNumber + next steps),
+                GET /orders/track (orderNumber + phone, no auth),
+                GET /orders/mine (JWT)
+    Auth      : POST /auth/register, /auth/login, /auth/refresh (rotation +
+                httpOnly cookie), /auth/logout, GET /auth/me
+    Admin     : GET /admin/orders?status, PATCH /admin/orders/:n/status
+                (state-machine enforced), PATCH /admin/orders/:n/verification
+                (approve/reject)
+    System    : GET /health (reports db connected/disconnected + uptime)
+
+2.5 Storefront (plan §2.2, §8) — DONE
+    Routes live and rendering real API data:
+      /                          home (hero w/ brand image, category quick links,
+                                 Deals of the Day + live countdown, top-category
+                                 marquee, 6 category rails, trust strip)
+      /shop                      filters: category, brand, advance price range,
+                                 sort; product count; pagination
+      /product-category/[...slug] category AND brand-subcategory listing pages
+      /product/[slug]            gallery placeholder, SPEC-SELECTOR for the
+                                 3 installment plans (monthly x term + advance +
+                                 total payable), qty, add-to-cart, specs table,
+                                 vendor block, related + same-brand rails,
+                                 Product JSON-LD
+      /cart                      plan-aware lines, qty edit, totals (advance,
+                                 monthly, total payable, free delivery)
+      /checkout + /checkout/success  form -> POST /checkout/order -> order number
+                                 + "what happens next" verification guidance
+      /order-tracking            Order ID + phone -> status, timeline, schedule
+      /account/login, /account/register, /account  (orders + installment table)
+      /page/[slug]               CMS renderer: 10 pages (About, FAQs, Verification
+                                 [bilingual EN + Urdu RTL], Payment Methods,
+                                 Delivery, Refunds, Terms, Privacy, Musawamah,
+                                 Become a Vendor)
+      /blogs, /blogs/[slug]      blog + press posts
+      /stores, /stores/[slug]    vendor directory + storefront with product grid
+      /visit-us                  12 facilitation centres grouped by city
+      /search, /wishlist, 404    search results, persisted wishlist, styled 404
+      /sitemap.xml, /robots.txt  dynamic sitemap (65+ URLs incl. products,
+                                 categories, subcategories, blogs) and robots
+                                 rules mirroring the reference site's policy
+                                 (disallow /account/, /order-tracking, /search)
+
+2.6 Security & correctness practices (plan §6.9, §9) — DONE
+    - All money as integer paisa; formatting only at the presentation layer
+    - Checkout prices ALWAYS recomputed server-side from the DB (client snapshot
+      never trusted); unavailable plans rejected with 400
+    - Idempotent-ish order numbering via an atomic Counter upsert
+    - JWT access/refresh with rotation, httpOnly refresh cookie, tokenVersion
+      invalidation, login lockout after repeated failures
+    - RBAC middleware on admin/staff routes; vendor data scoping in models
+    - Rate limiting: global 300/min, sensitive (auth + checkout) 20/min
+    - Order state machine enforced in one place; illegal transitions return 409
+    - Order tracking requires matching ORDER NUMBER + PHONE (no IDOR)
+    - Verification documents/guarantor fields modelled but never exposed publicly
+    - Dev-only graceful degradation: API boots without MongoDB, logs a warning,
+      keeps retrying, /health reports "degraded", DB-backed routes answer
+      503 DB_UNAVAILABLE; in production it fails fast instead
+
+2.7 Seed data (plan §4, §14) — DONE
+    `npm run seed` inserts: 17 top categories with 5 subcategories, 12 brands,
+    21 products with 3 generated installment plans each, 6 home rails, an active
+    24-hour deal, 10 CMS pages, 3 blog/press posts, 12 branches across 6 cities,
+    3 vendor stores, 2 demo users (admin + customer).
+    All copy is ORIGINAL — no text, images, logos or blog content copied from any
+    third-party site (explicit requirement carried over from plan.md).
+
+
+3. WHAT DEVIATED FROM THE PLAN (and why)
+--------------------------------------------------------------------------------
+
+3.1 Installment schedule stored EMBEDDED in the order (plan §5.2 proposed a
+    separate InstallmentSchedule collection). Embedded subdocuments keep the
+    order document atomic (one write per state change), remove a join on the
+    tracking path, and are fully sufficient for the implemented flows. For
+    payment-collection scale (indexed queries across all orders, per-month
+    reporting) promote it to its own collection — the DTO shapes stay the same.
+
+3.2 Cart lives on the client (zustand + localStorage) instead of a server-side
+    Cart collection with guest-id merging. Server trust is preserved because
+    POST /checkout/quote and POST /checkout/order re-price and re-validate every
+    line from the database. A server cart is only needed for cross-device
+    persistence.
+
+3.3 No separate `shared/` workspace package for zod schemas + DTO types. With a
+    single API consumer, duplicating the DTO types in `client/src/types/api.ts`
+    was simpler than a third workspace; unify when a second client (mobile app)
+    appears.
+
+3.4 Spec filters (RAM/Storage) — the plan's category sidebar. Filter DEFINITIONS
+    are seeded and served via GET /facets/:categorySlug, and products carry the
+    specs, but the sidebar currently exposes category / brand / advance-price /
+    sort only, i.e. spec facets are not yet wired end-to-end.
+
+3.5 Product images are gradient placeholders (deterministic per product name)
+    instead of uploaded media + Cloudinary. No upload endpoint was built. This
+    keeps the repo free of third-party imagery.
+
+3.6 SEO landing pages (the pattern `/{brand}-mobile-price-in-pakistan-{range}`,
+    plan §2.2 item 29 and the SeoLandingPage model) were NOT implemented. The
+    general category/brand/product SEO surface, dynamic sitemap, JSON-LD and
+    robots rules ARE implemented.
+
+3.7 Admin and Vendor have API coverage but NO dedicated admin/vendor UI. The
+    admin endpoints exist and are RBAC-protected (verified), and section 2.5 of
+    this report lists the public surfaces that ARE built. A Next.js admin panel
+    (product CRUD, verification queue with document viewer, installment
+    collections, CMS editor) and the vendor dashboard remain to be built.
+
+3.8 Deliberate architectural choice: catalog pages are rendered dynamically
+    (`dynamic = 'force-dynamic'`) rather than SSG/ISR. Reason: the build must
+    not depend on a live API/DB. Switching the catalog routes to ISR
+    (`export const revalidate = 3600`, matching the reference site's
+    `s-maxage=3600`) is a one-line change per page once the API is deployed
+    alongside the build.
+
+3.9 Recommended additions from the plan that are not implemented: Redis caching,
+    BullMQ reminder/payment-due jobs, Sentry, CI/CD pipelines, Docker Compose,
+    Playwright E2E suite, a payment-gateway adapter layer for JazzCash/EasyPaisa
+    (currently admin-confirmed/manual, which matches the reference site's
+    consumer-ID collection model), NADRA/eKYC automation, ratings/reviews write
+    path, multi-image galleries, coupons, Urdu locale routing (bilingual content
+    IS present inside CMS blocks).
+
+3.10 Tooling notes: because no local `mongod` was usable at build time, the test
+    harness prefers mongodb-memory-server and otherwise falls back to an isolated
+    `<db>_test` database derived from MONGO_URI (dropped afterwards). No
+    third-party/system packages were installed, and nothing outside the project
+    root was modified.
+
+
+4. FILES CREATED / MODIFIED (all inside D:\Coding\QistStore)
+--------------------------------------------------------------------------------
+Root
+  package.json (new)                 npm workspaces + dev/build/test/seed scripts
+  README.md (new)                    tech stack, setup, architecture, API, testing
+  PLAN_VS_BUILD_REPORT.txt (new)     this file
+  .gitignore (new)
+  plan.md (unchanged, source plan)
+
+server/  (new project)
+  package.json, tsconfig.json, tsconfig.build.json, vitest.config.ts,
+  .env.example
+  src/index.ts, src/app.ts, src/routes/index.ts
+  src/config/{env.ts,db.ts}
+  src/middlewares/{auth.ts,validate.ts,rateLimit.ts,error.ts}
+  src/models/{User.ts,Category.ts,Product.ts,Order.ts,Content.ts}
+  src/modules/engine/installment.ts
+  src/modules/auth/auth.routes.ts
+  src/modules/catalog/catalog.routes.ts
+  src/modules/content/content.routes.ts
+  src/modules/checkout/checkout.routes.ts
+  src/seed/{data.ts,seed.ts,dev-db.ts}
+  src/utils/{money.ts,slug.ts,response.ts,pagination.ts,errors.ts,logger.ts}
+  tests/{engine.test.ts,api.test.ts,globalSetup.ts}
+
+client/  (new project)
+  package.json, tsconfig.json, next.config.ts, postcss.config.mjs,
+  eslint.config.mjs, .env.local, .env.local.example
+  src/app/            layout.tsx, globals.css, page.tsx, not-found.tsx,
+                      sitemap.ts, robots.ts, shop/, product-category/[...slug]/,
+                      product/[slug]/, search/, cart/, checkout/,
+                      checkout/success/, order-tracking/, account/,
+                      account/login/, account/register/, wishlist/,
+                      page/[slug]/, blogs/, blogs/[slug]/, stores/,
+                      stores/[slug]/, visit-us/
+  src/components/     layout/{Header,Footer,USPBar,WhatsAppButton}.tsx
+                      product/{ProductCard,PlanSelector,WishlistButton}.tsx
+                      listing/{FilterSidebar,Pagination}.tsx
+                      home/{SectionRail,CategoryMarquee,DealsCountdown}.tsx
+                      cms/BlockRenderer.tsx
+  src/lib/{api.ts,format.ts,auth.ts}
+  src/stores/{cart.ts,wishlist.ts}
+  src/types/api.ts
+  public/brand/{qiststore-logo.png,hero.jpg}   (user-supplied brand assets,
+                                                copied from repo root)
+
+Removed: temporary *.log files and one-off inspection scripts used during
+verification (no stray artifacts left behind). Note: brand-logo.png and
+brand-logo-img.jpg supplied by the user remain in the root untouched.
+
+
+5. VERIFICATION EVIDENCE (commands actually run + results)
+--------------------------------------------------------------------------------
+5.1 Type checks & lint
+    server: `npx tsc --noEmit`                      -> exit 0, no errors
+    client: `npx tsc --noEmit`                      -> exit 0, no errors
+    client: `npx eslint .`                          -> exit 0, 0 errors / 0 warnings
+            (3 React `set-state-in-effect` errors and 4 unused-import warnings
+             found on the first lint run were FIXED at the cause — countdown
+             and persisted-auth reads now use `useSyncExternalStore` instead
+             of copying values into state inside an effect; nothing was
+             suppressed and no lint rule was disabled)
+
+5.2 Builds
+    server: `npx tsc -p tsconfig.build.json`        -> exit 0, dist/index.js emitted
+    client: `npx next build`                        -> exit 0, 22 routes compiled
+            (/, /shop, /product-category/[...slug], /product/[slug], /cart,
+             /checkout, /checkout/success, /order-tracking, /account,
+             /account/login, /account/register, /wishlist, /page/[slug],
+             /blogs, /blogs/[slug], /stores, /stores/[slug], /visit-us,
+             /search, /robots.txt, /sitemap.xml, /_not-found)
+
+5.3 Test suite (`npx vitest run` in server/)
+    33 passed, 2 skipped, 0 failed
+      - tests/engine.test.ts ............ 12 passed (plan math, schedule
+                                           invariant, rounding, state machine,
+                                           order-number format)
+      - tests/api.test.ts ............... 21 passed / 2 skipped
+          * HTTP layer (no DB): health, 404 envelope, validation 400s,
+            auth-protected route 401s                        ... 6 passed
+          * Integration (real MongoDB via fallback): categories tree, product
+            filtering + pagination meta, PDP plans/related, duplicate + invalid
+            registration, login/me, full checkout quote + order with schedule
+            invariant, tracking security (404 on wrong phone), RBAC 403,
+            admin state machine + verification approval + 409 on illegal
+            transition                                      ... 15 passed
+          * Skipped: mongodb-memory-server availability probe and the
+            "503 while DB down" case (DB is available here, so both are
+            correctly skipped rather than failed)
+
+5.4 Live end-to-end smoke test (real processes, real database)
+    API: `node server/dist/index.js` + MongoDB Atlas from server/.env
+      GET  /health                      -> 200 {"status":"ok","db":"connected"}
+      Seed                              -> 17 categories / 21 products / 10 pages
+                                           / 3 blogs / 12 branches / 3 vendors
+      Categories, products, PDP, deals, home rails, CMS page, stores, branches
+                                        -> all returned real data
+      POST /checkout/quote              -> server-priced (advance 1,290,000 paisa,
+                                           monthly 329,700, total 5,246,400)
+      POST /checkout/order              -> QST-2026-000001, pending_verification,
+                                           timeline + next steps
+      GET  /orders/track (correct)      -> status + 12 schedule rows summing to
+                                           monthly * term (invariant holds live)
+      GET  /orders/track (wrong phone)  -> 404 (no IDOR)
+      POST /auth/login (admin/customer) -> access tokens issued
+      PATCH /admin/orders/:n/status     -> pending_verification ->
+                                           verification_in_progress
+      PATCH /admin/orders/:n/verification -> approved
+      PATCH illegal transition          -> 409 CONFLICT
+      GET  /admin/orders (as customer)  -> 403 (RBAC)
+    Web: `next start` (production build)
+      All 15 storefront routes           -> 200
+      /product/does-not-exist            -> 404
+      /robots.txt, /sitemap.xml          -> served (65 URLs in sitemap)
+      Rendered HTML contained real data: Deals of the Day, product names,
+        Rs. prices, plan rows (Rs. 2,269 x 12 months, advance Rs. 10,750),
+        specs table, related products, Product JSON-LD, Urdu RTL verification
+        block, FAQ items, city-grouped centres, brand logo + hero image
+      Client->API proxy path used by the browser
+        (POST/GET http://localhost:3000/api/v1/...) -> quote, login, register
+        and product detail all succeeded through the Next rewrite
+
+5.5 Defects found by verification and fixed (not worked around)
+    a) `mongoose.connect()` resolved even with no reachable server, so the API
+       logged "MongoDB connected" while every query failed. Fixed in
+       config/db.ts: verify readyState === 1 and ping admin before reporting
+       success, plus connection error/disconnect listeners, and a real
+       /health db status (this is now reported honestly as "degraded").
+    b) The state machine allowed cancelling a shipment already in `processing`.
+       Fixed in the engine (cancel only before processing) to match the
+       business rule; unit test asserting the rule now passes.
+    c) Illegal order transitions surfaced as HTTP 500. Fixed by mapping them to
+       409 CONFLICT in the admin routes (test updated to assert 409 + code).
+    d) A Mongoose deprecation (`new: true` on findOneAndUpdate for the order
+       counter) replaced with `returnDocument: 'after'`.
+    e) Type-safety issues found by `tsc` (lean() typings on populated refs,
+       possibly-null subdocuments, a zod-enum ordering bug) were fixed in place
+       rather than cast away, plus a void-truthiness bug in the filter sidebar's
+       Clear button (now a proper clearFilters() handler).
+    f) ESLint flagged setState-in-effect in three client components
+       (Deals of the Day countdown, checkout success page, account dashboard).
+       Fixed idiomatically: auth is now a small external store consumed through
+       useSyncExternalStore (with save/clear notifications), the countdown reads
+       a bucketed clock snapshot, and sessionStorage is read through
+       useSyncExternalStore — all hydration-safe, no suppressions.
+
+5.6 Limitations of this verification
+    - Interactive browser behaviour (client-side JS: add-to-cart, checkout form
+      submission, accordions) was verified through the same HTTP interfaces the
+      browser uses (Next proxy + API) and via server-rendered HTML, but NOT
+      driven in a real browser (no Playwright installed; installing it would
+      download browser binaries). Recommend adding the E2E suite next.
+    - mongodb-memory-server could not start on this machine (missing
+      vcruntime140_1.dll / Visual C++ redistributable). Integration tests ran
+      against an isolated `qiststore_test` database instead. Installing the VC++
+      redistributable enables the in-memory path.
+    - No Lighthouse/performance run was performed; no load testing.
+    - The demo database now contains the seed data plus verification artifacts
+      (order QST-2026-000001, users "E2E Tester"/"Proxy Test"). Re-run
+      `npm run seed` for a clean demo state.
+
+
+6. HOW TO RUN
+--------------------------------------------------------------------------------
+  npm install
+  cp server/.env.example server/.env      # set MONGO_URI + JWT secrets
+  cp client/.env.local.example client/.env.local
+  npm run seed                            # demo catalogue + logins
+  npm run dev                             # API :5000, web :3000
+  npm test                                # 33 passing tests
+  npm run build && npm start              # production mode
+
+Demo logins:  admin 03000000001 / Admin@123   |   customer 03000000002 / Customer@123
+
+
+7. RECOMMENDED NEXT STEPS (in priority order)
+--------------------------------------------------------------------------------
+  1. Admin panel UI (verification queue with document viewer, order pipeline,
+     installment collections, product/CMS CRUD) — API is already in place.
+  2. Vendor self-service: apply -> approve -> product CRUD with plan editor ->
+     order dispatch -> payouts.
+  3. ISR/SSG for catalog routes + Redis caching (match the reference site's
+     s-maxage=3600 behaviour) once the API is deployed next to the build.
+  4. Spec facets (RAM/Storage) wired into the listing sidebar.
+  5. Payment gateway adapter for JazzCash/EasyPaisa behind the existing
+     manual-confirmation flow, plus BullMQ reminders for due installments.
+  6. Playwright E2E + CI pipeline (typecheck, lint, tests, build) and Sentry.
+  7. Image uploads (Cloudinary/S3) and multi-image galleries.
+  8. SEO landing-page generator + ratings/reviews write path.
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -1,0 +1,25 @@
+{
+  "name": "qiststore",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QistStore - BNPL installment e-commerce marketplace (MERN) - client (Next.js) + server (Express)",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w server && npm run build -w client",
+    "start": "concurrently -n server,client -c blue,green \"npm run start -w server\" \"npm run start -w client\"",
+    "typecheck": "npm run typecheck -w server && npm run typecheck -w client",
+    "test": "npm run test -w server",
+    "seed": "npm run seed -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "puppeteer-core": "^25.13.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
