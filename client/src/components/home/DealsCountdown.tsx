@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useSyncExternalStore } from 'react';
+import { LuClock } from 'react-icons/lu';
 
 /** Ticks once per second as an external store — avoids setState-in-effect. */
 function useTicker(intervalMs = 1000): number | null {
@@ -28,37 +29,59 @@ function remaining(endsAt: string, now: number) {
   };
 }
 
-export function DealsCountdown({ endsAt }: { endsAt: string }) {
-  const now = useTicker();
+const UNITS: { key: 'h' | 'm' | 's'; label: string }[] = [
+  { key: 'h', label: 'Hours' },
+  { key: 'm', label: 'Mins' },
+  { key: 's', label: 'Secs' },
+];
 
-  // Server snapshot is null → first client paint matches SSR, then it ticks.
-  // Render the same layout with placeholders so there is no layout shift.
-  if (now === null) {
+/**
+ * Deal countdown.
+ * - `boxes` renders the reference-style stat boxes (for dark banners)
+ * - the default renders an inline "Ends in" chip (for light sections)
+ */
+export function DealsCountdown({
+  endsAt,
+  variant = 'inline',
+}: {
+  endsAt: string;
+  variant?: 'inline' | 'boxes';
+}) {
+  const now = useTicker();
+  const time = now === null ? null : remaining(endsAt, now);
+
+  if (variant === 'boxes') {
+    const values = time ? { h: time.h, m: time.m, s: time.s } : { h: '--', m: '--', s: '--' };
     return (
-      <div className="flex items-center gap-1.5" aria-label="Deal ends in">
-        <span className="text-sm text-gray-500">Ends in:</span>
-        {['--', '--', '--'].map((unit, i) => (
-          <span key={i} className="flex items-center gap-1.5">
-            {i > 0 && <span className="text-gray-400">:</span>}
-            <span className="rounded bg-brand-800 px-2 py-1 font-mono text-sm font-bold text-white">{unit}</span>
+      <div className="flex items-center gap-2" aria-label="Deal ends in">
+        {UNITS.map(({ key, label }, i) => (
+          <span key={key} className="flex items-center gap-2">
+            {i > 0 && <span className="text-xs font-bold text-brand-200">:</span>}
+            <span className="qb-stat-box">
+              <span className="text-lg font-extrabold leading-none text-ink-900 sm:text-xl">{values[key]}</span>
+              <span className="mt-1 text-[10px] font-bold uppercase tracking-wide text-gray-500">{label}</span>
+            </span>
           </span>
         ))}
       </div>
     );
   }
 
-  const time = remaining(endsAt, now);
-  if (time.done) return <span className="text-sm font-semibold text-red-600">Deal ended</span>;
-
+  // Inline variant: deal expired / loaded states share one layout.
+  const done = time?.done;
   return (
-    <div className="flex items-center gap-1.5" aria-label="Deal ends in">
-      <span className="text-sm text-gray-500">Ends in:</span>
-      {[time.h, time.m, time.s].map((unit, i) => (
-        <span key={i} className="flex items-center gap-1.5">
-          {i > 0 && <span className="text-gray-400">:</span>}
-          <span className="rounded bg-brand-800 px-2 py-1 font-mono text-sm font-bold text-white">{unit}</span>
-        </span>
-      ))}
+    <div className="inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-3.5 py-1.5 text-sm">
+      <LuClock className="h-4 w-4 text-accent-500" aria-hidden />
+      {done ? (
+        <span className="font-semibold text-red-600">Deal ended</span>
+      ) : (
+        <>
+          <span className="text-gray-500">Ends in</span>
+          <span className="font-mono font-bold text-ink-900">
+            {time ? `${time.h}:${time.m}:${time.s}` : '--:--:--'}
+          </span>
+        </>
+      )}
     </div>
   );
 }

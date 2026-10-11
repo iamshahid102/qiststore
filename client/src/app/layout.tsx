@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -8,6 +9,13 @@ import { apiGet } from '@/lib/api';
 import type { CategoryNode } from '@/types/api';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+
+/** Modern geometric sans — matches the reference UI's display type. */
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -43,11 +51,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const categories = cats?.data ?? [];
 
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col">
+    <html lang="en" className={jakarta.variable}>
+      <body className="flex min-h-screen flex-col font-sans">
         <Header categories={categories} />
-        <USPBar />
         <main className="flex-1">{children}</main>
+        <USPBar />
         <Footer />
         <WhatsAppButton />
       </body>

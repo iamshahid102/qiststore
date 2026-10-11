@@ -5,10 +5,11 @@
    Primary  : #185ADB  (brand blue)
    Accent   : #FF8A3D  (orange CTA)
    Surface  : #F5F1E8  (cream page background)
+   Ink      : #0B1B39  (deep navy — footer / headings)
    =========================================================================== */
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   /* Brand blue — #185ADB is the 600 step */
   --color-brand-50: #ebf1fd;
@@ -35,12 +36,80 @@
   --color-cream-100: #f5f1e8;
   --color-cream-200: #eae3d4;
   --color-cream-300: #ded4bf;
+
+  /* Ink (deep navy) — footer + display headings */
+  --color-ink-900: #0b1b39;
+  --color-ink-800: #14294f;
 }
 
 body {
-  @apply bg-cream-100 text-gray-900 antialiased;
+  @apply bg-cream-100 text-ink-900 antialiased;
   /* Prevent accidental horizontal scroll from wide tables/rails on small screens */
   overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent-200);
+  color: var(--color-ink-900);
+}
+
+/* ---------------------------------------------------------------------------
+   Component classes — the shared visual language of the storefront
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* Surfaces */
+  .qb-card {
+    @apply rounded-2xl border border-cream-200/80 bg-white;
+    box-shadow:
+      0 1px 2px rgba(11, 27, 57, 0.04),
+      0 12px 28px -18px rgba(11, 27, 57, 0.25);
+  }
+
+  .qb-card-hover {
+    @apply transition duration-200;
+  }
+  .qb-card-hover:hover {
+    box-shadow:
+      0 2px 4px rgba(11, 27, 57, 0.05),
+      0 18px 38px -18px rgba(11, 27, 57, 0.35);
+    transform: translateY(-2px);
+  }
+
+  /* Buttons — pill shaped, like the reference design.
+     Note: each variant lists its own utilities; Tailwind v4 cannot @apply a
+     custom component class. */
+  .qb-btn,
+  .qb-btn-accent,
+  .qb-btn-dark,
+  .qb-btn-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600;
+  }
+  .qb-btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600;
+    box-shadow: 0 10px 22px -12px rgba(255, 138, 61, 0.9);
+  }
+  .qb-btn-dark {
+    @apply bg-brand-600 text-white hover:bg-brand-700;
+    box-shadow: 0 10px 22px -14px rgba(24, 90, 219, 0.9);
+  }
+  .qb-btn-light {
+    @apply border border-cream-300 bg-white text-ink-900 hover:border-brand-300 hover:text-brand-700;
+  }
+
+  /* Eyebrow chip above section titles */
+  .qb-eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-accent-600 sm:text-xs;
+  }
+
+  /* Tinted circular icon holder */
+  .qb-icon-chip {
+    @apply inline-flex items-center justify-center rounded-full bg-brand-50 text-brand-600;
+  }
+
+  /* Countdown / stat boxes used in the deals banner */
+  .qb-stat-box {
+    @apply flex min-w-[3.25rem] flex-col items-center rounded-xl bg-white/95 px-2 py-1.5 shadow-sm;
+  }
 }
 
 /* Category marquee (top categories strip) */
@@ -50,7 +119,7 @@ body {
 }
 
 .qb-marquee-track {
-  animation: qb-marquee 30s linear infinite;
+  animation: qb-marquee 40s linear infinite;
   width: max-content;
 }
 
@@ -61,6 +130,9 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .qb-marquee-track {
     animation: none;
+  }
+  .qb-card-hover:hover {
+    transform: none;
   }
 }
 

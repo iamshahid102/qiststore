@@ -1,9 +1,9 @@
 ================================================================================
- QISTSTORE — PLAN vs BUILD REPORT
- Project : QistStore (BNPL installment e-commerce marketplace, MERN)
+ QIST STORE — PLAN vs BUILD REPORT
+ Project : Qist Store (BNPL installment e-commerce marketplace, MERN)
  Source plan : ./plan.md   (generated from live analysis of qistbazaar.pk)
  Repo root   : D:\Coding\QistStore   (ALL work confined to this root folder)
- Date        : 2026-10-11
+ Date        : 2026-10-11  (rev. 2 — branding, theme, assets, Cloudinary, responsive)
 ================================================================================
 
 1. SUMMARY
@@ -28,6 +28,17 @@ Status by area:
                                              no Sentry, no load testing)
 
 Everything listed as DONE was verified by executable checks (section 5).
+
+REVISION 2 (this pass) — the project owner supplied the final brand identity, so
+the following were added on top of the build above and are covered in section 8:
+  * Brand name set to "Qist Store" across UI, metadata and docs
+  * Theme tokens locked to the supplied palette
+    (#185ADB primary / #FF8A3D accent / #F5F1E8 surface)
+  * The owner's logo assets installed and integrated (logo + hero banner +
+    favicon + Open Graph card)
+  * Cloudinary integrated end-to-end for image/file handling, with real
+    credentials in server/.env — upload/attach/detach/delete verified live
+  * Full responsiveness pass + a real-browser audit (320px -> 1440px)
 
 
 2. WHAT WAS BUILT — MAPPED TO THE PLAN
@@ -94,7 +105,9 @@ Everything listed as DONE was verified by executable checks (section 5).
       /shop                      filters: category, brand, advance price range,
                                  sort; product count; pagination
       /product-category/[...slug] category AND brand-subcategory listing pages
-      /product/[slug]            gallery placeholder, SPEC-SELECTOR for the
+      /product/[slug]            gallery (Cloudinary-capable, gradient fallback
+                                 when a product has no uploaded image),
+                                 SPEC-SELECTOR for the
                                  3 installment plans (monthly x term + advance +
                                  total payable), qty, add-to-cart, specs table,
                                  vendor block, related + same-brand rails,
@@ -170,8 +183,12 @@ Everything listed as DONE was verified by executable checks (section 5).
     sort only, i.e. spec facets are not yet wired end-to-end.
 
 3.5 Product images are gradient placeholders (deterministic per product name)
-    instead of uploaded media + Cloudinary. No upload endpoint was built. This
-    keeps the repo free of third-party imagery.
+    for the SEEDED catalogue, so the repo ships without third-party imagery.
+    [RESOLVED in rev. 2] Real media handling was added: Cloudinary upload /
+    delete + product image attach/detach endpoints, `next/image` delivery from
+    res.cloudinary.com, and a client upload helper — see section 8.3. Seeded
+    products still use deterministic placeholders until an operator uploads
+    real product photography (a deliberate choice, not a gap).
 
 3.6 SEO landing pages (the pattern `/{brand}-mobile-price-in-pakistan-{range}`,
     plan §2.2 item 29 and the SeoLandingPage model) were NOT implemented. The
@@ -193,11 +210,15 @@ Everything listed as DONE was verified by executable checks (section 5).
 
 3.9 Recommended additions from the plan that are not implemented: Redis caching,
     BullMQ reminder/payment-due jobs, Sentry, CI/CD pipelines, Docker Compose,
-    Playwright E2E suite, a payment-gateway adapter layer for JazzCash/EasyPaisa
+    a full Playwright E2E suite (rev. 2 added targeted real-browser checks for
+    responsiveness/branding via puppeteer-core — see section 8.4),
+    a payment-gateway adapter layer for JazzCash/EasyPaisa
     (currently admin-confirmed/manual, which matches the reference site's
     consumer-ID collection model), NADRA/eKYC automation, ratings/reviews write
-    path, multi-image galleries, coupons, Urdu locale routing (bilingual content
-    IS present inside CMS blocks).
+    path,    coupons, admin/vendor image-upload UI screens (the upload API + client
+    helper exist and are verified), Urdu locale routing (bilingual content IS
+    present inside CMS blocks). Multi-image galleries ARE supported by the data
+    model and the attach endpoint (products hold an ordered image array).
 
 3.10 Tooling notes: because no local `mongod` was usable at build time, the test
     harness prefers mongodb-memory-server and otherwise falls back to an isolated
@@ -249,12 +270,33 @@ client/  (new project)
   src/lib/{api.ts,format.ts,auth.ts}
   src/stores/{cart.ts,wishlist.ts}
   src/types/api.ts
-  public/brand/{qiststore-logo.png,hero.jpg}   (user-supplied brand assets,
-                                                copied from repo root)
+  public/brand/{logo.png,brand-banner.jpg,og-image.jpg}
+                                      generated from the owner's root assets
+  src/app/{icon.png,apple-icon.png}   generated favicons (512 / 180 px)
+
+Added in REVISION 2
+  Root
+    scripts/check-responsive.mjs      real-browser layout/overflow audit
+    scripts/check-brand.mjs           real-browser theme + brand audit
+    package.json                      + check:responsive / check:brand scripts,
+                                      + puppeteer-core devDependency
+  server/
+    src/config/cloudinary.ts          Cloudinary SDK wiring + configuration probe
+    src/modules/uploads/upload.routes.ts
+                                      upload / delete / attach / detach routes
+    .env.example                      + CLOUDINARY_* variables
+    (modified) src/config/env.ts, src/routes/index.ts
+  client/
+    next.config.ts                    remotePatterns for res.cloudinary.com
+    src/components/layout/USPBar.tsx (new trust strip)
+    (modified) globals.css (theme tokens), layout.tsx, page.tsx, Header.tsx,
+               Footer.tsx, api.ts, and every page/component touched by the
+               responsive pass (see 8.4)
 
 Removed: temporary *.log files and one-off inspection scripts used during
 verification (no stray artifacts left behind). Note: brand-logo.png and
-brand-logo-img.jpg supplied by the user remain in the root untouched.
+brand-logo-img.jpg supplied by the user remain in the root untouched, and are
+the originals the installed assets in client/public/brand/ were derived from.
 
 
 5. VERIFICATION EVIDENCE (commands actually run + results)
@@ -355,14 +397,17 @@ brand-logo-img.jpg supplied by the user remain in the root untouched.
 5.6 Limitations of this verification
     - Interactive browser behaviour (client-side JS: add-to-cart, checkout form
       submission, accordions) was verified through the same HTTP interfaces the
-      browser uses (Next proxy + API) and via server-rendered HTML, but NOT
-      driven in a real browser (no Playwright installed; installing it would
-      download browser binaries). Recommend adding the E2E suite next.
+      browser uses (Next proxy + API) and via server-rendered HTML. REV. 2
+      additionally drives the locally installed Chrome through puppeteer-core
+      for layout/theme assertions (section 8.4), but a full click-through E2E
+      suite (Playwright) is still not part of the repo. Recommend adding it.
     - mongodb-memory-server could not start on this machine (missing
       vcruntime140_1.dll / Visual C++ redistributable). Integration tests ran
       against an isolated `qiststore_test` database instead. Installing the VC++
       redistributable enables the in-memory path.
-    - No Lighthouse/performance run was performed; no load testing.
+    - No Lighthouse/performance run was performed; no load testing. Rev. 2 did
+      measure real-browser rendering at 8 viewport widths (overflow/layout),
+      which is layout correctness, not a performance benchmark.
     - The demo database now contains the seed data plus verification artifacts
       (order QST-2026-000001, users "E2E Tester"/"Proxy Test"). Re-run
       `npm run seed` for a clean demo state.
@@ -377,6 +422,10 @@ brand-logo-img.jpg supplied by the user remain in the root untouched.
   npm run dev                             # API :5000, web :3000
   npm test                                # 33 passing tests
   npm run build && npm start              # production mode
+
+  # with both servers running (rev. 2 verifiers, drive local Chrome):
+  npm run check:responsive                # 128 viewport checks, 0 overflow
+  npm run check:brand                     # theme tokens + logo/banner + mobile header
 
 Demo logins:  admin 03000000001 / Admin@123   |   customer 03000000002 / Customer@123
 
@@ -393,8 +442,307 @@ Demo logins:  admin 03000000001 / Admin@123   |   customer 03000000002 / Custome
   5. Payment gateway adapter for JazzCash/EasyPaisa behind the existing
      manual-confirmation flow, plus BullMQ reminders for due installments.
   6. Playwright E2E + CI pipeline (typecheck, lint, tests, build) and Sentry.
-  7. Image uploads (Cloudinary/S3) and multi-image galleries.
+  7. Admin/vendor screens that consume the (already built and verified) upload
+     API: product gallery manager, vendor logo/banner upload.
   8. SEO landing-page generator + ratings/reviews write path.
+  9. Client-side re-optimisation of legacy seed placeholders: swap the
+     deterministic gradient placeholders for Cloudinary-hosted product imagery
+     once real photography exists (`npm run seed` sources URLs, not files).
+
+================================================================================
+8. REVISION 2 — BRANDING, THEME, ASSETS, CLOUDINARY, RESPONSIVENESS
+================================================================================
+
+8.1 Brand name — "Qist Store"
+--------------------------------------------------------------------------------
+The requirement was to move off the "qist bazaar" naming and use "Qist Store".
+A controlled sweep updated prose/UI/metadata while deliberately preserving every
+identifier that must stay machine-stable:
+
+  RENAMED  : page titles/metadata, header + footer wordmark, email copy, CMS and
+             blog seed text, README, this report, package description
+  PRESERVED: package name `qiststore`, npm workspace names, Mongo database name,
+             email addresses (support@qiststore.example), env keys, the CDN
+             folder (qiststore/products), API paths and the order-ID prefix
+             (QST-…). Renaming those would break runtime config or data, not
+             branding.
+
+8.2 Theme + brand assets
+--------------------------------------------------------------------------------
+Theme tokens (single source of truth: client/src/app/globals.css via Tailwind v4
+`@theme`), so no component hard-codes the palette:
+
+  --color-brand-600 : #185ADB   (primary — links, header bar, prices, focus)
+  --color-accent-500: #FF8A3D   (accent — Add-to-Cart / Place-Order CTAs, badges)
+  --color-cream-100 : #F5F1E8   (surface — body background, section bands)
+
+Plus generated 50–900 scales per family, and `themeColor: #185ADB` for mobile
+browser chrome.
+
+Assets supplied by the owner in the repo root, and the engineering decision made:
+
+  brand-logo.png      677x369, TRANSPARENT background, brand blue
+    -> CHOSEN AS THE LOGO. Rationale: transparency lets one asset sit on the
+       cream surface, on white cards and on the blue header without a visible
+       box, which a JPEG cannot do.
+    -> installed as client/public/brand/logo.png (900px wide),
+       client/src/app/icon.png (512px square, favicon),
+       client/src/app/apple-icon.png (180px square)
+
+  brand-logo-img.jpg  1408x768, cream #F2EEE3 background (matches the surface)
+    -> CHOSEN AS THE BRAND BANNER, not the logo (its background would clash on
+       the blue header, and its aspect ratio cannot serve as a square icon).
+    -> installed as client/public/brand/brand-banner.jpg (1600px) for the hero,
+       and re-cropped to client/public/brand/og-image.jpg (1200x630) for social
+       sharing / Open Graph
+
+Processing used sharp (already present as a Next.js dependency; now declared
+explicitly as a client devDependency at 0.35.5). The originals in the repo root
+were left untouched.
+
+8.3 Cloudinary — image & file handling (integrated end-to-end)
+--------------------------------------------------------------------------------
+Server (new files)
+  server/src/config/cloudinary.ts          SDK config + `isConfigured()` probe
+  server/src/modules/uploads/upload.routes.ts   protected endpoints
+
+Endpoints (admin/staff only, RBAC-enforced)
+  GET    /api/v1/admin/uploads/status            is storage configured?
+  POST   /api/v1/admin/uploads                   multipart `file` -> CDN asset
+  DELETE /api/v1/admin/uploads?publicId=…        delete a CDN asset
+  POST   /api/v1/admin/products/:slug/images     attach { url, publicId, alt }
+  DELETE /api/v1/admin/products/:slug/images     detach (best-effort CDN delete)
+
+Guardrails
+  * multer: 5 MB limit, image MIME allow-list, single file, memory storage
+  * uploads are rate-limited like the other sensitive routes
+  * response is normalised { url, publicId, width, height, format, bytes }
+  * WITH NO CREDENTIALS the app still runs: the endpoints answer
+    503 CLOUDINARY_NOT_CONFIGURED and everything else keeps working
+
+Client
+  * client/next.config.ts: remotePatterns allow-lists res.cloudinary.com so
+    next/image optimises CDN assets (AVIF/WebP, responsive widths)
+  * client/src/lib/api.ts: apiUpload<T>(path, file, token) multipart helper,
+    ready for the admin upload screens
+  * server/.env.example documents all four CLOUDINARY_* variables
+
+The project owner placed real Cloudinary credentials in server/.env, so the flow
+was verified against the live CDN (results in 8.5) rather than with mocks.
+
+8.4 Responsiveness — full pass + measured audit
+--------------------------------------------------------------------------------
+Code changes
+  * mobile-first spacing/typography; container gutters px-3 -> sm:px-4
+  * home rails 2-up on phones, 3-up on tablets, 4-up on desktop
+  * sticky header with a compact utility bar, always-visible mobile search and
+    a category menu drawer
+  * filter sidebar collapses to a stack, then becomes a sticky, independently
+    scrollable column from lg upwards
+  * wide tables (installment schedules) scroll inside their own container
+    instead of stretching the page
+  * PDP plan selector stacks on phones and shows the price rail side-by-side
+    on desktop; cart/checkout summary sticks on desktop only
+
+Verifier added: scripts/check-responsive.mjs — drives the locally installed
+Chrome through puppeteer-core (no browser download) and, at each width, flags
+any visible element that crosses the viewport edge unless a scroll container
+ancestor explains it.
+
+8.5 Verification evidence for revision 2 (commands actually run)
+--------------------------------------------------------------------------------
+BRAND / THEME — node scripts/check-brand.mjs            ALL 14 CHECKS PASSED
+  PASS design token --color-brand-600 is #185ADB   — computed #185adb
+  PASS design token --color-accent-500 is #FF8A3D  — computed #ff8a3d
+  PASS design token --color-cream-100 is #F5F1E8   — computed #f5f1e8
+  PASS page background uses the cream surface      — rgb(245, 241, 232)
+  PASS primary CTA uses accent orange (#FF8A3D)    — rgb(255, 138, 61)
+  PASS brand logo renders in the header            — /brand/logo.png, 900px, 44px tall
+  PASS brand banner image loads in the hero
+  PASS mobile: logo scales down (32px) / search visible (36px input) /
+       menu button present / desktop nav hidden / header stays compact (132px)
+
+RESPONSIVE — node scripts/check-responsive.mjs
+  128 viewport checks (16 routes x 320/360/390/414/768/1024/1280/1440 px)
+  0 overflow failures, exit code 0
+  routes: / /shop /product-category/mobiles /product/:slug /search /cart
+          /checkout /order-tracking /account/login /account/register
+          /wishlist /page/faqs /page/verification-process /blogs /stores /visit-us
+
+CLOUDINARY (live account, real credentials from server/.env)
+  1) admin login                         200
+  2) GET /admin/uploads/status           200 {"provider":"cloudinary","configured":true}
+  3) POST /admin/uploads (real file)     201 -> https://res.cloudinary.com/<cloud>/image/
+                                         upload/v…/qiststore/products/<id>.jpg  (1408x768)
+  4) POST /:slug/images (attach)         200 -> product carries the CDN image
+  5) GET /products/:slug                 200 -> Cloudinary URL served to clients
+  6) DELETE /:slug/images (detach)       200 -> asset removed from the product
+  7) DELETE /admin/uploads?publicId=…    200 {"deleted":true}
+  8) GET /admin/uploads/status (no auth) 401
+  ---
+  9) PUT the CDN URL through the web app's image optimizer
+     GET /_next/image?url=<cloudinary>&w=640  ->  200 image/png, 12470 bytes
+     (proves next.config.ts remotePatterns allows the CDN)
+ 10) CDN transformation f_auto,q_auto,w_300 -> 200 image/png, 4844 bytes
+     (proves Cloudinary-side optimisation/delivery)
+
+PLATFORM RE-CHECKS after the revision (unchanged files re-verified)
+  server tsc --noEmit / tsc -p tsconfig.build.json ....... exit 0
+  server vitest run ..................................... 33 passed, 2 skipped,
+                                                          0 failed
+  client tsc --noEmit ................................... exit 0
+  client eslint . ....................................... exit 0 (0 errors/warnings)
+  client next build ..................................... exit 0, 22 routes
+  GET /health ........................................... ok, db "connected"
+                                                          (owner's Atlas URI)
+
+8.6 Defects found and fixed during revision 2
+--------------------------------------------------------------------------------
+  * The filter sidebar "Clear" control did not reset the active filters —
+    fixed (it now resets every filter param, not just the visible ones).
+  * Overview tables could push the page wider than the viewport on phones —
+    fixed by wrapping them in a horizontal scroll container (documented in 8.4).
+  * The brand-name sweep initially matched identifiers — re-run with word
+    boundaries after the first attempt, so only prose changed.
+  * The brand verifier's first selector grabbed the hidden desktop search input
+    and the whole <nav> element, producing false failures — the check was made
+    precise (explicit data-testid hooks in the header) instead of being relaxed.
+  * sharp sat only in Next.js' transitive tree while the asset pipeline used it
+    directly — now an explicit client devDependency.
+
+8.7 Still open after revision 2
+--------------------------------------------------------------------------------
+  * Admin/vendor UI screens that use the upload API (backend + helper ready).
+  * Product photography for the seeded catalogue (placeholders remain).
+  * Playwright click-through E2E, CI, Sentry, Redis/BullMQ, payment adapters —
+    unchanged from section 3.9 / section 7.
+
+================================================================================
+END OF REPORT
+================================================================================
+
+================================================================================
+9. REVISION 3 — UI/UX REDESIGN, EMOJI -> REACT ICONS
+================================================================================
+
+9.1 Scope and the one thing that was refused
+--------------------------------------------------------------------------------
+Requested: (a) download and copy every asset from qistbazaar.pk into this
+project, (b) replace all emoji with modern React icons, (c) 100% responsive,
+(d) redesign the UI/UX after the two reference screenshots.
+
+(a) was DECLINED and is deliberately not done. The reference site's images,
+banners, logos and copy are its owners' intellectual property; copying them
+would be infringement and would also break this project's own documented policy
+(plan.md "Legal note" and README §13 — original assets only). The engineering
+path offered instead: keep the owner's own logo/banner assets, serve product
+media through the already-integrated Cloudinary pipeline, and take only the
+*layout language* of the reference screenshots (which is what (d) did).
+
+(b), (c), (d) were implemented in full and verified.
+
+9.2 Emoji -> react-icons (client 5.7.0, Lucide + Font Awesome sets)
+--------------------------------------------------------------------------------
+A repo-wide scan found 40 emoji-bearing lines across 15 files (including the
+MONGO category seed, which stored emoji glyphs in the icon field). Result: 0
+remaining (verified by re-scan over client/src + server/src).
+
+  Layer       Change
+  API/DB      Category.icon now stores an icon KEY ("smartphone", "tv",
+              "refrigerator", "airconditioner" …) instead of a glyph — the API
+              serves data, not artwork. DB re-seeded; API verified serving keys.
+  Client      New registry client/src/components/ui/CategoryIcon.tsx maps keys
+              -> Lucide components, with a shopping-bag fallback so an unknown
+              key can never render an empty box.
+  UI          Header (phone/search/cart/menu/account), USP bar, WhatsApp button
+              (brand icon), wishlist hearts, star ratings, timeline checkmarks,
+              cart/404/success empty states — all Lucide/FA icons.
+
+Why keys instead of a global find/replace: emoji cannot be recoloured, resized
+consistently or read reliably by screen readers, and they render differently on
+every OS. Keys keep the icon decision in the client's design system.
+
+9.3 UI/UX redesign (matched to the two reference screenshots)
+--------------------------------------------------------------------------------
+Design language — new tokens in globals.css: ink-900/800 (deep navy) alongside
+the brand/accent/cream scales, and shared component classes:
+  .qb-card / .qb-card-hover   rounded-2xl surfaces with layered soft shadows
+  .qb-btn-accent|dark|light   pill buttons (accent = primary CTA)
+  .qb-eyebrow                 accent label above display headings
+  .qb-icon-chip               tinted circular icon holder
+  .qb-stat-box                countdown/stat tiles
+Typography: Plus Jakarta Sans via next/font — self-hosted at build time, so no
+runtime third-party request.
+
+Surfaces rebuilt
+  Header      announcement bar (gradient, phone + auth links), primary nav,
+              pill search with icon button, circular wishlist/cart/account
+              buttons with count badges, category bar, mobile drawer with
+              per-category icons
+  Home        rounded hero card (gradient + blobs, "New Arrival" chip, accent
+              headline span, CTA pair, avatar social proof + star icons),
+              "Browse by Category" icon-card grid, dark deals banner with
+              countdown tiles + CTA, category marquee, per-category rails,
+              4-item trust strip
+  ProductCard badge + wishlist heart + hover zoom + brand line + title + star
+              rating + advance/cash price + accent "View Plans" button
+  Footer      deep navy, brand card, three link columns, newsletter form with
+              submit state, five social icons, legal bottom bar
+  Shared      new ui/SectionHeading (eyebrow + title + "View all" arrow)
+
+9.4 Verification for revision 3 (commands actually run)
+--------------------------------------------------------------------------------
+  client tsc --noEmit ......................... exit 0
+  client eslint . ............................. exit 0 (0 errors, 0 warnings)
+  client next build ........................... exit 0, 22 routes + static assets
+  server tsc --noEmit / tsc -p tsconfig.build  exit 0
+  server vitest run ........................... 33 passed | 2 skipped | 0 failed
+  npm run seed ................................ 25 categories / 12 brands /
+                                                21 products / 10 pages re-seeded
+  npm run check:brand ......................... 14/14 PASSED
+      tokens #185ADB/#FF8A3D/#F5F1E8, cream body, accent CTA rgb(255,138,61),
+      logo 44px, hero banner loaded, mobile logo 32px, search visible with a
+      36px tap target, menu button, desktop nav hidden, header 152px (<=190)
+  npm run check:responsive ..................... 128 checks (16 routes x 8 widths),
+                                                0 overflow failures, exit 0
+  Emoji re-scan (client/src + server/src) ..... 0 emoji lines
+  Live DOM probe (Chrome, 1440px):
+      font family "Plus Jakarta Sans" loaded, hero gradient rendered,
+      footer rgb(11,27,57), newsletter input + 5 social links present,
+      154 SVG icons on the home page, 48/48 category cards carry an icon,
+      product-card CTA rgb(255,138,61), 0 emoji characters in the page text
+  Live DOM probe (Chrome, 390px): mobile drawer opens with 17 icon'd category
+      links; search tap target 36px
+  Screenshots: node scripts/capture-previews.mjs -> preview/home-desktop.png,
+      preview/home-mobile.png, preview/product-desktop.png (git-ignored)
+  npm run check:console (NEW permanent verifier, 14 routes):
+      0 console errors/warnings, 0 page errors, 0 failed requests, 0 5xx.
+      Next.js RSC prefetches cancelled on page close (?_rsc= + ERR_ABORTED)
+      are benign and are filtered; everything else fails the run.
+
+Defects found by this pass and fixed (no suppressions)
+  * Tailwind v4 cannot @apply a custom component class (build failed with
+    "Cannot apply unknown utility class qb-btn"). Fixed by giving each button
+    variant its own full utility list instead of nesting.
+  * The mobile search input measured a 20px tap target (< the 34px floor) —
+    fixed with vertical padding on the input itself; the brand verifier caught
+    it and now passes at 36px.
+  * scripts/check-brand.mjs located the burger button by the "\u2630" glyph; with
+    the emoji removal that selector could never match — the check now uses
+    header button[aria-label="Menu"] (same assertion, stable selector).
+  * Two stale node processes were still bound to :3000/:5000 serving the OLD
+    client build, which would have made every visual check a false pass/fail —
+    killed, restarted from the new build, then all checks re-run.
+
+9.5 Still open
+--------------------------------------------------------------------------------
+  * qistbazaar.pk assets are NOT copied (see 9.1). To use your own product
+    photography: drop the files anywhere and upload them through the Cloudinary
+    admin endpoints (README §6) — the attach API already supports multi-image
+    galleries.
+  * Inner pages (cart/checkout/CMS) keep the shared shell (header/footer/tokens/
+    buttons) but were not individually re-laid-out like the home page.
+  * Admin/vendor UI screens, Playwright E2E, CI — unchanged from §7.
 
 ================================================================================
 END OF REPORT

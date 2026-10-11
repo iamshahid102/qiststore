@@ -14,7 +14,7 @@ export interface SeedCategory {
 
 export const categories: SeedCategory[] = [
   {
-    name: 'Mobiles', slug: 'mobiles', icon: '📱',
+    name: 'Mobiles', slug: 'mobiles', icon: 'smartphone',
     filters: [
       { key: 'ram', label: 'RAM', type: 'enum', options: ['3GB', '4GB', '6GB', '8GB', '12GB'] },
       { key: 'storage', label: 'Storage', type: 'enum', options: ['64GB', '128GB', '256GB', '512GB'] },
@@ -27,22 +27,22 @@ export const categories: SeedCategory[] = [
       { name: 'Itel', slug: 'itel-mobiles' },
     ],
   },
-  { name: 'Laptops', slug: 'laptops', icon: '💻', children: [{ name: 'HP', slug: 'hp-laptops' }, { name: 'Dell', slug: 'dell-laptops' }, { name: 'Lenovo', slug: 'lenovo-laptops' }] },
-  { name: 'LED TV', slug: 'led-tv', icon: '📺' },
-  { name: 'Refrigerator', slug: 'refrigerator', icon: '🧊' },
-  { name: 'Washing Machine', slug: 'washing-machine', icon: '🌀' },
-  { name: 'Air Conditioner', slug: 'air-conditioner', icon: '❄️' },
-  { name: 'Small Appliances', slug: 'small-appliances', icon: '🔌' },
-  { name: 'Microwave Oven', slug: 'microwave-oven', icon: '🍽️' },
-  { name: 'Water Dispenser', slug: 'water-dispenser', icon: '🚰' },
-  { name: 'Fans', slug: 'fans', icon: '🌀' },
-  { name: 'Bikes', slug: 'bikes', icon: '🏍️' },
-  { name: 'Deep Freezer', slug: 'deep-freezer', icon: '❄️' },
-  { name: 'Batteries', slug: 'batteries', icon: '🔋' },
-  { name: 'Mattress', slug: 'mattress', icon: '🛏️' },
-  { name: 'Tyres', slug: 'tyres', icon: '🛞' },
-  { name: 'Tablet', slug: 'tablet', icon: '📟' },
-  { name: 'Solar', slug: 'solar', icon: '☀️' },
+  { name: 'Laptops', slug: 'laptops', icon: 'laptop', children: [{ name: 'HP', slug: 'hp-laptops' }, { name: 'Dell', slug: 'dell-laptops' }, { name: 'Lenovo', slug: 'lenovo-laptops' }] },
+  { name: 'LED TV', slug: 'led-tv', icon: 'tv' },
+  { name: 'Refrigerator', slug: 'refrigerator', icon: 'refrigerator' },
+  { name: 'Washing Machine', slug: 'washing-machine', icon: 'washingmachine' },
+  { name: 'Air Conditioner', slug: 'air-conditioner', icon: 'airconditioner' },
+  { name: 'Small Appliances', slug: 'small-appliances', icon: 'appliance' },
+  { name: 'Microwave Oven', slug: 'microwave-oven', icon: 'microwave' },
+  { name: 'Water Dispenser', slug: 'water-dispenser', icon: 'waterdispenser' },
+  { name: 'Fans', slug: 'fans', icon: 'fan' },
+  { name: 'Bikes', slug: 'bikes', icon: 'bike' },
+  { name: 'Deep Freezer', slug: 'deep-freezer', icon: 'deepfreezer' },
+  { name: 'Batteries', slug: 'batteries', icon: 'battery' },
+  { name: 'Mattress', slug: 'mattress', icon: 'mattress' },
+  { name: 'Tyres', slug: 'tyres', icon: 'tyre' },
+  { name: 'Tablet', slug: 'tablet', icon: 'tablet' },
+  { name: 'Solar', slug: 'solar', icon: 'solar' },
 ];
 
 export const brands = [

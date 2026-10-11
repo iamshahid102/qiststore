@@ -11,3 +11,6 @@ coverage/
 .DS_Store
 *.tsbuildinfo
 mongo-data/
+
+# generated UI previews (scripts/capture-previews.mjs)
+preview/

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useSyncExternalStore } from 'react';
+import { LuPartyPopper } from 'react-icons/lu';
 
 interface OrderResponse {
   orderNumber: string;
@@ -47,7 +48,9 @@ export default function CheckoutSuccessPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-3 sm:px-4 py-16 text-center">
-      <p className="text-6xl">🎉</p>
+      <span className="qb-icon-chip mx-auto h-20 w-20 bg-accent-100 text-accent-600">
+        <LuPartyPopper className="h-9 w-9" aria-hidden />
+      </span>
       <h1 className="mt-4 text-3xl font-bold text-gray-900">Order placed!</h1>
       <p className="mt-2 text-gray-600">
         Your order number is{' '}

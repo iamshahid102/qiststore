@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { LuShoppingCart } from 'react-icons/lu';
 import { useCart, cartTotals } from '@/stores/cart';
 import { formatRs } from '@/lib/format';
 
@@ -11,7 +12,9 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
-        <p className="text-5xl">🛒</p>
+        <span className="qb-icon-chip mx-auto h-20 w-20">
+          <LuShoppingCart className="h-9 w-9" aria-hidden />
+        </span>
         <h1 className="mt-4 text-2xl font-bold text-gray-900">Your cart is empty</h1>
         <p className="mt-2 text-gray-500">Browse our catalog and pick a plan that fits your budget.</p>
         <Link href="/shop" className="mt-6 inline-block rounded-full bg-brand-600 px-8 py-3 font-semibold text-white hover:bg-brand-700">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { LuCheck } from 'react-icons/lu';
 import { formatRs } from '@/lib/format';
 import { useCart } from '@/stores/cart';
 import type { PlanOption } from '@/types/api';
@@ -88,7 +89,13 @@ export function PlanSelector({
           onClick={onAdd}
           className="w-full rounded-lg bg-accent-500 py-3 text-sm font-bold text-white transition hover:bg-accent-600 sm:flex-1 sm:text-base"
         >
-          {added ? '✓ Added to Cart' : 'Add to Cart'}
+          {added ? (
+            <>
+              <LuCheck className="h-4 w-4" aria-hidden /> Added to Cart
+            </>
+          ) : (
+            'Add to Cart'
+          )}
         </button>
       </div>
 

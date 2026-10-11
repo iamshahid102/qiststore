@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { LuCheck } from 'react-icons/lu';
 import { apiGet } from '@/lib/api';
 import type { ProductDetailPayload } from '@/types/api';
 import { formatRs } from '@/lib/format';
@@ -106,7 +107,8 @@ export default async function ProductPage({ params }: PageProps) {
             <ul className="mt-4 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
               {product.highlights.map((h) => (
                 <li key={h} className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="text-brand-600">✓</span> {h}
+                  <LuCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden />
+                  <span>{h}</span>
                 </li>
               ))}
             </ul>

@@ -1,23 +1,27 @@
 import Link from 'next/link';
+import { CategoryIcon } from '@/components/ui/CategoryIcon';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import type { CategoryNode } from '@/types/api';
 
-/** Infinite-scrolling category strip (two rows: CSS marquee). */
+/** Infinite-scrolling category strip (CSS marquee, pauses on hover). */
 export function CategoryMarquee({ categories }: { categories: CategoryNode[] }) {
   if (categories.length === 0) return null;
   const loop = [...categories, ...categories]; // duplicate for seamless loop
   return (
-    <section className="mt-6 overflow-hidden sm:mt-8">
-      <h2 className="mb-3 text-lg font-bold text-gray-900 sm:text-2xl">Top Categories of the Month</h2>
-      <div className="relative">
+    <section className="mt-10 overflow-hidden sm:mt-14">
+      <SectionHeading eyebrow="Top picks" title="Top Categories of the Month" href="/shop" linkLabel="View all" />
+      <div className="qb-scroll-x -mx-3 px-3 sm:mx-0 sm:px-0">
         <div className="qb-marquee-track flex gap-3 pb-2">
           {loop.map((c, i) => (
             <Link
               key={`${c.slug}-${i}`}
               href={`/product-category/${c.slug}`}
-              className="flex w-24 shrink-0 flex-col items-center gap-2 rounded-xl border border-cream-200 bg-white px-2 py-3 hover:border-brand-300 hover:shadow-sm sm:w-28 sm:px-3 sm:py-4"
+              className="qb-card flex w-28 shrink-0 flex-col items-center gap-2 px-3 py-4 transition hover:border-brand-300 sm:w-32"
             >
-              <span className="text-2xl sm:text-3xl" aria-hidden>{c.icon || '🛍️'}</span>
-              <span className="line-clamp-2 text-center text-[11px] font-medium text-gray-700 sm:text-xs">{c.name}</span>
+              <span className="qb-icon-chip h-12 w-12">
+                <CategoryIcon name={c.icon} className="h-6 w-6" />
+              </span>
+              <span className="line-clamp-2 text-center text-xs font-semibold text-ink-900">{c.name}</span>
             </Link>
           ))}
         </div>

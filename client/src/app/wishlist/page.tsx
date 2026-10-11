@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { LuHeart } from 'react-icons/lu';
 import { useWishlist } from '@/stores/wishlist';
 import { formatRs } from '@/lib/format';
 
@@ -12,7 +13,8 @@ export default function WishlistPage() {
       <h1 className="text-2xl font-bold text-gray-900">My Wishlist</h1>
       {items.length === 0 ? (
         <p className="mt-6 rounded-xl border border-dashed border-gray-300 bg-white p-10 text-center text-gray-500">
-          Your wishlist is empty. Tap the ♡ on any product to save it here.
+          Your wishlist is empty. Tap the{' '}
+          <LuHeart className="inline h-4 w-4 text-accent-500" aria-hidden /> button on any product to save it here.
         </p>
       ) : (
         <ul className="mt-6 space-y-3">

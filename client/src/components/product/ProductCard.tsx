@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { LuArrowRight, LuStar } from 'react-icons/lu';
 import { formatRs } from '@/lib/format';
 import type { ProductSummary } from '@/types/api';
 import { WishlistButton } from '@/components/product/WishlistButton';
@@ -39,7 +40,7 @@ export function ProductImage({
   return (
     <div
       className="flex h-full w-full items-center justify-center"
-      style={{ background: `linear-gradient(135deg, hsl(${hue} 70% 92%), hsl(${(hue + 40) % 360} 70% 80%))` }}
+      style={{ background: `linear-gradient(135deg, hsl(${hue} 70% 94%), hsl(${(hue + 40) % 360} 70% 84%))` }}
       aria-hidden
     >
       <span className="select-none text-4xl font-black drop-shadow sm:text-5xl" style={{ color: `hsl(${hue} 50% 45%)` }}>
@@ -49,56 +50,100 @@ export function ProductImage({
   );
 }
 
-export function ProductCard({ product, priority = false }: { product: ProductSummary; priority?: boolean }) {
+/** Compact star rating — accent stars, muted count. */
+function Rating({ avg, count }: { avg: number; count: number }) {
+  if (count === 0) {
+    return <span className="text-xs font-semibold text-gray-400">No reviews yet</span>;
+  }
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:shadow-lg">
+    <span className="flex items-center gap-1 text-xs text-gray-500">
+      <LuStar className="h-3.5 w-3.5 fill-accent-500 text-accent-500" aria-hidden />
+      <span className="font-bold text-ink-900">{avg.toFixed(1)}</span>
+      <span className="text-gray-400">({count})</span>
+    </span>
+  );
+}
+
+export function ProductCard({ product, priority = false }: { product: ProductSummary; priority?: boolean }) {
+  const isNew = product.ratingCount === 0 && !product.tags.includes('deal-of-day');
+  return (
+    <article className="qb-card qb-card-hover group relative flex flex-col overflow-hidden">
       <div className="absolute right-2 top-2 z-10">
         <WishlistButton slug={product.slug} name={product.name} minAdvance={product.minAdvance} />
       </div>
-      {product.tags.includes('deal-of-day') && (
-        <span className="absolute left-2 top-2 z-10 rounded bg-red-600 px-2 py-0.5 text-[11px] font-bold uppercase text-white">
-          Deal
-        </span>
-      )}
-      <Link href={`/product/${product.slug}`} className="block">
-        <div className="aspect-square w-full overflow-hidden bg-cream-50">
+      <div className="absolute left-2 top-2 z-10 flex flex-col gap-1.5">
+        {product.tags.includes('deal-of-day') && (
+          <span className="rounded-full bg-accent-500 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow-sm">
+            Deal
+          </span>
+        )}
+        {isNew && (
+          <span className="rounded-full bg-brand-600 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow-sm">
+            New
+          </span>
+        )}
+      </div>
+
+      <Link
+        href={`/product/${product.slug}`}
+        className="block aspect-square w-full overflow-hidden bg-cream-50"
+        tabIndex={-1}
+        aria-hidden
+      >
+        <div className="h-full w-full transition-transform duration-300 group-hover:scale-105">
           <ProductImage name={product.name} url={product.imageUrl} priority={priority} />
         </div>
       </Link>
-      <div className="flex flex-1 flex-col p-2.5 sm:p-3">
-        <p className="text-base font-bold text-brand-700 sm:text-lg">
-          {formatRs(product.minAdvance)} <span className="text-[11px] font-semibold text-gray-500 sm:text-xs">Advance</span>
-        </p>
+
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        {product.brandName && (
+          <p className="text-[11px] font-bold uppercase tracking-wide text-gray-400">{product.brandName}</p>
+        )}
         <Link
           href={`/product/${product.slug}`}
-          className="mt-1 line-clamp-2 min-h-[2.5rem] text-xs text-gray-800 hover:text-brand-600 sm:text-sm"
+          className="mt-1 line-clamp-2 min-h-[2.5rem] text-sm font-semibold leading-snug text-ink-900 hover:text-brand-600"
         >
           {product.name}
         </Link>
-        {product.brandName && <p className="mt-1 text-xs text-gray-400">{product.brandName}</p>}
-        <div className="mt-auto flex items-center justify-between pt-2">
-          <span className="text-xs text-gray-400">
-            {product.ratingCount > 0 ? `★ ${product.ratingAvg.toFixed(1)}` : 'New'}
-          </span>
-          <Link href={`/product/${product.slug}`} className="rounded bg-brand-50 px-2.5 py-1.5 text-[11px] font-semibold text-brand-700 hover:bg-brand-100 sm:text-xs">
+
+        <div className="mt-2">
+          <Rating avg={product.ratingAvg} count={product.ratingCount} />
+        </div>
+
+        <div className="mt-auto pt-3">
+          <div className="flex items-baseline gap-2">
+            <span className="text-lg font-extrabold text-brand-700 sm:text-xl">
+              {formatRs(product.minAdvance)}
+            </span>
+            <span className="text-[11px] font-semibold text-gray-500">advance</span>
+          </div>
+          <p className="mt-0.5 text-xs text-gray-400">
+            Cash {formatRs(product.cashPrice)}
+          </p>
+
+          <Link
+            href={`/product/${product.slug}`}
+            className="qb-btn-accent mt-3 w-full px-3 py-2.5 text-xs sm:text-sm"
+          >
             View Plans
+            <LuArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 export function ProductGrid({ products, priorityFirst = false }: { products: ProductSummary[]; priorityFirst?: boolean }) {
   if (products.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-gray-500 sm:p-12">
+      <div className="rounded-2xl border border-dashed border-cream-300 bg-white p-8 text-center text-gray-500 sm:p-12">
         No products found. Try a different filter.
       </div>
     );
   }
   return (
-    <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {products.map((p, i) => (
         <ProductCard key={p.id} product={p} priority={priorityFirst && i < 4} />
       ))}
