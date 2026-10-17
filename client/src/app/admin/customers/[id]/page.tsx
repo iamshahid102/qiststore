@@ -168,7 +168,7 @@ export default function AdminCustomerDetailPage() {
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          label="Lifetime advance"
+          label="Advance booked"
           value={formatRs(stats.totalAdvance)}
           hint={`${stats.orders} order(s) total`}
           icon={<LuWallet className="h-5 w-5" />}

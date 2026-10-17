@@ -115,7 +115,7 @@ try {
         await page.goto(`${BASE_URL}${href}`, { waitUntil: 'networkidle0', timeout: 60000 });
         await new Promise((resolve) => setTimeout(resolve, 800));
         const detail = await page.evaluate(() => document.body.innerText);
-        const detailOk = /lifetime advance/i.test(detail) && /order history/i.test(detail);
+        const detailOk = /advance booked/i.test(detail) && /order history/i.test(detail);
         if (!detailOk) failures++;
         console.log(`${detailOk ? 'OK  ' : 'FAIL'} Customer detail  ${href}`);
         await page.screenshot({ path: `${OUT_DIR}/admin-customer-detail.png`, fullPage: false });

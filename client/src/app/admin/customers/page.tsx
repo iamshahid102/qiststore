@@ -146,7 +146,7 @@ export default function AdminCustomersPage() {
                   <th className="px-4 py-2.5 sm:pl-5">Customer</th>
                   <th className="px-3 py-2.5">Role</th>
                   <th className="px-3 py-2.5 text-center">Orders</th>
-                  <th className="px-3 py-2.5 text-right">Advance paid</th>
+                  <th className="px-3 py-2.5 text-right">Advance booked</th>
                   <th className="px-3 py-2.5 text-right">Contract value</th>
                   <th className="px-3 py-2.5">Last order</th>
                   <th className="px-3 py-2.5">Status</th>

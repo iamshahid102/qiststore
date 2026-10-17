@@ -37,7 +37,7 @@ koi dashboard UI nahi tha. Ab ek complete, production-style admin panel hai:
       - Installment schedule: mark paid, record partial payment, reset to upcoming
         (method + transaction reference stored; timeline entry written)
   • Customer management:
-      - Lifetime advance, contract value, orders count, last order
+      - Advance booked, contract value, orders count, last order
       - Profile with full order history and KYC status
       - Block / unblock account (blocking bumps tokenVersion → refresh sessions die)
       - Role management (customer / vendor / staff / admin) — full admin only
