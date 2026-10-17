@@ -1,0 +1,131 @@
+================================================================================
+QIST STORE — LOCAL CLEANUP + PASSWORD TOGGLE REPORT
+================================================================================
+Date    : 17 October 2026
+Scope   : Sirf `D:\Coding\QistStore` ke andar — kisi doosre folder/system ko
+          touch nahi kiya gaya.
+Rule    : Zaroori files/folders, saare .md/.txt, brand sources aur import data
+          ko DELETE nahi kiya gaya. Sirf verified-junk delete kiya gaya.
+
+--------------------------------------------------------------------------------
+1. KYA-KYA DELETE / REMOVE KIYA (aur kyun)
+--------------------------------------------------------------------------------
+A) Root ke obsolete one-off scraper scripts (9 files, ~45 KB)
+   ─────────────────────────────────────────────────────────────
+   debug_rsc.js, fast_scraper.js, final_scraper.js, full_scraper.js,
+   parse_rsc.js, quick_scraper.js, scrape.js, scrape_complete.js,
+   scrape_qist.js
+   Reason: ye import:assets / import:curated banne se pehle ke throwaway
+   experiments thay. Unme se koi bhi package.json script, README ya code se
+   import/use nahi ho raha tha (verified via grep). Project ki official
+   pipeline `scripts/import-assets.mjs` + `scripts/import-curated.mjs` hai.
+
+B) test_products.json (1 file, ~12 KB)
+   ─────────────────────────────────
+   Reason: scraper ke waqt ka scratch/test data; koi code isay nahi padhta.
+
+C) assets/images/ — pura folder: 1,130 files, ~18 MB, 15 category sub-folders
+   ─────────────────────────────────────────────────────────────────────────
+   Reason: har file ka extension .jpeg/.jpg/.png/.webp tha magar bytes
+   ek hi 15.7 KB "Page Not Found" HTML page thay (magic-byte check se
+   verify kiya gaya — `<!DOCTYPE html>` output). Ye files kabhi decode
+   nahi hui thay; storefront images Cloudinary se aate hain.
+   Verified safe: `npm run import:assets` pehle bhi invalid images ko skip
+   karta tha. Folder deletion ke baad script ko defensive guard diya gaya
+   (copyImage ab missing source folder par crash nahi karta) aur re-run
+   kiya gaya — output `server/src/seed/assets-products.ts` BILKUL identical
+   (git diff empty) raha.
+
+D) preview/admin-mobile-debug.png (1 file)
+   ──────────────────────────────────────
+   Reason: debugging ke waqt banaya gaya temporary screenshot; regenerable.
+
+E) server/node_modules/.vite-temp/ (empty directory)
+   ───────────────────────────────────────────────
+   Reason: test runner ka khaali temp folder.
+
+TOTAL: 1,140 tracked files deleted (1,130 images + 10 root files) + 1 ignored
+debug screenshot + 1 empty folder ≈ **18 MB freed** locally.
+
+--------------------------------------------------------------------------------
+2. JO CHEEZEIN JAAN-BOOJH KAR RAKHI GAYI (important)
+--------------------------------------------------------------------------------
+  • Saari .md files — README.md, plan.md
+  • Saari .txt reports — ADMIN_DASHBOARD_REPORT.txt, ASSETS_INTEGRATION_REPORT.txt,
+    PLAN_VS_BUILD_REPORT.txt, aur ye CLEANUP_REPORT.txt
+  • assets/data/products.json + products_flat.json — `npm run import:assets`
+    ka source input
+  • brand-logo.png + brand-logo-img.jpg (root) — original brand source assets,
+    README mein documented (client/public/brand/ ke generated versions ke source)
+  • preview/*.png — reports ke verification screenshots (evidence)
+  • scripts/* (capture-previews, check-*, import-*) — saare npm scripts se chalte hain
+  • Build/dependency folders — node_modules, client/.next, server/dist, server/.env
+  • client/public/brand/* — live brand assets
+
+--------------------------------------------------------------------------------
+3. CODE CHANGES
+--------------------------------------------------------------------------------
+  NEW  client/src/components/ui/PasswordInput.tsx
+       Reusable password field with a show/hide eye toggle:
+         - type password ↔ text toggle (LuEye / LuEyeOff icons)
+         - aria-label + aria-pressed + aria-controls + title (a11y)
+         - onMouseDown preventDefault → eye click karne par input ka focus
+           caret kabhi nahi chhota (typing jari rehti hai)
+         - autoComplete/autoCapitalize/autoCorrect/spellCheck hardening
+  MOD  client/src/app/(store)/account/login/page.tsx
+       Password field → <PasswordInput autoComplete="current-password" />
+       + hint line "Tap the eye icon to show or hide your password."
+  MOD  client/src/app/(store)/account/register/page.tsx
+       Password field → <PasswordInput autoComplete="new-password" minLength={6} />
+       + hint line.
+  MOD  scripts/import-assets.mjs
+       copyImage() ab SOURCE_IMAGES folder missing honay par graceful skip
+       karta hai (cleanup ke baad import command kaam karta rahe) + header
+       docs updated.
+  MOD  ASSETS_INTEGRATION_REPORT.txt
+       Update section add kiya (assets/images removal documented).
+
+Note: login/register ke header/footer mein jo doosre forms hain (search bar)
+un mein bhi submit buttons hain; is liye password-toggle browser check ko
+sirf auth form ke andar scope kar ke verify kiya gaya (formSubmit=1,
+formToggle=1).
+
+--------------------------------------------------------------------------------
+4. VERIFICATION (sab real runs, captured exit codes)
+--------------------------------------------------------------------------------
+  npm run typecheck        → EXIT 0
+  npm test                 → EXIT 0  (41 passed | 2 skipped; skips = DB-unavailable guards)
+  npm run build            → EXIT 0  (server + client, saare /admin routes build)
+  npm run check:admin      → EXIT 0  (11/11 OK, login flow new component ke saath)
+  npm run check:console    → EXIT 0  (14 routes clean, 0 console/page/network problems)
+  npm run check:images     → EXIT 0  (0 product image failures — Cloudinary images intact)
+  node scripts/import-assets.mjs → EXIT 0, generated file identical (git diff empty)
+
+  Password toggle — real browser (Chrome/Puppeteer):
+    OK /account/login   start=password → reveal (text) → hide (password), focus kept
+    OK /account/register start=password → reveal (text) → hide (password), focus kept
+    OK form scope: 1 submit + 1 toggle button in each auth form
+    OK full admin login flow → /admin (check:admin)
+
+  Cleanup ke baad app live:
+    API http://localhost:5000/health → ok + db connected
+    Web http://localhost:3000/admin  → 200 (dashboard, products, orders, customers)
+
+--------------------------------------------------------------------------------
+5. NOTES / LIMITATIONS
+--------------------------------------------------------------------------------
+  • Ye deletions abhi **local working tree** mein hain (git mein 1,140 deleted
+    files dikhenge). Commit karein tabhi repository se permanently remove honge —
+    commit aapka decision hai (koi commit mujhse nahi karwaya gaya).
+  • `assets/images` delete karne se `npm run import:assets` ka output same hai
+    (invalid files waise bhi kabhi use nahi hui).
+  • Agar aap chahein to `preview/` (regenerable screenshots) bhi hata sakte
+    hain — maine reports ke evidence ke taur par rakha hai.
+  • `server/dist` aur `client/.next` build artifacts hain (gitignored), chalte
+    waqt delete nahi kiye.
+  • Password visibility sirf client UI par hai — data hamesha form ke normal
+    submit process se hi jata hai; kahin bhi password log nahi hota.
+
+================================================================================
+END OF REPORT
+================================================================================

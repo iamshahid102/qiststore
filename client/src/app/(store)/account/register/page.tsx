@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { apiPost } from '@/lib/api';
 import { saveAuth, type StoredAuth } from '@/lib/auth';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -43,9 +44,18 @@ export default function RegisterPage() {
         </label>
         <label className="block text-sm">
           <span className="mb-1 block text-gray-600">Password (min 6 characters)</span>
-          <input required minLength={6} type="password" value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-            className="w-full rounded border border-gray-300 px-3 py-2" />
+          <PasswordInput
+            required
+            minLength={6}
+            autoComplete="new-password"
+            name="password"
+            value={form.password}
+            onChange={(value) => setForm({ ...form, password: value })}
+            placeholder="Create a password"
+          />
+          <span className="mt-1 block text-[11px] text-gray-400">
+            Tap the eye icon to show or hide your password while typing.
+          </span>
         </label>
         {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
         <button type="submit" disabled={loading}

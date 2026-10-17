@@ -5,7 +5,9 @@
  * Source:
  *   assets/data/products.json       grouped dump (13 category keys, 676 rows)
  *   assets/data/products_flat.json  flat dump (676 rows)
- *   assets/images/<category>/*      product images (15 folders)
+ *   assets/images/<category>/*      product images (15 folders, optional —
+ *                                   every supplied file was an invalid 404
+ *                                   HTML page, so this folder may be deleted)
  *
  * What it does:
  *   1. De-duplicates the scraped rows into real products.
@@ -289,6 +291,12 @@ function isValidImage(buffer) {
 }
 
 function copyImage(file, category, sourceFolderHint) {
+  // The source image folder is optional: it may have been cleaned up after
+  // the one-time import (every supplied file was an invalid 404 HTML page).
+  if (!fs.existsSync(SOURCE_IMAGES)) {
+    imageStats.missing++;
+    return null;
+  }
   const candidates = [
     path.join(SOURCE_IMAGES, sourceFolderHint, file),
     ...fs.readdirSync(SOURCE_IMAGES)

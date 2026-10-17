@@ -459,5 +459,16 @@ tiles: N / S / L / I).
       npm run dev
 
 ================================================================================
+UPDATE — 17 October 2026 (local cleanup)
+================================================================================
+The `assets/images/` tree (1,130 files, ~18 MB) described in section 2.3 was
+removed during a local cleanup pass: every file was the identical invalid
+"Page Not Found" HTML page already documented above, so nothing real was lost.
+`npm run import:assets` still works with the folder gone — it now skips source
+image copying gracefully when `assets/images` does not exist (the catalogue
+JSON in `assets/data/` is what remains and is still used). Product imagery
+lives on Cloudinary, as verified by `npm run check:images` (0 failures).
+
+================================================================================
 END OF REPORT
 ================================================================================

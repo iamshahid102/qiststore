@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { apiPost } from '@/lib/api';
 import { saveAuth, type StoredAuth } from '@/lib/auth';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -45,8 +46,16 @@ export default function LoginPage() {
         </label>
         <label className="block text-sm">
           <span className="mb-1 block text-gray-600">Password</span>
-          <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded border border-gray-300 px-3 py-2" />
+          <PasswordInput
+            required
+            autoComplete="current-password"
+            value={password}
+            onChange={setPassword}
+            placeholder="Enter your password"
+          />
+          <span className="mt-1 block text-[11px] text-gray-400">
+            Tap the eye icon to show or hide your password.
+          </span>
         </label>
         {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
         <button type="submit" disabled={loading}
