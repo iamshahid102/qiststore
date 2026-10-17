@@ -2,6 +2,30 @@ import type { PaginationMeta } from '@/types/api';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000/api/v1';
 
+/**
+ * Where should SERVER-side fetches (SSR) hit the API?
+ *  1. `NEXT_PUBLIC_API_URL` when explicitly configured (e.g. a dedicated API host)
+ *  2. otherwise the SAME origin the request arrived on — on Vercel the API is a
+ *     serverless function of this very project (see /vercel.json), and locally
+ *     the Next rewrite proxies /api/v1 to Express on :5000
+ *  3. localhost fallback for build-time / non-request contexts
+ */
+async function resolveServerApiBase(): Promise<string> {
+  if (process.env.NEXT_PUBLIC_API_URL) return API_URL;
+  try {
+    const { headers } = await import('next/headers');
+    const requestHeaders = await headers();
+    const host = requestHeaders.get('x-forwarded-host') ?? requestHeaders.get('host');
+    if (host) {
+      const protocol = requestHeaders.get('x-forwarded-proto') ?? 'http';
+      return `${protocol}://${host}/api/v1`;
+    }
+  } catch {
+    /* not inside a request scope (build/scripts) — fall back to the default */
+  }
+  return API_URL;
+}
+
 export interface ApiEnvelope<T> {
   success: boolean;
   data: T;
@@ -13,8 +37,9 @@ export interface ApiEnvelope<T> {
  * empty states instead of crashing (dev machines may not have the API up).
  */
 export async function apiGet<T>(path: string): Promise<{ data: T; meta?: PaginationMeta } | null> {
+  const base = await resolveServerApiBase();
   try {
-    const res = await fetch(`${API_URL}${path}`, { cache: 'no-store' });
+    const res = await fetch(`${base}${path}`, { cache: 'no-store' });
     if (!res.ok) return null;
     const json = (await res.json()) as ApiEnvelope<T>;
     return { data: json.data, meta: json.meta };

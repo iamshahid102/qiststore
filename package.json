@@ -29,8 +29,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "dependencies": {
-    "puppeteer": "^25.13.0"
   }
 }

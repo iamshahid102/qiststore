@@ -421,16 +421,29 @@ npm run check:console         # needs the web app running
 
 ## 12. Deployment Notes
 
+**One Vercel project (storefront + API) — default setup.**
+The repo is ready for a single-project Vercel deploy: `vercel.json` (root) builds both
+workspaces and rewrites `/api/v1/*` + `/health` into the serverless Express handler
+`api/index.mjs`. The client's SSR fetches resolve the API from the incoming request's own
+origin, so no `NEXT_PUBLIC_API_URL` is needed. Env vars to set on Vercel: `MONGO_URI`,
+`JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET`, `CORS_ORIGIN`, the three `CLOUDINARY_*`
+values and `NEXT_PUBLIC_SITE_URL`. Step-by-step commands, route map and troubleshooting:
+see **`DEPLOYMENT_VERCEL.txt`**.
+
+**Alternative — split hosts.**
+
 | Piece | Suggested target |
 |---|---|
 | Client | Vercel (Next.js native) — set `NEXT_PUBLIC_API_URL`, `API_PROXY_URL`, `NEXT_PUBLIC_SITE_URL` |
 | API | Render / Railway / Fly.io — `npm run build -w server && npm start -w server` |
-| Database | MongoDB Atlas (enable PITR backups) |
+| Database | MongoDB Atlas (enable PITR backups; allow Vercel IPs when co-hosted) |
 | Media | Cloudinary (set the three API credentials in the API environment) |
 
-Production hardening checklist: rotate JWT secrets, set `NODE_ENV=production` (the API then
-**fails fast** if MongoDB is unreachable), enable TLS + secure cookies, configure Redis for caching and
+Production hardening checklist: rotate JWT secrets, enable TLS + secure cookies (Vercel
+provides both), set `CORS_ORIGIN` to the deployed domain, configure Redis for caching and
 BullMQ for installment reminders, wire Sentry, and put a CDN in front of static assets.
+On Vercel, `NODE_ENV=production` is forced — the API then **fails fast** if MongoDB is
+unreachable.
 
 ---
 

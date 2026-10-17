@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   async rewrites() {
+    // On Vercel the API ships inside the SAME project as a serverless function
+    // (see /vercel.json), which rewrites /api/v1/* itself. Proxying to a
+    // localhost API there would fail, so this local/dev proxy is skipped.
+    if (process.env.VERCEL && !process.env.API_PROXY_URL) return [];
     return [
       {
         source: '/api/v1/:path*',

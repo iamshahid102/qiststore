@@ -1,0 +1,183 @@
+================================================================================
+QIST STORE — VERCEL DEPLOYMENT GUIDE (ONE PROJECT: CLIENT + SERVER)
+================================================================================
+Date : 17 October 2026
+Goal : Ek hi Vercel project mein storefront (Next.js) aur API (Express) dono
+       deploy hon, aur saare routes deployment ke baad bina kisi redirect /
+       404 issue ke chalen.
+
+--------------------------------------------------------------------------------
+1. DEPLOYMENT MODEL (kaise kaam karta hai)
+--------------------------------------------------------------------------------
+  Vercel par long-running Node server chalta nahi (sirf static + serverless
+  functions). Isliye same architecture, do tarike se:
+
+  OPTION A — ONE VERCEL PROJECT (IMPLEMENTED & READY)  ← recommended for you
+    repo root vercel.json + api/index.mjs bana diya hai:
+      /                    → Next.js storefront (Vercel pe render)
+      /api/v1/*            → serverless function (Express app, as-is)
+      /health              → serverless function (health probe)
+    Express app ko listen karne ki zaroorat nahi — serverless entry seedha
+    app(req, res) call karti hai. MongoDB connection lambda ke module scope
+    mein cache hota hai (warm instance par har request par nahi judta).
+
+  OPTION B — SEPARATE HOSTS (bhi supported)
+    Client → Vercel (Root Directory: client)
+    API    → Render / Railway / Fly.io (npm run build -w server && npm start)
+    Then set NEXT_PUBLIC_API_URL=https://<api-host>/api/v1 on Vercel.
+    Koi code change nahi chahiye — api.ts pehle se env-driven hai.
+
+--------------------------------------------------------------------------------
+2. KIYA-KIYA ADD / CHANGE KIYA (iss deployment ke liye)
+--------------------------------------------------------------------------------
+  NEW  vercel.json (root)
+       - installCommand: npm install --no-audit --no-fund (root se, workspaces)
+       - buildCommand:   npm run build -w server && npm run build -w client
+       - outputDirectory: client/.next
+       - rewrites:  /api/v1/:path* → /api/index.mjs
+                    /health        → /api/index.mjs
+       - functions: api/index.mjs → maxDuration 30s, memory 1024MB
+
+  NEW  api/index.mjs  (Vercel serverless entry)
+       - server/dist/app.js (wahi Express app) ko handler ki tarah chalata hai
+       - lazy + memoised connectDb() (cold start par ek baar; failure par
+         agli invocation retry karti hai)
+       - DB down hone par app crash nahi — /health degraded, API 503
+
+  NEW  api/load-env.mjs
+       - server/.env ko server modules ke parse hone se pehle load karta hai
+         (sirf local/dev convenience; Vercel par file hoti hi nahi)
+
+  MOD  client/next.config.ts
+       - Vercel par localhost:5000 wala proxy rewrite SKIP hota hai
+         (warna /api/v1 requests dead localhost par jati)
+       - local dev: pehle jaisa (rewrite → http://localhost:5000)
+
+  MOD  client/src/lib/api.ts
+       - SSR fetches ab self-referencing hain: NEXT_PUBLIC_API_URL set ho to
+         wahi, warna request ke apne origin (x-forwarded-host/host) use hota
+         hai — Vercel par site ka domain, local par localhost:3000 (Next
+         rewrite ke zariye :5000 par proxy ho jata hai)
+       - build-time / non-request context (sitemap etc.) → localhost fallback
+
+  MOD  package.json (root)
+       - Unused root dependency `puppeteer` hata di (sab scripts
+         puppeteer-core use karte hain). Vercel install ab Chromium download
+         nahi karega → build tez aur kam fail hoti hai.
+
+--------------------------------------------------------------------------------
+3. ROUTES — DEPLOYMENT KE BAAD KYA CHALEGA (verify kiya)
+--------------------------------------------------------------------------------
+  STOREFRONT (Next.js, sab SSR/ƒ dynamic)
+    /                       /shop                      /search?q=…
+    /product-category/mobiles                          /product/[slug]
+    /cart  /checkout  /checkout/success                /order-tracking
+    /account  /account/login  /account/register
+    /admin  /admin/products  /admin/products/new
+    /admin/products/[slug]                             /admin/orders
+    /admin/orders/[orderNumber]                        /admin/customers
+    /admin/customers/[id]
+    /blogs  /blogs/[slug]  /stores  /stores/[slug]  /visit-us  /page/[slug]
+    /wishlist  /sitemap.xml  /robots.txt  /icon.png  /apple-icon.png
+    → Koi redirect rule nahi lagayi (next.config mein redirects() nahi hai),
+      trailing-slash Next default. Is liye purane links seedhe chalte rahenge.
+
+  API (Express — sab /api/v1/* ke neeche)
+    /health                                  → health probe (rewritten)
+    /api/v1/auth/*                           register/login/refresh/logout/me
+    /api/v1/products, /products/:slug, /categories/tree, /brands,
+    /deals/active, /home/sections, /facets/:slug
+    /api/v1/content/*, /cms/*, /blogs, /branches, /stores
+    /api/v1/checkout/quote, /checkout/order
+    /api/v1/orders/track, /orders/mine
+    /api/v1/admin/*                          stats/products/orders/customers
+    /api/v1/admin/uploads                    Cloudinary upload
+    → Refresh cookie ka path /api/v1/auth hai — same-origin function rewrite
+      se cookie set/read dono theek chalte hain.
+
+--------------------------------------------------------------------------------
+4. STEP-BY-STEP DEPLOY (5 minute)
+--------------------------------------------------------------------------------
+  Step 0 — pehle ye commits karein (ye files abhi working tree mein hain):
+      vercel.json, api/index.mjs, api/load-env.mjs,
+      client/next.config.ts, client/src/lib/api.ts, package.json,
+      package-lock.json
+      git add -A && git commit -m "vercel deployment config"
+
+  Option 1 — Vercel CLI (fastest):
+      npm i -g vercel
+      cd QistStore
+      vercel login
+      vercel                 ← preview deploy
+      vercel --prod          ← production deploy
+    (CLI khud root directory detect karega; koi Root Directory setting nahi)
+
+  Option 2 — Dashboard:
+      vercel.com/new → Import git repo → Framework: "Other" (auto-detect chalta
+      hai) → Build & Output: sab default rakhein (vercel.json already saara
+      config deta hai) → Deploy.
+
+  Step 1 — Environment variables (dashboard: Settings → Environment Variables)
+      MONGO_URI              Atlas connection string (srv://…)
+      JWT_ACCESS_SECRET      >= 8 chars, random string
+      JWT_REFRESH_SECRET     >= 8 chars, random string (different!)
+      CORS_ORIGIN            https://<your-domain>.vercel.app
+      CLOUDINARY_CLOUD_NAME  image storage
+      CLOUDINARY_API_KEY
+      CLOUDINARY_API_SECRET
+      NEXT_PUBLIC_SITE_URL   https://<your-domain>.vercel.app (sitemap/canonical)
+      (NEXT_PUBLIC_API_URL ki zaroorat NAHI — same project hai; sirf OPTION B
+       mein set karein)
+    ⚠️ Vercel par NODE_ENV=production hota hai → JWT secrets BHI set karein,
+      warna dev-default secrets use ho jayenge (insecure).
+    ⚠️ MongoDB Atlas → Network Access mein Vercel ke IPs (0.0.0.0/0 with
+      auth) allow karein, warna lambdas ka dynamic IP block hoga.
+
+  Step 2 — verify karein (deploy ke baad):
+      curl https://<domain>/health                       → {"status":"ok",…}
+      curl https://<domain>/api/v1/categories/tree       → 200 JSON
+      curl https://<domain>/api/v1/products?limit=1      → 200 JSON
+      Browser: / , /shop (images), /product/<slug> , /admin (login 03000000001),
+      /account/register, /sitemap.xml, /robots.txt
+
+--------------------------------------------------------------------------------
+5. LOCAL VERIFICATION (jo already run ho chuki hai)
+--------------------------------------------------------------------------------
+  Serverless entry asli HTTP par test ki (same handler Vercel use karega):
+    /health                     → 200 ok + db connected
+    /api/v1/products?limit=1    → 200 (real catalog JSON)
+    /api/v1/categories/tree     → 200
+    /api/v1/auth/login (admin)  → 200 token
+    /api/v1/admin/stats w/token → 200
+    /api/v1/admin/orders no tok → 401 (auth layer intact)
+    /api/v1/nope                → 404 envelope
+    POST /api/v1/checkout/quote  → 400 validation (zod intact)
+  Project checks:
+    npm run build        → exit 0 (server + client)
+    npm run typecheck    → exit 0
+    npm test             → exit 0 (41 passed | 2 skipped)
+    npm run check:images → exit 0 (0 failures — SSR same-origin fetch OK)
+    npm run check:console→ exit 0 (14 routes, 0 problems)
+    npm run check:admin  → exit 0 (11/11 OK)
+
+--------------------------------------------------------------------------------
+6. LIMITATIONS / TROUBLESHOOTING (Vercel specific)
+--------------------------------------------------------------------------------
+  • Upload body limit: Vercel request body ~4.5 MB tak allow karta hai; humara
+    admin upload 5 MB ka hai — 4.5 MB se badi image Vercel par reject hogi.
+    (Large assets ke liye direct-to-Cloudinary upload ya separate API host.)
+  • Cold start: pehli request par Mongo handshake (~0.5–2s extra). maxDuration
+    30s set hai; agar 401/DB error dikhe to Atlas access list check karein.
+  • Serverless functions 365 din mein inactive ho sakti hain — Vercel dashboard
+    se "Quick Deploy" ya git push karte hi wapas active ho jati hain.
+  • Cron jobs / background workers is architecture mein nahi chalenge; monthly
+    installment reminder ke liye Vercel Cron (api/v1/jobs/...) ya alag worker
+    chahiye hoga.
+  • `npm run seed` / `import:*` / `sync:images` Vercel par NAHI chalte (CLI
+    tools) — locally chalayen (DB Atlas wahi rahega).
+  • Debug: `vercel logs <url>` ya dashboard → Logs tab; API ke errors wahi
+    milenge (pino logger).
+
+================================================================================
+END OF GUIDE
+================================================================================
