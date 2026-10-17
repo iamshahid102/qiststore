@@ -47,6 +47,7 @@ export const categories: SeedCategory[] = [
 
 export const brands = [
   { name: 'Samsung', slug: 'samsung' },
+  { name: 'Xiaomi', slug: 'xiaomi' },
   { name: 'Infinix', slug: 'infinix' },
   { name: 'Tecno', slug: 'tecno' },
   { name: 'Vivo', slug: 'vivo' },

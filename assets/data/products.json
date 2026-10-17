@@ -1,0 +1,5436 @@
+{
+  "led-tv": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/led-tv/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/led-tv/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/led-tv/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "led-tv"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/led-tv/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/led-tv/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "led-tv"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/led-tv/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "led-tv"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/led-tv/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/led-tv/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/led-tv/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "led-tv"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/led-tv/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/led-tv/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/led-tv/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "led-tv"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/led-tv/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/led-tv/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/led-tv/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "led-tv"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/led-tv/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "led-tv"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/led-tv/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/led-tv/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "led-tv"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/led-tv/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "led-tv"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/led-tv/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/led-tv/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/led-tv/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "led-tv"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/led-tv/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "led-tv"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/led-tv/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/led-tv/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "led-tv"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/led-tv/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "led-tv"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/led-tv/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "led-tv"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/led-tv/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "led-tv"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/led-tv/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "led-tv"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/led-tv/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "led-tv"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/led-tv/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "led-tv"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/led-tv/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "led-tv"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/led-tv/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "led-tv"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/led-tv/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "led-tv"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/led-tv/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "led-tv"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/led-tv/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "led-tv"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/led-tv/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "led-tv"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/led-tv/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "led-tv"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "led-tv"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "led-tv"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/led-tv/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "led-tv"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "led-tv"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/led-tv/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "led-tv"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/led-tv/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "led-tv"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/led-tv/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "led-tv"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/led-tv/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "led-tv"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/led-tv/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "led-tv"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/led-tv/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "led-tv"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/led-tv/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "led-tv"
+    }
+  ],
+  "refrigerator": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/refrigerator/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/refrigerator/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/refrigerator/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/refrigerator/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/refrigerator/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/refrigerator/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/refrigerator/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/refrigerator/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/refrigerator/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/refrigerator/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/refrigerator/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/refrigerator/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/refrigerator/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/refrigerator/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/refrigerator/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/refrigerator/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/refrigerator/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/refrigerator/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/refrigerator/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/refrigerator/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/refrigerator/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/refrigerator/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/refrigerator/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/refrigerator/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/refrigerator/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/refrigerator/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/refrigerator/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/refrigerator/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/refrigerator/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/refrigerator/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/refrigerator/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "refrigerator"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/refrigerator/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/refrigerator/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "refrigerator"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/refrigerator/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/refrigerator/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/refrigerator/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/refrigerator/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/refrigerator/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/refrigerator/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/refrigerator/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/refrigerator/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "refrigerator"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/refrigerator/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/refrigerator/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/refrigerator/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "refrigerator"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/refrigerator/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "refrigerator"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/refrigerator/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "refrigerator"
+    }
+  ],
+  "washing-machine": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/washing-machine/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/washing-machine/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/washing-machine/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/washing-machine/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/washing-machine/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/washing-machine/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/washing-machine/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/washing-machine/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/washing-machine/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/washing-machine/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/washing-machine/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/washing-machine/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/washing-machine/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/washing-machine/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/washing-machine/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/washing-machine/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/washing-machine/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/washing-machine/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/washing-machine/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/washing-machine/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/washing-machine/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/washing-machine/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/washing-machine/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/washing-machine/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/washing-machine/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/washing-machine/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/washing-machine/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/washing-machine/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/washing-machine/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/washing-machine/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/washing-machine/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "washing-machine"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/washing-machine/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/washing-machine/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "washing-machine"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/washing-machine/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/washing-machine/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/washing-machine/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/washing-machine/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/washing-machine/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/washing-machine/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/washing-machine/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/washing-machine/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "washing-machine"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/washing-machine/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/washing-machine/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/washing-machine/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "washing-machine"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/washing-machine/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "washing-machine"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/washing-machine/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "washing-machine"
+    }
+  ],
+  "air-conditioner": [
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/air-conditioner/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/air-conditioner/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/air-conditioner/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/air-conditioner/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/air-conditioner/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/air-conditioner/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/air-conditioner/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/air-conditioner/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/air-conditioner/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/air-conditioner/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/air-conditioner/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/air-conditioner/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/air-conditioner/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/air-conditioner/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/air-conditioner/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/air-conditioner/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/air-conditioner/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/air-conditioner/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/air-conditioner/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/air-conditioner/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/air-conditioner/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/air-conditioner/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/air-conditioner/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/air-conditioner/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/air-conditioner/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/air-conditioner/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/air-conditioner/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/air-conditioner/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/air-conditioner/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/air-conditioner/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/air-conditioner/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/air-conditioner/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/air-conditioner/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/air-conditioner/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/air-conditioner/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/air-conditioner/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/air-conditioner/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/air-conditioner/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/air-conditioner/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/air-conditioner/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/air-conditioner/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/air-conditioner/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/air-conditioner/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/air-conditioner/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/air-conditioner/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "air-conditioner"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/air-conditioner/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "air-conditioner"
+    }
+  ],
+  "microwave-oven": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/microwave-oven/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/microwave-oven/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/microwave-oven/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/microwave-oven/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/microwave-oven/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/microwave-oven/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/microwave-oven/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/microwave-oven/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/microwave-oven/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/microwave-oven/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/microwave-oven/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/microwave-oven/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/microwave-oven/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/microwave-oven/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/microwave-oven/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/microwave-oven/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/microwave-oven/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/microwave-oven/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/microwave-oven/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/microwave-oven/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/microwave-oven/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/microwave-oven/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/microwave-oven/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/microwave-oven/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/microwave-oven/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/microwave-oven/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/microwave-oven/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/microwave-oven/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/microwave-oven/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/microwave-oven/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/microwave-oven/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/microwave-oven/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/microwave-oven/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/microwave-oven/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/microwave-oven/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/microwave-oven/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/microwave-oven/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/microwave-oven/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/microwave-oven/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/microwave-oven/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/microwave-oven/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/microwave-oven/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/microwave-oven/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/microwave-oven/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/microwave-oven/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "microwave-oven"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/microwave-oven/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "microwave-oven"
+    }
+  ],
+  "water-dispenser": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/water-dispenser/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/water-dispenser/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/water-dispenser/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/water-dispenser/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/water-dispenser/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/water-dispenser/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/water-dispenser/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/water-dispenser/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/water-dispenser/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/water-dispenser/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/water-dispenser/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/water-dispenser/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/water-dispenser/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/water-dispenser/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/water-dispenser/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/water-dispenser/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/water-dispenser/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/water-dispenser/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/water-dispenser/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/water-dispenser/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/water-dispenser/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/water-dispenser/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/water-dispenser/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/water-dispenser/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/water-dispenser/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/water-dispenser/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/water-dispenser/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/water-dispenser/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/water-dispenser/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/water-dispenser/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/water-dispenser/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/water-dispenser/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/water-dispenser/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/water-dispenser/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/water-dispenser/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/water-dispenser/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/water-dispenser/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/water-dispenser/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/water-dispenser/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/water-dispenser/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/water-dispenser/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/water-dispenser/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/water-dispenser/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/water-dispenser/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/water-dispenser/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "water-dispenser"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/water-dispenser/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "water-dispenser"
+    }
+  ],
+  "fans": [
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/fans/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "fans"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/fans/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "fans"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/fans/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "fans"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/fans/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "fans"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/fans/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "fans"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/fans/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "fans"
+    },
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/fans/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "fans"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/fans/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "fans"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/fans/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "fans"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/fans/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "fans"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/fans/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "fans"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/fans/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "fans"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/fans/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "fans"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/fans/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "fans"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/fans/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "fans"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/fans/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "fans"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/fans/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "fans"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/fans/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "fans"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/fans/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "fans"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/fans/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "fans"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/fans/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "fans"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/fans/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "fans"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/fans/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "fans"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/fans/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "fans"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/fans/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "fans"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/fans/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "fans"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/fans/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "fans"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/fans/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "fans"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/fans/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "fans"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/fans/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "fans"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/fans/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "fans"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/fans/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "fans"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/fans/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "fans"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/fans/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "fans"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/fans/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "fans"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/fans/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "fans"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/fans/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "fans"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/fans/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "fans"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/fans/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "fans"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/fans/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "fans"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/fans/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "fans"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/fans/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "fans"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/fans/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "fans"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/fans/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "fans"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/fans/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "fans"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/fans/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "fans"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/fans/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "fans"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/fans/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "fans"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/fans/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "fans"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/fans/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "fans"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/fans/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "fans"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/fans/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "fans"
+    }
+  ],
+  "bikes": [
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/bikes/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "bikes"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/bikes/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "bikes"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/bikes/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "bikes"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/bikes/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "bikes"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/bikes/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "bikes"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/bikes/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "bikes"
+    },
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/bikes/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "bikes"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/bikes/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "bikes"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/bikes/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "bikes"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "bikes"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/bikes/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "bikes"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/bikes/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "bikes"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/bikes/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "bikes"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/bikes/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "bikes"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/bikes/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "bikes"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/bikes/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "bikes"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/bikes/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "bikes"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/bikes/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "bikes"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/bikes/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "bikes"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/bikes/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "bikes"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/bikes/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "bikes"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/bikes/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "bikes"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/bikes/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "bikes"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/bikes/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "bikes"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/bikes/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "bikes"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/bikes/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "bikes"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "bikes"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "bikes"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "bikes"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "bikes"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/bikes/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "bikes"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "bikes"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/bikes/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "bikes"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/bikes/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "bikes"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/bikes/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "bikes"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/bikes/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "bikes"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/bikes/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "bikes"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/bikes/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "bikes"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/bikes/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "bikes"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/bikes/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "bikes"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/bikes/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "bikes"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/bikes/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "bikes"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/bikes/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "bikes"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/bikes/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "bikes"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/bikes/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "bikes"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/bikes/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "bikes"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/bikes/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "bikes"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/bikes/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "bikes"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/bikes/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "bikes"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/bikes/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "bikes"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/bikes/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "bikes"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/bikes/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "bikes"
+    }
+  ],
+  "deep-freezer": [
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/deep-freezer/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/deep-freezer/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/deep-freezer/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/deep-freezer/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/deep-freezer/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/deep-freezer/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/deep-freezer/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/deep-freezer/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/deep-freezer/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/deep-freezer/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/deep-freezer/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/deep-freezer/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/deep-freezer/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/deep-freezer/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/deep-freezer/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/deep-freezer/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/deep-freezer/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/deep-freezer/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/deep-freezer/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/deep-freezer/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/deep-freezer/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/deep-freezer/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/deep-freezer/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/deep-freezer/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/deep-freezer/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/deep-freezer/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/deep-freezer/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/deep-freezer/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/deep-freezer/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/deep-freezer/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/deep-freezer/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/deep-freezer/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/deep-freezer/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/deep-freezer/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/deep-freezer/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/deep-freezer/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/deep-freezer/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/deep-freezer/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/deep-freezer/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/deep-freezer/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/deep-freezer/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/deep-freezer/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/deep-freezer/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/deep-freezer/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/deep-freezer/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "deep-freezer"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/deep-freezer/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "deep-freezer"
+    }
+  ],
+  "batteries": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/batteries/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "batteries"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/batteries/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "batteries"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/batteries/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "batteries"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "batteries"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/batteries/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "batteries"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/batteries/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "batteries"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/batteries/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "batteries"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/batteries/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "batteries"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/batteries/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "batteries"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/batteries/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "batteries"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/batteries/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "batteries"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/batteries/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "batteries"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/batteries/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "batteries"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/batteries/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "batteries"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/batteries/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "batteries"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/batteries/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "batteries"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/batteries/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "batteries"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/batteries/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "batteries"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/batteries/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "batteries"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/batteries/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "batteries"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/batteries/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "batteries"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/batteries/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "batteries"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/batteries/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "batteries"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/batteries/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "batteries"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/batteries/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "batteries"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/batteries/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "batteries"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/batteries/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "batteries"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/batteries/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "batteries"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/batteries/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "batteries"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/batteries/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "batteries"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/batteries/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "batteries"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/batteries/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "batteries"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/batteries/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "batteries"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/batteries/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "batteries"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/batteries/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "batteries"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/batteries/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "batteries"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/batteries/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "batteries"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/batteries/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "batteries"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/batteries/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "batteries"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "batteries"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "batteries"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "batteries"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "batteries"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/batteries/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "batteries"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "batteries"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/batteries/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "batteries"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/batteries/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "batteries"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/batteries/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "batteries"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/batteries/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "batteries"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/batteries/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "batteries"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/batteries/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "batteries"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/batteries/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "batteries"
+    }
+  ],
+  "mattress": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/mattress/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "mattress"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/mattress/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "mattress"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/mattress/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "mattress"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "mattress"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/mattress/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "mattress"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/mattress/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "mattress"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/mattress/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "mattress"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/mattress/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "mattress"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/mattress/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "mattress"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/mattress/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "mattress"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/mattress/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "mattress"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/mattress/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "mattress"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/mattress/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "mattress"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/mattress/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "mattress"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/mattress/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "mattress"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/mattress/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "mattress"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/mattress/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "mattress"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/mattress/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "mattress"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/mattress/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "mattress"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/mattress/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "mattress"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/mattress/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "mattress"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/mattress/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "mattress"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/mattress/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "mattress"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/mattress/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "mattress"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/mattress/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "mattress"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/mattress/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "mattress"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/mattress/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "mattress"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/mattress/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "mattress"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/mattress/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "mattress"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/mattress/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "mattress"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/mattress/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "mattress"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/mattress/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "mattress"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/mattress/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "mattress"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/mattress/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "mattress"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/mattress/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "mattress"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/mattress/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "mattress"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/mattress/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "mattress"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/mattress/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "mattress"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/mattress/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "mattress"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "mattress"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "mattress"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "mattress"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "mattress"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/mattress/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "mattress"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "mattress"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/mattress/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "mattress"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/mattress/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "mattress"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/mattress/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "mattress"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/mattress/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "mattress"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/mattress/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "mattress"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/mattress/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "mattress"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/mattress/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "mattress"
+    }
+  ],
+  "tyres": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/tyres/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "tyres"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/tyres/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "tyres"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/tyres/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "tyres"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "tyres"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/tyres/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "tyres"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/tyres/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "tyres"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/tyres/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "tyres"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/tyres/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "tyres"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/tyres/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "tyres"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/tyres/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "tyres"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/tyres/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "tyres"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/tyres/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "tyres"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/tyres/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "tyres"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/tyres/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "tyres"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/tyres/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "tyres"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/tyres/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "tyres"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/tyres/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "tyres"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/tyres/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "tyres"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/tyres/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "tyres"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/tyres/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "tyres"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/tyres/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "tyres"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/tyres/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "tyres"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/tyres/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "tyres"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/tyres/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "tyres"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/tyres/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "tyres"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/tyres/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "tyres"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/tyres/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "tyres"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/tyres/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "tyres"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/tyres/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "tyres"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/tyres/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "tyres"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/tyres/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "tyres"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/tyres/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "tyres"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/tyres/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "tyres"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/tyres/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "tyres"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/tyres/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "tyres"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/tyres/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "tyres"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/tyres/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "tyres"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/tyres/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "tyres"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/tyres/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "tyres"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "tyres"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "tyres"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "tyres"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "tyres"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/tyres/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "tyres"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "tyres"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/tyres/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "tyres"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/tyres/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "tyres"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/tyres/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "tyres"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/tyres/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "tyres"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/tyres/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "tyres"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/tyres/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "tyres"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/tyres/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "tyres"
+    }
+  ],
+  "tablet": [
+    {
+      "id": 5549,
+      "title": "Infinix Hot 60i | 6GB-128GB",
+      "slug": "",
+      "image": "images/tablet/5549_productImage_1786968212090.jpeg",
+      "advanceAmount": 6900,
+      "category": "tablet"
+    },
+    {
+      "id": 11234,
+      "title": "Tecno Spark 50 | 6GB-128GB |",
+      "slug": "",
+      "image": "images/tablet/11234_productImage_1790775338608.jpeg",
+      "advanceAmount": 6900,
+      "category": "tablet"
+    },
+    {
+      "id": 11049,
+      "title": "SuperPower | 70 CC | Motorbike |",
+      "slug": "",
+      "image": "images/tablet/11049_productImage_1776949746150.jpeg",
+      "advanceAmount": 8900,
+      "category": "tablet"
+    },
+    {
+      "id": 10518,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/10518_productImage_1790593176985.jpeg",
+      "advanceAmount": 24900,
+      "category": "tablet"
+    },
+    {
+      "id": 12154,
+      "title": "Vivo Y05e | 4GB-64GB |",
+      "slug": "",
+      "image": "images/tablet/12154_productImage_1790774848942.jpeg",
+      "advanceAmount": 27900,
+      "category": "tablet"
+    },
+    {
+      "id": 10256,
+      "title": "Tecno Spark Go 3 | 4GB-64GB |",
+      "slug": "",
+      "image": "images/tablet/10256_productImage_1790774913466.jpeg",
+      "advanceAmount": 5500,
+      "category": "tablet"
+    },
+    {
+      "id": 10405,
+      "title": "Dawlance | Powercon X 1 Ton T3 Inverter Split AC |",
+      "slug": "",
+      "image": "images/tablet/10405_productImage_1774012635621.jpeg",
+      "advanceAmount": 5900,
+      "category": "tablet"
+    },
+    {
+      "id": 12329,
+      "title": "Itel A200+ | 3GB-128 GB |",
+      "slug": "",
+      "image": "images/tablet/12329_productImage_1790774955276.jpeg",
+      "advanceAmount": 29900,
+      "category": "tablet"
+    },
+    {
+      "id": 11692,
+      "title": "Vivo Y05 | 4GB-128 GB |",
+      "slug": "",
+      "image": "images/tablet/11692_productImage_1790774992431.jpeg",
+      "advanceAmount": 4900,
+      "category": "tablet"
+    },
+    {
+      "id": 11550,
+      "title": "Itel City 200 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/tablet/11550_productImage_1790775026378.jpeg",
+      "advanceAmount": 6500,
+      "category": "tablet"
+    },
+    {
+      "id": 12328,
+      "title": "Infinix | Smart 20 | 4Gb-64 Gb",
+      "slug": "",
+      "image": "images/tablet/12328_productImage_1790775061208.jpeg",
+      "advanceAmount": 5900,
+      "category": "tablet"
+    },
+    {
+      "id": 11981,
+      "title": "Infinix | Smart 20 | 4Gb-128Gb",
+      "slug": "",
+      "image": "images/tablet/11981_productImage_1790775103414.jpeg",
+      "advanceAmount": 5900,
+      "category": "tablet"
+    },
+    {
+      "id": 10090,
+      "title": "Tecno Spark Go 3 | 4GB-128GB |",
+      "slug": "",
+      "image": "images/tablet/10090_productImage_1790775167482.jpeg",
+      "advanceAmount": 6900,
+      "category": "tablet"
+    },
+    {
+      "id": 5564,
+      "title": "Infinix Hot 60i | 6GB-128 GB",
+      "slug": "",
+      "image": "images/tablet/5564_productImage_1755941232160.webp",
+      "advanceAmount": 6900,
+      "category": "tablet"
+    },
+    {
+      "id": 11145,
+      "title": "Tecno Spark 50 | 6GB-128GB",
+      "slug": "",
+      "image": "images/tablet/11145_productImage_1789029601491.webp",
+      "advanceAmount": 6900,
+      "category": "tablet"
+    },
+    {
+      "id": 10201,
+      "title": "Tecno Spark Go 3 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/tablet/10201_productImage_1772539600791.webp",
+      "advanceAmount": 8900,
+      "category": "tablet"
+    },
+    {
+      "id": 12114,
+      "title": "Infinix Hot 70 6Gb-128Gb",
+      "slug": "",
+      "image": "images/tablet/12114_productImage_1787595800727.webp",
+      "advanceAmount": 5900,
+      "category": "tablet"
+    },
+    {
+      "id": 6330,
+      "title": "Samsung A07 | 4GB-64GB ",
+      "slug": "",
+      "image": "images/tablet/6330_productImage_1773220077500.webp",
+      "advanceAmount": 10900,
+      "category": "tablet"
+    },
+    {
+      "id": 10607,
+      "title": "Itel City 200 | 4GB-128GB",
+      "slug": "",
+      "image": "images/tablet/10607_productImage_1774595652369.webp",
+      "advanceAmount": 8900,
+      "category": "tablet"
+    },
+    {
+      "id": 6331,
+      "title": "Samsung A07 | 6GB-128GB ",
+      "slug": "",
+      "image": "images/tablet/6331_productImage_1789029491740.webp",
+      "advanceAmount": 5900,
+      "category": "tablet"
+    },
+    {
+      "id": 7500,
+      "title": "Dawlance 32\\",
+      "slug": "",
+      "image": "images/tablet/7500_productImage_1774515576542.webp",
+      "advanceAmount": 8900,
+      "category": "tablet"
+    },
+    {
+      "id": 10731,
+      "title": "Xiaomi 43\\",
+      "slug": "",
+      "image": "images/tablet/10731_productImage_1775199819046.webp",
+      "advanceAmount": 8900,
+      "category": "tablet"
+    },
+    {
+      "id": 11501,
+      "title": "Dawlance 40\\",
+      "slug": "",
+      "image": "images/tablet/11501_productImage_1780123261822.png",
+      "advanceAmount": 14900,
+      "category": "tablet"
+    },
+    {
+      "id": 1635,
+      "title": "PEL 32\\",
+      "slug": "",
+      "image": "images/tablet/1635_productImage_1717058846120.webp",
+      "advanceAmount": 9900,
+      "category": "tablet"
+    },
+    {
+      "id": 1459,
+      "title": "Dawlance 43\\",
+      "slug": "",
+      "image": "images/tablet/1459_productImage_1709792173351.png",
+      "advanceAmount": 9900,
+      "category": "tablet"
+    },
+    {
+      "id": 10568,
+      "title": "Haier 32â€³ | Q LED Google TV | H32S80EFX",
+      "slug": "",
+      "image": "images/tablet/10568_productImage_1774426719297.jpg",
+      "advanceAmount": 18900,
+      "category": "tablet"
+    },
+    {
+      "id": 994,
+      "title": "Dawlance | 9140WB Avante | 8 CF Refrigerator",
+      "slug": "",
+      "image": "images/tablet/994_productImage_1758610142194.webp",
+      "advanceAmount": 19200,
+      "category": "tablet"
+    },
+    {
+      "id": 1040,
+      "title": " Pel | Life Pro PRLP-2350 | 9 CF Refrigerator",
+      "slug": "",
+      "image": "images/tablet/1040_productImage_1748329424903.png",
+      "advanceAmount": 19200,
+      "category": "tablet"
+    },
+    {
+      "id": 1394,
+      "title": "Dawlance | 9169 WB Avante+ | 12 CF Refrigerator",
+      "slug": "",
+      "image": "images/tablet/1394_productImage_1787131563061.png",
+      "advanceAmount": 19900,
+      "category": "tablet"
+    },
+    {
+      "id": 988,
+      "title": "Dawlance | 9178LF AVANTE+ | 13 Cf Refrigerator",
+      "slug": "",
+      "image": "images/tablet/988_productImage_1710755628085.png",
+      "advanceAmount": 25500,
+      "category": "tablet"
+    },
+    {
+      "id": 1546,
+      "title": "Dawlance | 9193LF CHROME | 17 CF Refrigerator",
+      "slug": "",
+      "image": "images/tablet/1546_productImage_1709984013481.png",
+      "advanceAmount": 30000,
+      "category": "tablet"
+    },
+    {
+      "id": 11633,
+      "title": "Dawlance | 9193 LF Acce-Pro |Inverter Refrigerator",
+      "slug": "",
+      "image": "images/tablet/11633_productImage_1780920243497.png",
+      "advanceAmount": 29000,
+      "category": "tablet"
+    },
+    {
+      "id": 4185,
+      "title": "Haier | HWM 130-1217 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/tablet/4185_productImage_1745045816761.png",
+      "advanceAmount": 5200,
+      "category": "tablet"
+    },
+    {
+      "id": 1088,
+      "title": "Dawlance | DW 6100 WHITE | Single Tub Washer | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/tablet/1088_image_1706717992214.png",
+      "advanceAmount": 5200,
+      "category": "tablet"
+    },
+    {
+      "id": 4203,
+      "title": "Pel | PWM-1050 Semi Automatic Twin Tub | Washing Machine",
+      "slug": "",
+      "image": "images/tablet/4203_productImage_1745072400397.png",
+      "advanceAmount": 4800,
+      "category": "tablet"
+    },
+    {
+      "id": 1085,
+      "title": "Dawlance | DW 6550  Glass Lid | Twin Tub Semi Automatic Black/Grey | 8 KG Washing Machine |",
+      "slug": "",
+      "image": "images/tablet/1085_productImage_1746171005174.png",
+      "advanceAmount": 6900,
+      "category": "tablet"
+    },
+    {
+      "id": 1105,
+      "title": "Dawlance | DWT 9060 EZ  | Top Load Automatic | 8 KG Washing Machine",
+      "slug": "",
+      "image": "images/tablet/1105_image_1706718007149.jpg",
+      "advanceAmount": 7500,
+      "category": "tablet"
+    },
+    {
+      "id": 1125,
+      "title": "Haier | HWM 120-826 | 12 KG Washing Machine",
+      "slug": "",
+      "image": "images/tablet/1125_image_1706718020971.png",
+      "advanceAmount": 11900,
+      "category": "tablet"
+    },
+    {
+      "id": 1670,
+      "title": "Dawlance |Frost 20 - 1.25 Ton Inverter (Cool Only)| Air Conditioner |",
+      "slug": "",
+      "image": "images/tablet/1670_productImage_1775908486656.jpg",
+      "advanceAmount": 27900,
+      "category": "tablet"
+    },
+    {
+      "id": 12106,
+      "title": "Dawlance | POWERCON X T3 INVERTER 15 | 1 Ton Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/12106_productImage_1787568547845.jpg",
+      "advanceAmount": 27900,
+      "category": "tablet"
+    },
+    {
+      "id": 10752,
+      "title": "Pel |PINV ATOM 12K (H&C) 1.0 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/10752_productImage_1775459764756.webp",
+      "advanceAmount": 29900,
+      "category": "tablet"
+    },
+    {
+      "id": 11834,
+      "title": "Dawlance | Chillex 1 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/11834_productImage_1784108924414.webp",
+      "advanceAmount": 29900,
+      "category": "tablet"
+    },
+    {
+      "id": 5148,
+      "title": "Pel |PINV AERO EXTEND 12K (H&C) 1.0 Ton | INV Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/5148_productImage_1785505464075.png",
+      "advanceAmount": 29900,
+      "category": "tablet"
+    },
+    {
+      "id": 11466,
+      "title": "Dawlance | Elegance X 1 Ton | Inverter Air Conditioner ",
+      "slug": "",
+      "image": "images/tablet/11466_productImage_1779362655746.png",
+      "advanceAmount": 29900,
+      "category": "tablet"
+    },
+    {
+      "id": 3730,
+      "title": "Pel |PINV AERO EXTEND 18K (H&C) 1.5 Ton| INVERTER Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/3730_productImage_1741866909150.png",
+      "advanceAmount": 34900,
+      "category": "tablet"
+    },
+    {
+      "id": 11835,
+      "title": "Dawlance | Chillex 1.5 Ton Inverter | Air Conditioner",
+      "slug": "",
+      "image": "images/tablet/11835_productImage_1784109128638.webp",
+      "advanceAmount": 37350,
+      "category": "tablet"
+    },
+    {
+      "id": 12017,
+      "title": "HP PROBOOK 11 G2 X360 LAPTOP - 7TH GENERATION - 11.6' SCREEN - WITH LAPTOP BAG",
+      "slug": "",
+      "image": "images/tablet/12017_productImage_1786531045992.jpg",
+      "advanceAmount": 7350,
+      "category": "tablet"
+    },
+    {
+      "id": 11368,
+      "title": "LENOVO  X1 Carbon | CORE I7 10TH GENERATION | 16GB RAM | 256GB SSD | 14'' INCH SCREEN ",
+      "slug": "",
+      "image": "images/tablet/11368_productImage_1779196407292.jpg",
+      "advanceAmount": 19950,
+      "category": "tablet"
+    },
+    {
+      "id": 12179,
+      "title": "DELL LATITUDE 5470 | CORE I7 6H GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/tablet/12179_productImage_1787913563720.jpg",
+      "advanceAmount": 10300,
+      "category": "tablet"
+    },
+    {
+      "id": 12259,
+      "title": "HP ProBook 650 G3 | i7-7th Gen | 256GB SSD | 8GB RAM | 15.6\\",
+      "slug": "",
+      "image": "images/tablet/12259_productImage_1788601616786.png",
+      "advanceAmount": 11550,
+      "category": "tablet"
+    },
+    {
+      "id": 12184,
+      "title": "DELL LATITUDE 5490 | CORE I7 8TH GENERATION | 8GB RAM | 256GB SSD | 14'' INCH SCREEN",
+      "slug": "",
+      "image": "images/tablet/12184_productImage_1787917834640.jpg",
+      "advanceAmount": 12600,
+      "category": "tablet"
+    },
+    {
+      "id": 4051,
+      "title": "HP ZBook 15 G6 | i7 9850H | 16 GB | 256 GB | 15.6\\",
+      "slug": "",
+      "image": "images/tablet/4051_productImage_1744884608049.webp",
+      "advanceAmount": 25200,
+      "category": "tablet"
+    }
+  ]
+}

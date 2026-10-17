@@ -1,0 +1,318 @@
+================================================================================
+QIST STORE — ASSETS INTEGRATION REPORT
+Task      : Root `assets/` folder ka data + images project mai integrate karna
+Date      : 2026-10-17
+Scope     : Sirf QistStore root folder (client/, server/, scripts/, assets/)
+Role      : Full-stack developer
+================================================================================
+
+--------------------------------------------------------------------------------
+1) TASK SUMMARY (Roman Urdu)
+--------------------------------------------------------------------------------
+Root folder mai `assets/` diya gaya tha jis mai do cheezen thin:
+  - assets/data/products.json        (category-wise scraped data)
+  - assets/data/products_flat.json   (flat scraped data)
+  - assets/images/<category>/*       (product images)
+
+Maine pehle poora data audit kiya, phir ek reusable importer script likhi jo:
+  1. Dono JSON files ko parh kar duplicate rows hataati hai.
+  2. Har product ki asli category detect karti hai (source data mai sab kuch
+     ghalat taur par "led-tv" ke under dump hua tha).
+  3. Product ka naam, brand, RAM/storage, capacity aur specs normalize karti hai.
+  4. Source advance se coherent cash price aur 6/12/18 month plans banati hai.
+  5. Images ko validate kar ke `client/public/products/` mai copy karti hai.
+  6. `server/src/seed/assets-products.ts` generate karti hai jo seed script
+     directly use karta hai.
+
+Phir seed script mai asset catalog ko existing demo catalog ke saath integrate
+kiya, duplicate placeholder products replace kiye, aur poora flow verify kiya.
+
+> IMPORTANT FINDING (images):
+> `assets/images` ke tamam 1,130 files ka extension .jpeg/.jpg/.png/.webp hai,
+> lekin asal mai har file ek hi 15,749-byte HTML page hai:
+>     "<title>Page Not Found | Qist Bazaar</title>"
+> Yani scraper ne image download karne ki bajaye source site ka 404 page save
+> kar diya. 1,130 files = 91 unique basenames, sab identical 15,749 bytes.
+> Is liye 88 image references validate karne par 0 valid nikli. Importer ab
+> magic-bytes se images check karta hai aur invalid files ko publish nahi karta,
+> taake UI mai broken/HTML images na jayen. Products existing gradient
+> placeholder (ProductImage fallback) se render hoti hain.
+
+--------------------------------------------------------------------------------
+2) SOURCE DATA ANALYSIS
+--------------------------------------------------------------------------------
+2.1 products.json (grouped dump)
+    - 13 category keys: led-tv, refrigerator, washing-machine, air-conditioner,
+      microwave-oven, water-dispenser, fans, bikes, deep-freezer, batteries,
+      mattress, tyres, tablet
+    - Har key ke under 52 rows = total 676 rows
+    - Masla: har category ke under wahi 52 products repeat hue hain, aur
+      "led-tv" ke under Infinix mobile, Dawlance fridge, SuperPower bike sab
+      mix tha. Source category field unreliable tha.
+
+2.2 products_flat.json (flat dump)
+    - 676 rows
+    - Unique source product IDs = 52
+    - Har ID 13 baar repeat thi (13 category keys)
+    - 2 rows bilkul duplicate thin (same title + same advance):
+        5549 / 5564  → Infinix Hot 60i | 6GB-128GB
+        11234 / 11145 → Tecno Spark 50 | 6GB-128GB
+    - Final unique products = 50
+    - `slug` field source mai har row mai empty tha
+    - `cashPrice` source mai mojood nahi tha, sirf `advanceAmount` tha
+
+2.3 assets/images
+    - 15 folders, 1,130 files
+    - Unique basenames = 91 (baqi sab folder-wise duplicates)
+    - Har folder mai wahi 91 files (contents bhi identical)
+    - Audit: 1,130 / 1,130 files HTML 404 pages (0 valid images)
+    - 8 folders (batteries, deep-freezer, fans, mattress, microwave-oven,
+      tablet, tyres, water-dispenser) ke liye source data mai koi matching
+      product row bhi nahi thi.
+
+2.4 Data quality fixes jo importer mai kiye gaye
+    - Escaped quote artifacts: `Dawlance 32\` → `Dawlance 32"`
+    - Mojibake inch marks: `Haier 32â€³` → `Haier 32"`
+    - Trailing empty pipes aur extra spaces clean
+    - 5 truncated TV titles ko readable banaya:
+        Dawlance 32" → Dawlance 32" LED TV (isi tarah 40", 43", Xiaomi 43",
+        PEL 32")
+    - Brand detection 13 brands ke liye (Infinix, Tecno, Vivo, Itel, Samsung,
+      Xiaomi, HP, Dell, Lenovo, Dawlance, Haier, Pel, SuperPower)
+    - Category detection title keywords se (laptop, motorbike, ton/AC,
+      washing machine, CF/refrigerator, TV/inch, phone models)
+
+--------------------------------------------------------------------------------
+3) FINAL IMPORTED CATALOG (50 products)
+--------------------------------------------------------------------------------
+Category              Products
+--------------------  --------
+Mobiles                  15
+Laptops                   6
+LED TV                    6
+Refrigerator              6
+Washing Machine           6
+Air Conditioner          10
+Bikes                     1
+--------------------  --------
+TOTAL                    50
+
+Brand distribution:
+  Dawlance 18, Pel 6, Infinix 4, Tecno 4, HP 3, Haier 3, Itel 3,
+  Samsung 2, Vivo 2, Dell 2, Lenovo 1, Xiaomi 1, SuperPower 1
+
+Source IDs sample (traceability):
+  5549  Infinix Hot 60i | 6GB-128GB
+  11234 Tecno Spark 50 | 6GB-128GB
+  11049 SuperPower | 70 CC | Motorbike
+  10518 Dawlance Frost 20 1.25 Ton Inverter AC
+  994   Dawlance 9140WB Avante 8 CF Refrigerator
+  11368 LENOVO X1 Carbon | i7 10th Gen | 16GB | 256GB SSD
+  12017 HP PROBOOK 11 G2 X360
+  4051  HP ZBook 15 G6
+
+Har product ka slug source ID ke saath unique hai, e.g.
+  infinix-hot-60i-6gb-128gb-5549
+  dawlance-frost-20-1-25-ton-inverter-cool-only-air-conditioner-10518
+
+SKU pattern: <PREFIX>-AS-<sourceId>, e.g. MOB-AS-5549, AC-AS-10518,
+             TV-AS-7500, LAP-AS-11368
+
+--------------------------------------------------------------------------------
+4) PRICING LOGIC (source mai sirf advance tha)
+--------------------------------------------------------------------------------
+Source field: advanceAmount (rupees)
+Store rule   : 6-month plan ka advance = 25% of cash price
+Derivation   : cashPriceRs = advanceAmount × 4
+
+Is formula ka faida:
+  - Card par jo "advance" dikhta hai wo bilkul source value ke barabar hai.
+    Example: Infinix Hot 60i source advance Rs 6,900 → cash Rs 27,600 →
+    plan 6 advance = Rs 6,900 (verified 50/50 products).
+  - Existing `plansFor()` engine se 3 plans banti hain:
+        6 months  → 25% advance, 14% total markup
+        12 months → 30% advance, 22% total markup
+        18 months → 35% advance, 30% total markup
+  - Sab amounts integer paisa mai store hoti hain (project ka money rule).
+
+Note: source advance amounts kuch rows mai noisy hain (e.g. budget phone
+Rs 27,900 advance), is liye derived cash price kuch products mai market se high
+ya low lag sakta hai. Ye source data ki limitation hai; formula har product par
+consistent hai aur installment math ko valid rakhta hai.
+
+--------------------------------------------------------------------------------
+5) FILES CREATED / MODIFIED
+--------------------------------------------------------------------------------
+NEW  scripts/import-assets.mjs (448 lines)
+     - Reusable importer: dedupe, category/brand detection, title cleanup,
+       spec/highlight parsing, pricing derivation, image validation + copy,
+       stale-file prune, typed seed file generation.
+     - Run: npm run import:assets
+
+NEW  server/src/seed/assets-products.ts (1,491 lines, generated)
+     - 50 typed AssetProduct records with sourceId, name, slug, sku,
+       categorySlug, brandSlug, cashPriceRs, description, highlights, specs,
+       tags, images[].
+     - AUTO-GENERATED header; hand-edit nahi karna chahiye.
+
+MOD  server/src/seed/seed.ts
+     - `assetsProducts` import.
+     - `REPLACED_BY_ASSETS` set: 10 hand-written placeholder products jo real
+       asset products se duplicate thay, unhein skip kiya:
+         smart-20-4gb-64gb, y05-4gb-128gb, a200-plus-3gb-128gb,
+         9140-wb-avante-8cf, life-pro-prlp-2350, hwm-130-1217,
+         dw-6550-glass-lid-8kg, frost-20-125-ton-inverter, pinv-atom-12k,
+         43-4k-google-tv
+     - Asset products ko category, brand, description, highlights, specs,
+       images, plans, stock, tags, delivery aur SEO fields ke saath create
+       kiya.
+     - Seed stats mai `assetProducts` aur `productsWithImages` add kiye.
+
+MOD  server/src/seed/data.ts
+     - Brands list mai `Xiaomi` add kiya (asset catalog mai Xiaomi 43" TV tha).
+
+MOD  package.json
+     - Naya script: "import:assets": "node scripts/import-assets.mjs"
+
+NEW  client/public/products/ (importer ka target)
+     - Valid images aane par yahan copy hoti hain. Is run mai 0 valid images
+       thin, is liye directory empty hai (invalid HTML files prune ho gayin).
+
+NEW  ASSETS_INTEGRATION_REPORT.txt (ye report)
+
+Unchanged / untouched:
+     - assets/ ke tamam original files (data + images) waisay hi hain.
+     - Root ke purane scraper scripts ko touch nahi kiya.
+     - Project root se bahar koi file modify nahi ki.
+
+--------------------------------------------------------------------------------
+6) SEED RESULT (actual run)
+--------------------------------------------------------------------------------
+Command: MONGO_URI=<in-memory mongo> npm run seed -w server
+Output:
+  Seed complete: {
+    categories: 25,
+    brands: 13,
+    products: 61,
+    assetProducts: 50,
+    productsWithImages: 0,
+    pages: 10,
+    blogs: 3,
+    branches: 12,
+    vendors: 3
+  }
+
+61 products = 11 legacy demo products + 50 asset products.
+(Pehle 21 legacy products thay; 10 duplicate placeholders asset versions se
+replace hue, is liye 11 bache.)
+
+--------------------------------------------------------------------------------
+7) VERIFICATION (actual measurements)
+--------------------------------------------------------------------------------
+7.1 Typecheck
+    npm run typecheck
+    → server tsc --noEmit : PASS
+    → client tsc --noEmit : PASS
+    Exit code 0.
+
+7.2 Tests
+    npm test
+    → Test Files 2 passed (2)
+    → Tests 33 passed | 2 skipped (35)
+    → Duration ~13.5s
+    Exit code 0.
+    (2 skipped DB tests machine-specific in-memory fallback behaviour hain,
+     pehle se maujood tests ka hissa.)
+
+7.3 Seed + API integration checks
+    API: http://127.0.0.1:5010/api/v1 (seeded in-memory MongoDB)
+
+    - GET /products?limit=100             → total 61
+    - Asset product detail endpoints      → 50/50 returned 200
+    - Plans on each asset product         → 50/50 had 3 valid plans
+    - 6-month advance == source advance   → 50/50 matched
+    - Missing asset detail pages          → 0
+    - Home sections                       → 6 rails, 43 products total
+    - Deal of the day                     → 8 products
+    - Image files referenced by DB        → 0 (all source images invalid)
+
+    Sample product API response:
+      name       : Infinix Hot 60i | 6GB-128GB
+      cashPrice  : 2,760,000 paisa (Rs 27,600)
+      minAdvance : 690,000 paisa (Rs 6,900)
+      plans      : 6 months  Rs 6,900 advance  + Rs 4,094/month
+                   12 months Rs 8,280 advance + Rs 2,116/month
+                   18 months Rs 9,660 advance + Rs 1,457/month
+
+7.4 Storefront (Next.js dev server, real HTTP)
+    - GET /product/infinix-hot-60i-6gb-128gb-5549 → 200
+      Product name, advance Rs 6,900 aur plan data render hua.
+    - GET /product-category/mobiles → 200
+      Asset products (Infinix, Tecno, Vivo, Itel, Samsung) fallback
+      placeholders ke saath render hue.
+    - Image URL test: static file HTTP 200, lekin Next image optimizer ne
+      "not a valid image" reject kiya — kyunke source files HTML thin.
+      Is liye invalid files ko public folder se hata diya gaya.
+
+7.5 Image audit
+    - Files examined      : 1,130
+    - Valid image files   : 0
+    - Invalid (HTML 404)  : 1,130 (100%)
+    - File size           : har file 15,749 bytes
+    - HTML title          : "Page Not Found | Qist Bazaar"
+    - Unique basenames    : 91
+    - Importer references : 88 (38 products ke paas doosra angle bhi tha)
+    - Published to public : 0 (validation ne block kiya)
+
+--------------------------------------------------------------------------------
+8) HOW TO RE-RUN
+--------------------------------------------------------------------------------
+1. Asset data ya images update karne ke baad:
+      npm run import:assets
+   (data normalize + client/public/products copy + seed file regenerate)
+
+2. Demo database seed:
+      npm run seed
+
+3. Verification:
+      npm run typecheck
+      npm test
+
+Note: `npm run seed` existing demo behaviour ki tarah pehle demo collections
+clear karta hai (categories, products, users, orders etc.). Ise sirf demo/dev
+database par chalayen.
+
+--------------------------------------------------------------------------------
+9) JAB ASLI IMAGES MIL JAYEN (future step)
+--------------------------------------------------------------------------------
+Importer already image-ready hai:
+  - `assets/images/<category>/<sourceId>_<anything>.jpeg|jpg|png|webp` rakhein.
+  - `npm run import:assets` dobara chalayen.
+  - Magic-byte validation pass hone par images automatically
+    `client/public/products/<category>/` mai copy hongi aur seed file mai
+    `/products/<category>/<file>` URLs aa jayengi.
+  - `npm run seed` ke baad cards/PDP par next/image ke through AVIF/WebP
+    optimize ho kar images render hongi.
+Koi manual path ya DB edit ki zaroorat nahi.
+
+--------------------------------------------------------------------------------
+10) LIMITATIONS / NOTES
+--------------------------------------------------------------------------------
+1. Images files valid nahi thin — ye task ki sab se bari limitation hai.
+   Source folder mai 1,130 "images" asal mai identical 404 HTML pages hain.
+   Is liye catalog abhi built-in gradient placeholder use karta hai.
+2. Source mai cash price nahi tha; cash = advance × 4 derive kiya gaya.
+   Isse source advance exactly preserve hota hai aur plans coherent rehte hain.
+3. Source categories ghalat thin (sab "led-tv"); importer ne titles se sahi
+   category detect ki. 8 image folders ke liye koi product row nahi thi, is
+   liye un categories mai asset products add nahi hue.
+4. 2 duplicate source rows merge hue (5549/5564, 11234/11145).
+5. 10 legacy placeholder products ko asset versions se replace kiya gaya taake
+   same model do dafa na dikhe; baqi 11 legacy products (solar, tablet,
+   ThinkPad, ProBook, Roadster etc.) barqarar hain.
+6. Descriptions/highlights original copy hain jo product title aur specs se
+   generate ki gayi hain; koi third-party text copy nahi kiya gaya.
+
+================================================================================
+END OF REPORT
+================================================================================

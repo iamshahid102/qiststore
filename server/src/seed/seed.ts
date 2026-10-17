@@ -6,7 +6,27 @@ import { User } from '../models/User.js';
 import { slugify } from '../utils/slug.js';
 import { rupeesToPaisa } from '../utils/money.js';
 import { blogs, brands, categories, cmsPages, branches, products, plansFor, vendors } from './data.js';
+import { assetsProducts } from './assets-products.js';
 import bcrypt from 'bcryptjs';
+
+/**
+ * Hand-written demo rows that duplicate a product imported from the real
+ * assets catalog. The asset version wins because it carries the source advance
+ * amount and real product identity. Keeping the list explicit makes the seed
+ * deterministic and documents exactly which placeholders were replaced.
+ */
+const REPLACED_BY_ASSETS = new Set([
+  'smart-20-4gb-64gb',
+  'y05-4gb-128gb',
+  'a200-plus-3gb-128gb',
+  '9140-wb-avante-8cf',
+  'life-pro-prlp-2350',
+  'hwm-130-1217',
+  'dw-6550-glass-lid-8kg',
+  'frost-20-125-ton-inverter',
+  'pinv-atom-12k',
+  '43-4k-google-tv',
+]);
 
 async function seed() {
   await connectDb();
@@ -63,6 +83,7 @@ async function seed() {
   // Products
   let i = 0;
   for (const p of products) {
+    if (REPLACED_BY_ASSETS.has(p.slug)) continue;
     const cashPrice = rupeesToPaisa(p.cashPriceRs);
     const plans = plansFor(cashPrice);
     await Product.create({
@@ -89,6 +110,45 @@ async function seed() {
       delivery: { free: true, instantCities: ['Karachi', 'Lahore', 'Hyderabad'] },
     });
     i++;
+  }
+
+  // Real catalog imported from assets/data (see scripts/import-assets.mjs).
+  // Valid images are copied to client/public/products/<category>/ and stored as
+  // root-relative URLs; products without a valid image use the UI's gradient
+  // placeholder (the supplied asset images failed validation).
+  let ai = 0;
+  for (const p of assetsProducts) {
+    const cashPrice = rupeesToPaisa(p.cashPriceRs);
+    const plans = plansFor(cashPrice);
+    await Product.create({
+      name: p.name,
+      slug: p.slug,
+      sku: p.sku,
+      category: categoryBySlug.get(p.categorySlug),
+      brand: brandBySlug.get(p.brandSlug) ?? null,
+      vendor: null,
+      vendorName: 'Qist Store Fulfilment',
+      description: p.description,
+      highlights: p.highlights,
+      specs: p.specs,
+      images: p.images,
+      cashPrice,
+      minAdvance: Math.min(...plans.map((pl) => pl.advance)),
+      plans: plans as never,
+      stock: { qty: 20, track: true, status: 'in_stock' },
+      tags: p.tags,
+      status: 'active',
+      featured: ai < 10,
+      ratingStats: { avg: 4 + (ai % 8) / 10, count: 9 + ai * 2 },
+      soldCount: 180 - ai * 2,
+      warranty: 'company',
+      delivery: { free: true, instantCities: ['Karachi', 'Lahore', 'Hyderabad'] },
+      seo: {
+        title: `${p.name} Price in Pakistan on Installment | Qist Store`,
+        description: `Buy the ${p.name} on easy monthly installments. Low advance, company warranty and free delivery across Pakistan.`,
+      },
+    });
+    ai++;
   }
 
   // CMS pages
@@ -136,6 +196,8 @@ async function seed() {
     categories: await Category.countDocuments(),
     brands: await Brand.countDocuments(),
     products: await Product.countDocuments(),
+    assetProducts: await Product.countDocuments({ sku: /^[A-Z]+-AS-\d+$/ }),
+    productsWithImages: await Product.countDocuments({ 'images.0': { $exists: true } }),
     pages: await CmsPage.countDocuments(),
     blogs: await Blog.countDocuments(),
     branches: await Branch.countDocuments(),
