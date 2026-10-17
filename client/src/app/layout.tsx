@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { USPBar } from '@/components/layout/USPBar';
-import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
-import { apiGet } from '@/lib/api';
-import type { CategoryNode } from '@/types/api';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
@@ -46,19 +40,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const cats = await apiGet<CategoryNode[]>('/categories/tree');
-  const categories = cats?.data ?? [];
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={jakarta.variable}>
-      <body className="flex min-h-screen flex-col font-sans">
-        <Header categories={categories} />
-        <main className="flex-1">{children}</main>
-        <USPBar />
-        <Footer />
-        <WhatsAppButton />
-      </body>
+      <body className="min-h-screen font-sans">{children}</body>
     </html>
   );
 }

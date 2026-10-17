@@ -1,0 +1,400 @@
+================================================================================
+QIST STORE — ADMIN DASHBOARD IMPLEMENTATION REPORT
+================================================================================
+Project : Qist Store (Next.js 16 + Express 5 + MongoDB/Mongoose)
+Scope   : Complete admin panel — dashboard, product CRUD, order management,
+          customer management, APIs, UI/UX, security and verification.
+Date    : 17 October 2026
+Status  : Implemented, built and verified against the running application.
+
+--------------------------------------------------------------------------------
+1. WHAT WAS DELIVERED (SUMMARY)
+--------------------------------------------------------------------------------
+Pehle project mein admin ka sirf REST API tha (orders status + image upload),
+koi dashboard UI nahi tha. Ab ek complete, production-style admin panel hai:
+
+  • Protected /admin area with its own dark-navy sidebar shell (storefront ka
+    header/footer admin par nahi aata — layouts ko route-group mein split kiya).
+  • Dashboard with live KPIs, 14-day sales chart, order pipeline, recent orders,
+    best sellers aur low-stock restock list.
+  • Complete Product CRUD:
+      - Create / edit / archive / permanent delete
+      - Rupees → paisa conversion at the form boundary
+      - Per-term installment plans (3/6/9/12/18/24 months) with live total,
+        markup and the 10% minimum-advance guardrail
+      - Cloudinary image upload (multi-file), URL add, reorder, cover selection
+      - Specs, highlights, description, inventory, delivery, tags, SEO
+      - Auto slug + auto SKU when left blank
+      - Bulk activate / archive from the list
+      - Featured toggle inline
+  • Complete Order management:
+      - Status tabs with counts, search (order #/name/phone), payment-method and
+        date-range filters, sorting, pagination, authenticated CSV export
+      - Order detail: customer, address, items, pricing, verification documents,
+        internal notes, activity timeline
+      - Only LEGAL status transitions are offered (server state machine)
+      - Verification approve / reject with mandatory rejection reason
+      - Installment schedule: mark paid, record partial payment, reset to upcoming
+        (method + transaction reference stored; timeline entry written)
+  • Customer management:
+      - Lifetime advance, contract value, orders count, last order
+      - Profile with full order history and KYC status
+      - Block / unblock account (blocking bumps tokenVersion → refresh sessions die)
+      - Role management (customer / vendor / staff / admin) — full admin only
+  • Security:
+      - Every /api/v1/admin route requires a valid Bearer token + admin/staff role
+      - Customer token → 403 on all admin endpoints (tested)
+      - Dashboard layout verifies the role against /admin/me on load, not just
+        localStorage
+      - 15-minute access token auto-refreshes once through /auth/refresh
+      - Full admins cannot block themselves or change their own role
+  • UX:
+      - Brand tokens reused (#185ADB blue, #FF8A3D orange, cream surface, navy ink)
+      - Responsive 320px → 1440px+, mobile drawer, horizontal-scroll tables
+      - Empty states, loading states, inline validation, confirmation dialogs,
+        success/error banners, sticky save bar
+      - 390px viewport par zero horizontal page overflow (verified)
+
+--------------------------------------------------------------------------------
+2. ACCESS & DEMO ACCOUNTS
+--------------------------------------------------------------------------------
+Storefront        : http://localhost:3000
+Admin dashboard   : http://localhost:3000/admin
+API               : http://localhost:5000/api/v1
+Admin API base    : http://localhost:5000/api/v1/admin
+
+  Admin    → phone 03000000001 / password Admin@123   (role: admin)
+  Customer → phone 03000000002 / password Customer@123 (role: customer)
+
+Login page: http://localhost:3000/account/login?next=/admin
+  - Admin/staff login ke baad seedha /admin khulta hai.
+  - Customer login /account par jata hai.
+  - Customer agar /admin kholne ki koshish kare to "Access denied" gate milta
+    hai, aur API bhi 403 deta hai.
+
+--------------------------------------------------------------------------------
+3. ADMIN PAGES
+--------------------------------------------------------------------------------
+/admin
+  Dashboard
+  - KPI cards: advance collected, total orders, customers, live products
+  - Secondary metrics: pending verification, monthly receivable, low stock,
+    average advance
+  - 14-day order-value bar chart (hover value, responsive)
+  - Order pipeline split with counts
+  - Recent orders table with direct links
+  - Best sellers (by soldCount)
+  - Low stock list (≤5 units) with quick edit links
+
+/admin/products
+  - Tabs: All / Active / Draft / Archived
+  - Search by name, SKU, slug, vendor
+  - Category (parent + child), stock (low/out), sort filters
+  - Pagination (20/page), total count
+  - Bulk select → activate or archive
+  - Per row: thumbnail, SKU, plan count, category, cash price, advance, stock,
+    status, featured star, Edit, Archive
+  - Archive confirmation explains order history is preserved
+
+/admin/products/new
+/admin/products/[slug]
+  - Shared ProductForm with sections:
+      Basic information, Pricing & installment plans, Product photos,
+      Description & specifications, Inventory, Delivery & tags, SEO,
+      Danger zone (permanent delete)
+  - Live per-plan total payable + markup + 10% advance warning
+  - Image upload to Cloudinary (JPG/PNG/WebP/AVIF, max 5 MB each)
+  - Image reorder/remove, first image = storefront cover
+  - Sticky save bar with validation summary
+
+/admin/orders
+  - Status tabs with live counts (all + every order status)
+  - Search order number / customer name / phone
+  - Payment method filter, from/to date range, value/advance sorting
+  - CSV export honours the current status filter (up to 5,000 rows)
+  - Row shows items, advance, monthly, payment method, verification, status, date
+
+/admin/orders/[orderNumber]
+  - Order items + pricing snapshots
+  - Installment schedule with Record/Edit payment dialog
+  - Verification card with CNIC/selfie links, approve/reject
+  - Workflow card: only allowed transitions, optional timeline note
+  - Internal notes (staff-only)
+  - Activity timeline (newest first)
+  - Customer + shipping + payment summary rail
+
+/admin/customers
+  - Search name/phone/email, status filter, pagination
+  - Orders count, advance paid, contract value, last order, role, status
+  - Quick block/unblock
+
+/admin/customers/[id]
+  - Lifetime stats cards
+  - Contact card
+  - Full order history with links
+  - Account status + role management (admin-only)
+  - KYC/verification status and account facts
+
+--------------------------------------------------------------------------------
+4. API REFERENCE (all under /api/v1/admin)
+--------------------------------------------------------------------------------
+Auth: Authorization: Bearer <access token>; role must be admin or staff.
+Money: integer PAISA everywhere (Rs 1 = 100 paisa). UI converts rupees ↔ paisa.
+
+DASHBOARD
+  GET    /stats
+         totals, pendingVerification, statusCounts, lowStockCount,
+         salesSeries[14], recentOrders, topProducts, lowStock
+
+PRODUCTS
+  GET    /products?q=&status=&category=&stock=&sort=&page=&limit=
+  GET    /products/:idOrSlug
+  POST   /products                    (201 → { id, slug, sku })
+  PATCH  /products/:idOrSlug          (partial; plans/cashPrice recompute minAdvance)
+  DELETE /products/:idOrSlug          (archive by default)
+  DELETE /products/:idOrSlug?permanent=true
+                                      (409 if any order references it)
+  PATCH  /products/:idOrSlug/stock    ({ qty, status?, track? })
+
+REFERENCE DATA
+  GET    /categories                  (flat, parent name, productCount)
+  GET    /brands
+
+ORDERS
+  GET    /orders?q=&status=&paymentMethod=&from=&to=&sort=&page=&limit=
+         meta.statusCounts included for the tabs
+  GET    /orders/export.csv?status=   (text/csv attachment)
+  GET    /orders/:orderNumber         (full doc + allowedTransitions + payments)
+  PATCH  /orders/:orderNumber/status                  ({ status, note? })
+  PATCH  /orders/:orderNumber/verification            ({ decision, reason? })
+  PATCH  /orders/:orderNumber/notes                   ({ notes })
+  PATCH  /orders/:orderNumber/schedule/:installmentNo
+         ({ status, paidAmount?, method?, txnRef? })
+
+CUSTOMERS
+  GET    /customers?q=&status=&page=&limit=
+  GET    /customers/:id               (profile + all linked orders + stats)
+  PATCH  /customers/:id               ({ name?, email?, status?, role? })
+
+SESSION
+  GET    /me                          (verifies the signed-in staff member)
+
+UPLOADS (existing, now used by the dashboard)
+  POST   /uploads                     multipart field "file" → Cloudinary
+  DELETE /uploads?publicId=
+  GET    /uploads/status
+
+ERROR BEHAVIOUR
+  400 validation / business-rule error
+  401 missing or expired token (client refreshes once, then redirects to login)
+  403 customer/vendor token, or staff trying to change a role
+  404 unknown order/product/customer
+  409 duplicate slug/SKU, illegal order transition, or permanent delete of an
+      order-linked product
+
+--------------------------------------------------------------------------------
+5. BUSINESS RULES ENFORCED
+--------------------------------------------------------------------------------
+  • Advance ≥ 10% of cash price, advance < 2× cash price (shared engine).
+  • monthly > 0 and an allowed term (3/6/9/12/18/24).
+  • minAdvance is derived from the cheapest active plan — never hand-typed.
+  • Slugs are normalised and unique; SKUs auto-generated with `QS-...`.
+  • Product updates are partial-safe: patching `featured` does NOT wipe plans,
+    images, specs or highlights (dedicated update schema).
+  • Orders follow the state machine:
+      pending_verification → verification_in_progress | approved | rejected | cancelled
+      verification_in_progress → approved | rejected | cancelled
+      approved → processing | cancelled
+      processing → shipped
+      shipped → delivered
+      delivered → completed | defaulted
+      rejected / completed / cancelled / defaulted → final
+    Any illegal move is a 409 with a clear message.
+  • Verification rejection requires a reason and writes it to the order.
+  • Installment "paid" stores paidAt + paidAmount = amount; "partial" requires
+    0 < paidAmount < amount; "reset" clears paidAt/paidAmount.
+  • Blocking a customer increments tokenVersion (refresh tokens revoked).
+  • Admin/staff cannot block themselves; only role=admin can change roles.
+
+--------------------------------------------------------------------------------
+6. SECURITY MODEL
+--------------------------------------------------------------------------------
+  • Server is the source of truth: every admin route re-checks the JWT and role.
+  • The dashboard gate is a UX layer only; hiding buttons is never the boundary.
+  • Access tokens live 15 minutes (ACCESS_TOKEN_TTL), refresh cookie 7 days.
+  • admin-api.ts retries one 401 through /auth/refresh, updates localStorage,
+    and only then redirects to /account/login?next=...
+  • Login `?next=` accepts same-site paths only (no open redirect).
+  • Role changes take effect on the next login because role is inside the JWT.
+  • Validation with Zod on every write endpoint; ObjectIds validated.
+  • Duplicate-key races return 409 instead of a 500.
+  • Cloudinary upload endpoint keeps the existing 5 MB / MIME restrictions.
+  • Role changes are audited by the normal API logs; order actions are written to
+    the order timeline (visible in the UI).
+
+--------------------------------------------------------------------------------
+7. UI / UX NOTES
+--------------------------------------------------------------------------------
+  • Same visual language as the storefront: cream background, white 2xl cards,
+    brand-blue primary actions, orange CTA, navy sidebar, Plus Jakarta Sans.
+  • Layout split into route groups:
+        client/src/app/(store)/...   → Header, USP bar, Footer, WhatsApp
+        client/src/app/admin/...     → admin shell (no storefront chrome)
+  • Desktop sidebar 264 px; mobile top bar + slide-in drawer.
+  • Sticky save bar on the product form; sticky admin top bar.
+  • Tables scroll horizontally inside their card on phones — the PAGE never
+    scrolls sideways (verified at 390 px).
+  • All destructive actions use a confirmation dialog.
+  • Every async action shows busy state, success banner or the server's exact
+    error message.
+  • Accessibility: labelled inputs, aria-labels on icon buttons, dialog Escape
+    handling, visible focus rings, `role="alert"` on errors.
+
+--------------------------------------------------------------------------------
+8. FILES
+--------------------------------------------------------------------------------
+NEW — server
+  server/src/modules/admin/admin.routes.ts     Complete admin API (stats, products,
+                                               orders, customers, CSV)
+
+NEW — client
+  client/src/app/admin/layout.tsx              Protected shell + role gate
+  client/src/app/admin/page.tsx                Dashboard
+  client/src/app/admin/products/page.tsx       Product list + bulk actions
+  client/src/app/admin/products/new/page.tsx   Create product
+  client/src/app/admin/products/[slug]/page.tsx Edit product
+  client/src/app/admin/orders/page.tsx         Orders list + filters + CSV
+  client/src/app/admin/orders/[orderNumber]/page.tsx  Order detail + payments
+  client/src/app/admin/customers/page.tsx      Customers list
+  client/src/app/admin/customers/[id]/page.tsx Customer profile
+  client/src/components/admin/ui.tsx           Cards, badges, pagination, dialogs
+  client/src/components/admin/ProductForm.tsx  Shared create/edit form
+  client/src/lib/admin-api.ts                  Typed client + token refresh + CSV
+  client/src/types/admin.ts                    Shared admin DTOs
+  scripts/check-admin.mjs                      Browser smoke test + screenshots
+
+NEW — docs
+  ADMIN_DASHBOARD_REPORT.txt                   This report
+
+CHANGED
+  server/src/routes/index.ts                   Mounts the new admin router
+  server/src/modules/checkout/checkout.routes.ts
+                                               Removed duplicated admin handlers
+                                               (moved to the admin module); public
+                                               checkout/tracking untouched
+  server/tests/api.test.ts                     +8 admin integration tests
+  client/src/app/layout.tsx                    Document-only root layout
+  client/src/app/(store)/layout.tsx            Storefront shell (new route group)
+  client/src/app/globals.css                   `max-width: 100%` on scroll tables
+  client/src/components/layout/Header.tsx      "Admin panel" link for staff,
+                                               customer first-name link, auth-aware
+  client/src/app/(store)/account/login/page.tsx Role-aware redirect + safe ?next
+  README.md                                    Admin feature/API/script docs
+  package.json                                 `npm run check:admin`
+
+  Note: all existing storefront routes moved into `src/app/(store)/` — URLs did
+  not change (route groups do not affect the path).
+
+--------------------------------------------------------------------------------
+9. VERIFICATION (ACTUAL RUNS, NOT CLAIMS)
+--------------------------------------------------------------------------------
+  npm run typecheck         → exit 0 (server + client)
+  npm run build             → exit 0
+                              Next.js built all 18 static pages and listed
+                              /admin, /admin/products, /admin/orders,
+                              /admin/customers, /admin/products/new as routes;
+                              server tsc build succeeded
+  npm test                  → 41 passed | 2 skipped (43 tests), exit 0
+                              The 2 skips are the inverse “DB unavailable” guards
+                              that intentionally skip when MongoDB is available.
+  npm run check:admin       → 11 checks, 0 failures, 0 console errors
+                              (desktop login, all 6 page types, order detail,
+                               customer detail, mobile shell, storefront)
+  390px mobile              → document scrollWidth == viewport width
+  1440px desktop            → sidebar + tables render, no overflow
+
+  End-to-end admin flow (real browser + live API):
+    ✓ Created "E2E Admin Phone …" through the form → appeared in the list
+    ✓ Edit form saved → "Product saved" banner, API reflected the change
+    ✓ Archive flow → API status `inactive`
+    ✓ Permanent cleanup delete → 200, product gone
+    ✓ Cloudinary upload → 201 (secure_url + public_id), delete asset → 200
+    ✓ Customer token → /admin shows "Access denied"; admin APIs return 403
+    ✓ CSV export returns text/csv with the expected header row
+    ✓ Block/unblock customer test and installment paid/reset test (vitest)
+
+  Screenshots (gitignored): preview/admin-dashboard.png, admin-products.png,
+  admin-product-new.png, admin-product-edit.png, admin-orders.png,
+  admin-order-detail.png, admin-customers.png, admin-customer-detail.png,
+  admin-mobile.png, admin-access-denied.png
+
+  Re-run everything (web on :3000, API on :5000):
+      npm run typecheck
+      npm test
+      npm run check:admin
+
+--------------------------------------------------------------------------------
+10. HOW TO USE (SHORT GUIDE)
+--------------------------------------------------------------------------------
+  Dashboard dekhne ke liye
+    1. http://localhost:3000/account/login?next=/admin kholen
+    2. 03000000001 / Admin@123 se login karen
+    3. Seedha dashboard khul jayega
+
+  Naya product add karna
+    1. Sidebar → Products → "Add product"
+    2. Name + cash price + plans (advance/monthly) bharen
+    3. "Upload" se photos add karen (ya Cloudinary URL paste karen)
+    4. Status = Active rakhen → "Create product"
+    5. Storefront par foran nazar aayega
+
+  Product edit / archive / delete
+    - List → Edit → tabdeeli karen → "Save changes"
+    - List → trash icon → archive (order history safe rehti hai)
+    - Edit page → Danger zone → permanent delete (agar koi order use na kare)
+
+  Order manage karna
+    - Orders → status tab / search se order dhundhen
+    - Order kholen → Workflow se next status chunen → Update status
+    - Pending order par verification Approve ya Reject (reason ke saath)
+    - Installments table → Record → paid / partial / reset
+    - Internal notes save karen; timeline sab kuch record karta hai
+
+  Customer manage karna
+    - Customers → search → View
+    - Block/unblock; admin ke taur par role badalna
+    - Customer ke saare orders profile par milte hain
+
+  CSV export
+    - Orders → Export CSV (current status filter ke mutabiq)
+
+--------------------------------------------------------------------------------
+11. KNOWN LIMITATIONS / NEXT STEPS
+--------------------------------------------------------------------------------
+  • Dashboard access control client-side gate hai; asli security server-side 403
+    hai. Agar browser-level protection chahiye to httpOnly cookie + Next
+    middleware based session add karna hoga.
+  • Role change ke baad user ko dobara login karna hota hai (JWT mein role).
+  • Categories, brands, deals, home rails aur CMS pages abhi read-only hain —
+    unke CRUD endpoints/UI is scope mein nahi thay.
+  • Detaching an image from a product does not delete the Cloudinary asset
+    (orphan cleanup job recommended).
+  • Refunds/returns, payment gateway reconciliation, courier tracking API,
+    invoice PDFs and SMS/email notifications are not part of this scope.
+  • No admin 2FA, password reset flow, or customer account creation by admin.
+  • Revenue KPI = advances on approved+ orders; it is not accounting profit.
+  • Customer table excludes staff/admin accounts by design.
+  • No real-time push; use the Refresh button for new orders.
+
+--------------------------------------------------------------------------------
+12. COMMANDS ADDED
+--------------------------------------------------------------------------------
+  npm run check:admin     Browser smoke test for the dashboard (needs web + API)
+
+Existing commands unchanged: dev, build, start, typecheck, test, seed,
+import:assets, import:curated, sync:images, check:images, check:responsive,
+check:brand, check:console.
+
+================================================================================
+END OF REPORT
+================================================================================

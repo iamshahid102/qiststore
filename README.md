@@ -152,13 +152,29 @@ No UI kit: components are hand-built with Tailwind so tokens stay in one place.
   policies, Musawamah agreement, Become a Vendor), blog/press, partner stores, 12 facilitation centres
 - SEO: dynamic `sitemap.xml`, `robots.txt`, per-page metadata, Open Graph/Twitter cards, brand OG image
 
+**Admin dashboard (`/admin`)**
+- Dark-navy sidebar shell in the store's own visual language, protected by a live role check
+- **Dashboard:** advance collected, orders, customers, active products, pending verification,
+  monthly receivable, low stock, 14-day order-value chart, pipeline split, recent orders,
+  best sellers and restock list
+- **Products:** searchable/filterable table with bulk activate/archive, featured toggle, stock and
+  publish state, **full create/edit form** (pricing + per-term plans, media upload, specs, highlights,
+  inventory, delivery, tags, SEO) and safe archive vs. permanent delete
+- **Orders:** status tabs with counts, search, payment/date filters, CSV export, order detail with
+  legal-transition-only workflow buttons, verification approve/reject with reason, internal notes,
+  installment payment recording (paid/partial/reset) and a full activity timeline
+- **Customers:** lifetime advance/contract value, order history, block/unblock (revokes sessions),
+  role management (admin-only) and KYC status
+- See **`ADMIN_DASHBOARD_REPORT.txt`** for the complete feature and endpoint reference
+
 **API**
 - Catalog: categories tree, brands, products (filters/sort/pagination/text search), product detail,
   active deal, home sections, category facets
 - Content: CMS pages, blogs/press, branches (grouped by city), vendor stores
 - Checkout: server-side quote, order creation (guest-friendly), public tracking, customer orders
 - Auth: register/login/refresh (rotation + cookie)/logout/me
-- Admin: order queue, **state-machine-enforced status transitions**, verification approve/reject,
+- Admin: stats, product CRUD + stock, order queue/detail/notes/payments/CSV, customer management,
+  **state-machine-enforced status transitions**, verification approve/reject,
   **Cloudinary image upload + product image attach/detach**, storage status probe
 - Installment schedule generation with overdue-capable statuses
 
@@ -213,8 +229,15 @@ cp client/.env.local.example client/.env.local
 ### 5.3 Seed demo data
 
 ```bash
-npm run seed         # 17 categories, 12 brands, 21 products w/ plans, CMS pages, blogs, branches, deals, demo users
+npm run seed         # 17 categories, 13 brands, 61 products w/ plans + Cloudinary photos, CMS pages, blogs, branches, deals, demo users
 ```
+
+All 61 products carry a real Cloudinary product photo (no generated placeholders). Fictional
+demo rows that had no photo on the source storefront are replaced by real products of the same
+category — see `server/src/seed/curated-products.ts` (regenerate with `npm run import:curated`).
+
+The catalog image pipeline is: `npm run import:assets && npm run import:curated` →
+`npm run seed` → `npm run sync:images` → `npm run seed`.
 
 | Role | Phone | Password |
 |---|---|---|
@@ -282,6 +305,10 @@ call through the Next proxy, ready for the admin UI upload form.
 | `npm run typecheck` | `tsc --noEmit` for server and client |
 | `npm test` | Server test suite (unit + integration) |
 | `npm run seed` | Re-seed the demo database |
+| `npm run import:curated` | Scrape the real replacements for fictional demo rows → `server/src/seed/curated-products.ts` |
+| `npm run sync:images` | Resolve real product photos from source pages, upload to Cloudinary, regenerate `server/src/seed/product-images.ts` and update DB image arrays |
+| `npm run check:images` | Real-browser product image audit: every card/PDP image must decode (`naturalWidth > 0`) |
+| `npm run check:admin` | Real-browser admin audit: logs in, walks every dashboard page, asserts content, screenshots and fails on console errors |
 | `npm run check:responsive` | Real-browser horizontal-overflow audit: 16 routes × 8 widths (320→1440 px) |
 | `npm run check:brand` | Real-browser theme/brand audit: tokens, cream surface, CTA colour, logo, banner, mobile header |
 | `npm run check:console` | Real-browser runtime audit: console errors/warnings, page errors, failed requests, 5xx across 14 routes |
@@ -299,7 +326,7 @@ MongoDB for machines without one installed).
 
 ```
 QistStore/
-├── scripts/                            # check-responsive.mjs, check-brand.mjs
+├── scripts/                            # check-*.mjs browser audits (incl. check-admin.mjs)
 ├── client/
 │   ├── src/app/icon.png, apple-icon.png # generated from the brand logo
 │   ├── public/brand/                    # logo.png, brand-banner.jpg, og-image.jpg
@@ -307,9 +334,11 @@ QistStore/
 │       ├── app/                         # routes: /, /shop, /product/[slug],
 │       │                                # /product-category/[...slug], /cart, /checkout,
 │       │                                # /order-tracking, /account/*, /page/[slug],
-│       │                                # /blogs, /stores, /visit-us, /search, /wishlist│       ├── components/      # layout/ product/ listing/ home/ cms/ ui/
-│       │                    #   ui/{SectionHeading,CategoryIcon}.tsx — shared
-│       │                    #   design language (eyebrow headings, icon registry)
+│       │                                # /blogs, /stores, /visit-us, /search, /wishlist
+│       │   └── admin/                   # protected dashboard: layout + dashboard,
+│       │                                #   products (list/new/edit), orders, customers
+│       ├── components/      # layout/ product/ listing/ home/ cms/ ui/
+│       │   └── admin/       # admin UI primitives + ProductForm
 │       ├── lib/             # api client (+ apiUpload), formatting, auth store
 │       ├── stores/                      # zustand: cart, wishlist
 │       └── types/                       # shared DTO types
@@ -321,6 +350,7 @@ QistStore/
     │   ├── modules/
     │   │   ├── engine/installment.ts    # PURE installment + state-machine logic
     │   │   ├── auth/ catalog/ content/ checkout/
+    │   │   ├── admin/                   # stats, product CRUD, orders, customers
     │   │   └── uploads/                 # Cloudinary upload + product image endpoints
     │   ├── routes/                      # API router
     │   ├── seed/                        # dataset + seed + dev-db helper

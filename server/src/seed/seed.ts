@@ -7,6 +7,8 @@ import { slugify } from '../utils/slug.js';
 import { rupeesToPaisa } from '../utils/money.js';
 import { blogs, brands, categories, cmsPages, branches, products, plansFor, vendors } from './data.js';
 import { assetsProducts } from './assets-products.js';
+import { curatedProducts } from './curated-products.js';
+import { productImages } from './product-images.js';
 import bcrypt from 'bcryptjs';
 
 /**
@@ -26,6 +28,15 @@ const REPLACED_BY_ASSETS = new Set([
   'frost-20-125-ton-inverter',
   'pinv-atom-12k',
   '43-4k-google-tv',
+  // Fictional demo rows with no photograph anywhere in the source catalog.
+  // Each is replaced by a real product of the same category (curated-products.ts).
+  'nova-x5-6gb-128gb',
+  'nova-x5-lite-4gb-64gb',
+  'spark-go-2026',
+  'probook-450-g10',
+  'thinkpad-e14-gen4',
+  'tab-a9',
+  '5kw-on-grid-solar-system',
 ]);
 
 async function seed() {
@@ -97,7 +108,7 @@ async function seed() {
       description: p.description,
       highlights: p.highlights,
       specs: p.specs,
-      images: [],
+      images: productImages[p.slug] ?? [],
       cashPrice,
       minAdvance: Math.min(...plans.map((pl) => pl.advance)),
       plans: plans as never,
@@ -131,7 +142,7 @@ async function seed() {
       description: p.description,
       highlights: p.highlights,
       specs: p.specs,
-      images: p.images,
+      images: productImages[p.slug] ?? [],
       cashPrice,
       minAdvance: Math.min(...plans.map((pl) => pl.advance)),
       plans: plans as never,
@@ -149,6 +160,40 @@ async function seed() {
       },
     });
     ai++;
+  }
+
+  // Real catalog replacements for the fictional demo rows (see import-curated.mjs).
+  for (const p of curatedProducts) {
+    const cashPrice = rupeesToPaisa(p.cashPriceRs);
+    const plans = plansFor(cashPrice);
+    await Product.create({
+      name: p.name,
+      slug: p.slug,
+      sku: p.sku,
+      category: categoryBySlug.get(p.categorySlug),
+      brand: p.brandSlug ? (brandBySlug.get(p.brandSlug) ?? null) : null,
+      vendor: null,
+      vendorName: 'Qist Store Fulfilment',
+      description: p.description,
+      highlights: p.highlights,
+      specs: p.specs,
+      images: productImages[p.slug] ?? [],
+      cashPrice,
+      minAdvance: Math.min(...plans.map((pl) => pl.advance)),
+      plans: plans as never,
+      stock: { qty: 20, track: true, status: 'in_stock' },
+      tags: p.tags,
+      status: 'active',
+      featured: false,
+      ratingStats: { avg: 4.2, count: 14 },
+      soldCount: 120,
+      warranty: 'company',
+      delivery: { free: true, instantCities: ['Karachi', 'Lahore', 'Hyderabad'] },
+      seo: {
+        title: `${p.name} Price in Pakistan on Installment | Qist Store`,
+        description: `Buy the ${p.name} on easy monthly installments. Low advance, company warranty and free delivery across Pakistan.`,
+      },
+    });
   }
 
   // CMS pages

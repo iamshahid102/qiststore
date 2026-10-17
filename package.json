@@ -15,9 +15,13 @@
     "test": "npm run test -w server",
     "seed": "npm run seed -w server",
     "import:assets": "node scripts/import-assets.mjs",
+    "import:curated": "node scripts/import-curated.mjs",
+    "sync:images": "npm run sync:images -w server",
     "check:responsive": "node scripts/check-responsive.mjs",
     "check:brand": "node scripts/check-brand.mjs",
-    "check:console": "node scripts/check-console.mjs"
+    "check:console": "node scripts/check-console.mjs",
+    "check:images": "node scripts/check-images.mjs",
+    "check:admin": "node scripts/check-admin.mjs"
   },
   "devDependencies": {
     "concurrently": "^10.0.6",

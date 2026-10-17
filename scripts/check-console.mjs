@@ -19,7 +19,7 @@ const CHROME = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Applic
 const ROUTES = [
   '/',
   '/shop',
-  '/product/nova-x5-6gb-128gb',
+  '/product/oppo-a6c-4gb-64gb-12172',
   '/product-category/mobiles',
   '/cart',
   '/checkout',

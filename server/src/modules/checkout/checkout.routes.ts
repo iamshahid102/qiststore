@@ -4,29 +4,12 @@ import { Product, type ProductDoc } from '../../models/Product.js';
 import { Order, nextOrderNumber } from '../../models/Order.js';
 import { ok } from '../../utils/response.js';
 import { ApiError, asyncHandler } from '../../utils/errors.js';
-import { requireAuth, requireRole } from '../../middlewares/auth.js';
+import { requireAuth } from '../../middlewares/auth.js';
 import { validate } from '../../middlewares/validate.js';
 import { sensitiveLimiter } from '../../middlewares/rateLimit.js';
-import {
-  assertTransition,
-  buildSchedule,
-  computePlan,
-  ORDER_STATUSES,
-  type OrderStatus,
-  type Term,
-} from '../engine/installment.js';
+import { buildSchedule, computePlan, type Term } from '../engine/installment.js';
 
 export const checkoutRouter = Router();
-export const adminRouter = Router();
-
-/** Business-rule guard: an illegal state transition is a 409, not a 500. */
-function transitionOrConflict(from: OrderStatus, to: OrderStatus): void {
-  try {
-    assertTransition(from, to);
-  } catch {
-    throw ApiError.conflict(`Cannot move order from ${from} to ${to}`);
-  }
-}
 
 // ---------------------------------------------------------------------------
 // Shared item schema (quote + order)
@@ -251,76 +234,5 @@ checkoutRouter.get(
         })),
       })),
     );
-  }),
-);
-
-// ---------------------------------------------------------------------------
-// Admin — order queue, state transitions, verification review
-// ---------------------------------------------------------------------------
-adminRouter.get(
-  '/orders',
-  requireAuth,
-  requireRole('admin', 'staff'),
-  asyncHandler(async (req, res) => {
-    const filter: Record<string, unknown> = {};
-    if (typeof req.query.status === 'string' && req.query.status) filter.status = req.query.status;
-    const orders = await Order.find(filter)
-      .sort({ createdAt: -1 })
-      .limit(100)
-      .select('orderNumber status customer pricing items verification createdAt')
-      .lean();
-    ok(res, orders);
-  }),
-);
-
-const statusSchema = z.object({ status: z.enum(ORDER_STATUSES), note: z.string().optional() });
-
-adminRouter.patch(
-  '/orders/:orderNumber/status',
-  requireAuth,
-  requireRole('admin', 'staff'),
-  validate(statusSchema),
-  asyncHandler(async (req, res) => {
-    const { status, note } = req.body as { status: OrderStatus; note?: string };
-    const order = await Order.findOne({ orderNumber: req.params.orderNumber });
-    if (!order) throw ApiError.notFound('Order not found');
-    transitionOrConflict(order.status as OrderStatus, status);
-    order.status = status;
-    order.timeline.push({ status, at: new Date(), note: note ?? '' });
-    await order.save();
-    ok(res, { orderNumber: order.orderNumber, status: order.status });
-  }),
-);
-
-const verificationSchema = z.object({
-  decision: z.enum(['approved', 'rejected']),
-  reason: z.string().optional(),
-});
-
-adminRouter.patch(
-  '/orders/:orderNumber/verification',
-  requireAuth,
-  requireRole('admin', 'staff'),
-  validate(verificationSchema),
-  asyncHandler(async (req, res) => {
-    const { decision, reason } = req.body as { decision: 'approved' | 'rejected'; reason?: string };
-    const order = await Order.findOne({ orderNumber: req.params.orderNumber });
-    if (!order) throw ApiError.notFound('Order not found');
-
-    order.verification.status = decision;
-    order.verification.reviewedBy = req.user!.sub as never;
-    if (decision === 'approved') order.verification.approvedAt = new Date();
-    if (reason) order.verification.rejectionReason = reason;
-
-    const target: OrderStatus = decision === 'approved' ? 'approved' : 'rejected';
-    transitionOrConflict(order.status as OrderStatus, target);
-    order.status = target;
-    order.timeline.push({
-      status: target,
-      at: new Date(),
-      note: decision === 'approved' ? 'Verification approved' : `Verification rejected: ${reason ?? 'n/a'}`,
-    });
-    await order.save();
-    ok(res, { orderNumber: order.orderNumber, status: order.status, verification: order.verification.status });
   }),
 );

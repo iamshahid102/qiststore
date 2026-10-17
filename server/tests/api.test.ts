@@ -277,6 +277,154 @@ describe.skipIf(!dbAvailable)('API integration (requires MongoDB)', () => {
       expect(illegal.status).toBe(409);
       expect(illegal.body.error.code).toBe('CONFLICT');
     });
+
+    it('GET /admin/stats returns dashboard totals and a 14-day series', async () => {
+      const res = await request(app).get('/api/v1/admin/stats').set('Authorization', `Bearer ${adminToken}`);
+      expect(res.status).toBe(200);
+      expect(res.body.data.totals.orders).toBeGreaterThan(0);
+      expect(res.body.data.salesSeries).toHaveLength(14);
+      expect(res.body.data.statusCounts).toBeTypeOf('object');
+    });
+
+    it('GET /admin/products supports search + pagination and hides nothing from staff', async () => {
+      const res = await request(app)
+        .get('/api/v1/admin/products?q=nova&limit=5')
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(res.status).toBe(200);
+      expect(res.body.data[0].slug).toBe('nova-x5');
+      expect(res.body.meta.total).toBe(1);
+    });
+
+    it('creates, updates, archives and permanently deletes a product', async () => {
+      const cats = await request(app).get('/api/v1/admin/categories').set('Authorization', `Bearer ${adminToken}`);
+      const categoryId = cats.body.data[0].id;
+
+      const created = await request(app)
+        .post('/api/v1/admin/products')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({
+          name: 'Admin Test Phone',
+          cashPrice: 5000000,
+          category: categoryId,
+          plans: [
+            { term: 6, advance: 1000000, monthly: 750000 },
+            { term: 12, advance: 1200000, monthly: 400000 },
+          ],
+          stock: { qty: 4, track: true, status: 'in_stock' },
+          images: [{ url: 'https://res.cloudinary.com/demo/image/upload/sample.jpg', alt: 'test' }],
+        });
+      expect(created.status).toBe(201);
+      expect(created.body.data.slug).toBe('admin-test-phone');
+      expect(created.body.data.sku).toMatch(/^QS-/);
+
+      const slug = created.body.data.slug;
+      const updated = await request(app)
+        .patch(`/api/v1/admin/products/${slug}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ featured: true, stock: { qty: 3, track: true, status: 'in_stock' } });
+      expect(updated.status).toBe(200);
+
+      const detail = await request(app).get(`/api/v1/admin/products/${slug}`).set('Authorization', `Bearer ${adminToken}`);
+      expect(detail.body.data.featured).toBe(true);
+      expect(detail.body.data.minAdvance).toBe(1000000);
+      expect(detail.body.data.stock.qty).toBe(3);
+
+      const archived = await request(app)
+        .delete(`/api/v1/admin/products/${slug}`)
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(archived.status).toBe(200);
+      expect(archived.body.data.archived).toBe(true);
+
+      const removed = await request(app)
+        .delete(`/api/v1/admin/products/${slug}?permanent=true`)
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(removed.status).toBe(200);
+      const gone = await request(app).get(`/api/v1/admin/products/${slug}`).set('Authorization', `Bearer ${adminToken}`);
+      expect(gone.status).toBe(404);
+    });
+
+    it('rejects a plan whose advance is below 10% of the cash price', async () => {
+      const res = await request(app)
+        .post('/api/v1/admin/products')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ name: 'Bad Margin', cashPrice: 100000, plans: [{ term: 6, advance: 1000, monthly: 20000 }] });
+      expect(res.status).toBe(400);
+      expect(res.body.error.message).toMatch(/advance/i);
+    });
+
+    it('blocks and unblocks a customer account', async () => {
+      const list = await request(app)
+        .get('/api/v1/admin/customers?q=03001112222')
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(list.status).toBe(200);
+      const customerId = list.body.data[0].id;
+
+      const blocked = await request(app)
+        .patch(`/api/v1/admin/customers/${customerId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ status: 'blocked' });
+      expect(blocked.status).toBe(200);
+      expect(blocked.body.data.status).toBe('blocked');
+
+      const loginBlocked = await request(app)
+        .post('/api/v1/auth/login')
+        .send({ phone: '03001112222', password: 'Pass@123' });
+      expect(loginBlocked.status).toBe(403);
+
+      const unblocked = await request(app)
+        .patch(`/api/v1/admin/customers/${customerId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ status: 'active' });
+      expect(unblocked.status).toBe(200);
+      expect(unblocked.body.data.status).toBe('active');
+    });
+
+    it('records and resets an installment payment', async () => {
+      const created = await request(app)
+        .post('/api/v1/checkout/order')
+        .send({
+          customer: { name: 'Payment Test', phone: '03007778888' },
+          shippingAddress: { line1: 'House 7', city: 'Karachi', area: 'Clifton' },
+          items: [{ slug: 'nova-x5', qty: 1, term: 12 }],
+        });
+      const orderNumber = created.body.data.orderNumber;
+
+      const paid = await request(app)
+        .patch(`/api/v1/admin/orders/${orderNumber}/schedule/1`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ status: 'paid', method: 'cash', txnRef: 'TEST-1' });
+      expect(paid.status).toBe(200);
+      expect(paid.body.data.status).toBe('paid');
+
+      const detail = await request(app)
+        .get(`/api/v1/admin/orders/${orderNumber}`)
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(detail.body.data.payments.collected).toBe(390000);
+
+      const reset = await request(app)
+        .patch(`/api/v1/admin/orders/${orderNumber}/schedule/1`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send({ status: 'upcoming' });
+      expect(reset.status).toBe(200);
+      expect(reset.body.data.paidAmount).toBe(0);
+    });
+
+    it('exports orders as CSV', async () => {
+      const res = await request(app)
+        .get('/api/v1/admin/orders/export.csv')
+        .set('Authorization', `Bearer ${adminToken}`);
+      expect(res.status).toBe(200);
+      expect(res.headers['content-type']).toContain('text/csv');
+      expect(res.text.split('\n')[0]).toContain('Order Number');
+    });
+
+    it('denies product CRUD to customers', async () => {
+      const res = await request(app)
+        .post('/api/v1/admin/products')
+        .set('Authorization', `Bearer ${accessToken}`)
+        .send({ name: 'Nope', cashPrice: 1000 });
+      expect(res.status).toBe(403);
+    });
   });
 });
 

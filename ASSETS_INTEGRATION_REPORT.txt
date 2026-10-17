@@ -313,6 +313,151 @@ Koi manual path ya DB edit ki zaroorat nahi.
 6. Descriptions/highlights original copy hain jo product title aur specs se
    generate ki gayi hain; koi third-party text copy nahi kiya gaya.
 
+--------------------------------------------------------------------------------
+11) IMAGE PIPELINE FIX + CLOUDINARY (2026-10-17, follow-up)
+--------------------------------------------------------------------------------
+User report: website par kisi bhi product ki image show nahi ho rahi thi.
+
+11.1 Root cause (do problems thin)
+    a) `assets/images` ki saari 1,130 files invalid HTML 404 pages thin (already
+       documented in section 10).
+    b) Purane scraper ne image URL ka base galat banaya tha:
+         galat : https://www.qistbazaar.pk/images/<file>          → 404
+         sahi  : https://backend.qistbazaar.pk/public/images/<file> → 200
+       Is liye assets mai images kabhi download hi nahi hui thin.
+
+11.2 Fix — real source images + Cloudinary
+    Naya script: `server/src/seed/sync-images.ts`
+    Run: `npm run sync:images`
+
+    Script kya karta hai:
+      1. Live product sitemap (1,154 URLs) fetch karta hai.
+      2. Har imported product ko brand + model code + category ke basis par uske
+         asli source page se match karta hai.
+      3. Source page ka `og:image` parhta hai (yahi filename scraper ne assets
+         data mai record kiya tha) aur correct backend URL se image download
+         karta hai.
+      4. Image magic-bytes se validate karta hai (HTML ko image samajh kar
+         upload nahi karta).
+      5. Cloudinary par upload karta hai:
+             qiststore/products/<category>/<slug>
+         `overwrite: true` + `invalidate: true` ke saath, taake re-run safe ho.
+      6. Un demo products ke liye jo fictitious hain (Nova X5, Roadster,
+         Solar system etc.) ek clean branded 1200x1200 placeholder generate
+         karta hai (sharp) aur Cloudinary par upload karta hai:
+             qiststore/placeholders/<category>/<slug>
+      7. `server/src/seed/product-images.ts` manifest likhta hai (61 products,
+         Cloudinary secure URLs + publicId + alt + source page trace).
+      8. MongoDB ke har product ka `images` array update karta hai.
+
+11.3 Seed integration
+    `server/src/seed/seed.ts` ab `productImages` manifest import karta hai aur
+    legacy + asset dono loops mai `images` attach karta hai. Is liye fresh
+    `npm run seed` ke baad bhi images barqarar rehti hain (tested).
+
+11.4 Result  (updated in section 12 — placeholders ab zero hain)
+    - 50 asset products  → real source product photos (Cloudinary)
+    - 11 legacy/demo products → real source photos ya curated replacement
+    - 61 / 61 products ke paas real product photo hai
+    - DB `productsWithImages`: 61
+    - Cloudinary folders:
+        qiststore/products/{mobiles,laptops,led-tv,refrigerator,
+                            washing-machine,air-conditioner,bikes,
+                            tablet,solar}/<slug>
+        qiststore/placeholders/<category>/<slug>   (ab koi use nahi hota)
+
+11.5 Verification (fresh seed ke baad bhi)
+    API:
+      GET /api/v1/products (61)            → 61/61 Cloudinary imageUrl
+      Asset PDP (Infinix Hot 60i)          → images 1, specs 2, highlights 3,
+                                             plans 3, image URL Cloudinary
+    Real-browser audit (`npm run check:images`):
+      Home              images=50 loaded=50 pending=0
+      Shop              images=26 loaded=26 pending=0
+      Mobiles category  images=20 loaded=20 pending=0
+      Product detail    images=10 loaded=10 pending=0
+      Placeholder PDP   images=11 loaded=11 pending=0
+      product image failures: 0
+    Next.js image optimizer bhi Cloudinary URLs ko 200 image response deta hai.
+
+11.6 Naye commands
+      npm run sync:images     Cloudinary image sync (source → Cloudinary → DB)
+      npm run check:images    Real-browser product image audit
+
+11.7 Note
+    Kuch source photos chhoti resolution mai hain (e.g. 206x244) kyunke source
+    page ne wahin image di thi. Cards `object-contain` use karte hain, is liye
+    image stretch nahi hoti. Baqi tamam photos normal product photography hain.
+
+--------------------------------------------------------------------------------
+12) ZERO PLACEHOLDERS — FINAL CATALOG FIX (2026-10-17)
+--------------------------------------------------------------------------------
+User report: "ek bhi product ki image show nahi ho rahi" (screenshot mai letter
+tiles: N / S / L / I).
+
+12.1 Root cause
+    Live DB check: 54 products ke paas real Cloudinary photo thi, lekin 7 demo
+    products (Nova X5, Nova X5 Lite, Spark Go 2026, ProBook 450 G10,
+    ThinkPad E14 Gen 4, Tab A9, 5KW Solar System) source catalog mai maujood hi
+    nahi hain — inka koi asli photo exist nahi karta. Is liye ye 7 products
+    hamesha branded letter-tile placeholder par atak jate thay, aur 2 inme se
+    homepage "Deals of the Day" rail mai bhi aa rahe thay.
+
+12.2 Fix — fictitious demo rows ko real catalog products se replace kiya
+    Naya script: `scripts/import-curated.mjs`   (npm run import:curated)
+    Har demo slug ke against ek real product (same category) source page se
+    scrape hota hai: title, advance, description, source id, source page.
+
+    Replacements (demo slug → real product):
+      nova-x5-6gb-128gb         → OPPO A6c | 4GB-64GB            (Rs 5,900)
+      nova-x5-lite-4gb-64gb     → Vivo Y11d | 6GB-128GB          (Rs 8,900)
+      spark-go-2026             → Itel A100C | 4GB-64GB          (Rs 4,900)
+      probook-450-g10           → HP ProBook 450 G9 | i5-12th Gen| 16GB | 256GB SSD (Rs 20,400)
+      thinkpad-e14-gen4         → Lenovo ThinkPad X280 | i5-8th Gen | 8GB | 256GB SSD (Rs 17,550)
+      tab-a9                    → Samsung Galaxy Tab A7 | 3GB-32GB | 10" (Rs 19,200)
+      5kw-on-grid-solar-system  → Solar Generator 1KW | Complete Package (Rs 52,500)
+
+    Output: `server/src/seed/curated-products.ts` (7 typed records, sourcePage
+    ke saath). Seed inhe `REPLACED_BY_ASSETS` ke through demo rows ki jagah
+    create karta hai; `sync:images` inke exact source page se photo upload
+    karta hai (fuzzy matching ki zaroorat nahi).
+
+12.3 Result
+    - Products: 61  (57 asset/curated + 4 legacy jo source par real hain)
+    - products with images: 61 / 61
+    - branded placeholders: 0
+    - Deals of the Day rail: 8 / 8 real photos
+    - Home rails: 43 / 43 real photos, koi missing nahi
+    - Tablet aur Solar categories bhi ab real products + real photos ke saath
+
+12.4 Verification (fresh `npm run seed` ke baad)
+    API:
+      GET /api/v1/products (61)   → 61 Cloudinary imageUrl, 0 missing
+      GET /api/v1/deals/active    → 8 products, 8 real Cloudinary images
+      GET /api/v1/home/sections   → mobiles 8, laptops 8, led-tv 7,
+                                    refrigerator 6, air-con 8, washer 6
+                                    (sab Cloudinary)
+    Seed counts:
+      products: 61, assetProducts: 57, productsWithImages: 61
+    Real-browser audit (`npm run check:images`):
+      Home                    images=50 loaded=50 pending=0
+      Shop                    images=26 loaded=26 pending=0
+      Mobiles category        images=20 loaded=20 pending=0
+      Product detail          images=10 loaded=10 pending=0
+      Curated product detail  images=7  loaded=7  pending=0
+      product image failures: 0
+
+12.5 Commands
+      npm run import:curated   demo rows ke liye real replacements regenerate
+      npm run seed             catalog + images DB mai (re)create
+      npm run sync:images      photos → Cloudinary → product-images.ts → DB
+      npm run check:images     real-browser image audit
+
+    Recommended order (fresh setup):
+      npm run import:assets && npm run import:curated
+      npm run seed && npm run sync:images && npm run seed
+      npm run dev
+
 ================================================================================
 END OF REPORT
 ================================================================================

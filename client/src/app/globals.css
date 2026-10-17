@@ -138,6 +138,7 @@ body {
 
 /* Horizontal scroll containers (tables on mobile) */
 .qb-scroll-x {
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }

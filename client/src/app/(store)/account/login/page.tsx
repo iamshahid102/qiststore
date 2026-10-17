@@ -20,7 +20,13 @@ export default function LoginPage() {
     try {
       const data = await apiPost<StoredAuth>('/auth/login', { phone, password });
       saveAuth(data);
-      router.push('/account');
+
+      // Staff land in the dashboard; customers keep their account page. Only
+      // same-site paths are honoured so ?next= cannot redirect off-site.
+      const requested = new URLSearchParams(window.location.search).get('next');
+      const safeNext = requested && requested.startsWith('/') && !requested.startsWith('//') ? requested : null;
+      const isStaff = data.user.role === 'admin' || data.user.role === 'staff';
+      router.push(safeNext ?? (isStaff ? '/admin' : '/account'));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed');
       setLoading(false);

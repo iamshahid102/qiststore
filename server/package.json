@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed": "tsx src/seed/seed.ts",
+    "sync:images": "tsx src/seed/sync-images.ts",
     "db:dev": "tsx src/seed/dev-db.ts"
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "@types/node": "^26.6.5",
     "@types/supertest": "^6.0.3",
     "mongodb-memory-server": "^11.3.0",
+    "sharp": "^0.35.5",
     "supertest": "^7.3.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",

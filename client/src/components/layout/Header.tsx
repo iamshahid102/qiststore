@@ -4,9 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { LuHeart, LuMenu, LuPhone, LuSearch, LuShoppingCart, LuStore, LuTruck, LuUser, LuX } from 'react-icons/lu';
+import { LuHeart, LuMenu, LuPhone, LuSearch, LuShieldCheck, LuShoppingCart, LuStore, LuTruck, LuUser, LuX } from 'react-icons/lu';
 import { useCart } from '@/stores/cart';
 import { useWishlist } from '@/stores/wishlist';
+import { parseAuth, useAuthRaw } from '@/lib/auth';
 import { CategoryIcon } from '@/components/ui/CategoryIcon';
 import type { CategoryNode } from '@/types/api';
 
@@ -23,6 +24,9 @@ export function Header({ categories }: { categories: CategoryNode[] }) {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const rawAuth = useAuthRaw();
+  const auth = parseAuth(rawAuth);
+  const isStaff = auth?.user.role === 'admin' || auth?.user.role === 'staff';
   const items = useCart((s) => s.items);
   const wishlistCount = useWishlist((s) => s.items.length);
   const cartCount = items.reduce((n, i) => n + i.qty, 0);
@@ -55,12 +59,27 @@ export function Header({ categories }: { categories: CategoryNode[] }) {
             >
               <LuPhone className="h-3.5 w-3.5" /> 111-115-566
             </a>
-            <Link href="/account/login" className="font-medium hover:text-accent-200">
-              Log in
-            </Link>
-            <Link href="/account/register" className="hidden font-medium hover:text-accent-200 sm:inline">
-              Register
-            </Link>
+            {isStaff ? (
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-semibold ring-1 ring-inset ring-white/25 transition hover:bg-white/25"
+              >
+                <LuShieldCheck className="h-3.5 w-3.5" /> Admin panel
+              </Link>
+            ) : auth ? (
+              <Link href="/account" className="font-medium hover:text-accent-200">
+                {auth.user.name.split(' ')[0]}
+              </Link>
+            ) : (
+              <>
+                <Link href="/account/login" className="font-medium hover:text-accent-200">
+                  Log in
+                </Link>
+                <Link href="/account/register" className="hidden font-medium hover:text-accent-200 sm:inline">
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
