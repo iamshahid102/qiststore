@@ -1,0 +1,337 @@
+================================================================================
+QIST STORE — SPLIT VERCEL DEPLOYMENT REPORT
+Client (Next.js) aur Server (Express) — do ALAG Vercel projects
+================================================================================
+Report date   : 18 October 2026 (deploy window 19:05 – 19:35 UTC)
+Deployed by   : Vercel CLI 64.5.0 (Node 24.21.0), repo root = D:\Coding\QistStore
+Vercel account: iamshahid102-4620
+Team          : muhammad-shahids-projects-79212103 (team_ePxAgD4tb0DAMMa8JGcUcdkx)
+Git commit    : 3d0f183 ("deployment issues fix", branch main)
+Method        : `vercel deploy --prod --yes` (CLI) + Vercel REST API for settings
+                jo CLI se set nahi hote (rootDirectory, framework, protection,
+                env vars bulk push)
+
+--------------------------------------------------------------------------------
+0. GOAL
+--------------------------------------------------------------------------------
+Ek hi repo se do independent deployments:
+
+    ┌─────────────────────────────┐        ┌─────────────────────────────┐
+    │  qiststore-web  (Next.js)   │  HTTP  │  qiststore-api  (Express)   │
+    │  root: client/              │ ─────► │  root: server/              │
+    │  https://qiststore-web...   │ rewrite│  https://qiststore-api...   │
+    └─────────────────────────────┘        └──────────────┬──────────────┘
+                 ▲                                        │
+                 │ same-origin /api/v1                    │ mongoose
+                 │ (browser)                              ▼
+            end user                              MongoDB Atlas (qiststore)
+
+  Alag projects hone ki wajah se: alag build, alag env, alag scaling, aur ek
+  project ka failure doosre ko nahi girata.
+
+--------------------------------------------------------------------------------
+1. FINAL LIVE URLS
+--------------------------------------------------------------------------------
+  Storefront (web) : https://qiststore-web.vercel.app
+  API (server)     : https://qiststore-api.vercel.app
+  Health check     : https://qiststore-api.vercel.app/health
+
+  Note: purana single-project setup (Vercel Services) bhi live hai:
+        https://qiststore.vercel.app  → project `qiststore`
+        (fallback ke tor par rakha gaya; chahein to delete kar dein.)
+
+--------------------------------------------------------------------------------
+2. PROJECT CONFIGURATION (jo Vercel par set hai)
+--------------------------------------------------------------------------------
+  ┌──────────────┬────────────────────────────┬───────────┬──────────┐
+  │ Project      │ Project ID                 │ Root Dir  │ Framework│
+  ├──────────────┼────────────────────────────┼───────────┼──────────┤
+  │ qiststore-api│ prj_QTc7mT6DbRFpYTq2cbhkfsUP2Kgq │ server/   │ express  │
+  │ qiststore-web│ prj_5Jn0vWBzxQbaW2RHREEEYOOU8UWe │ client/   │ nextjs   │
+  └──────────────┴────────────────────────────┴───────────┴──────────┘
+
+  Dono par:
+    • Deployment Protection (Vercel Authentication) = OFF  → public site
+    • Password Protection = OFF
+    • Root Directory = repo root ke andar subfolder (server/ / client/)
+      → Vercel repo root se files uthata hai, build subfolder mein karta hai
+    • GitHub repo linked: iamshahid102/qiststore, production branch = main
+      (push par dono apne root directory se build honge)
+    • Node 24.x (platform default)
+
+  Root `vercel.json` (services config) in projects par APPLY NAHI hota kyunki
+  wo repo root par hai, aur har project ka root directory server/ ya client/
+  hai. Build log mein warning aati hai:
+      "The vercel.json file should be inside of the provided root directory."
+  Yeh EXPECTED hai — isi ka matlab hai ke purana services setup interfere nahi
+  kar raha.
+
+--------------------------------------------------------------------------------
+3. STEPS — JO EXACTLY KIYE GAYE (chronological)
+--------------------------------------------------------------------------------
+  STEP 1 — Pre-flight
+    • `npx vercel whoami` → iamshahid102-4620
+    • Repo clean, HEAD = 3d0f183, root `.vercel/` purane `qiststore` project se
+      linked (is liye CLI hamesha root link use karta hai — neeche point 4).
+    • Local secrets/build output upload na hon, is ke liye 2 naye ignore files:
+        server/.vercelignore   (.env, .env.*, dist, node_modules, *.tsbuildinfo)
+        client/.vercelignore   (.env, .env.*, .next, out, node_modules, *.log)
+      (Vercel CLI deploy par `.gitignore` APPLY NAHI karta — sirf
+       `.vercelignore`.)
+
+  STEP 2 — Projects create/fix
+    • `vercel link --yes --project qiststore-api` chalaya → project ban gaya,
+      lekin CLI ne repo ROOT ko project root maan kar framework = `services`
+      set kar diya (kyunki `.vercel` root par tha).
+    • Fix (REST API PATCH /v9/projects/<id>):
+        framework        = express
+        rootDirectory    = server
+        ssoProtection    = null
+      → ab project standalone Express hai.
+    • Web project REST API se banaya (POST /v11/projects):
+        name = qiststore-web, framework = nextjs
+      phir PATCH: rootDirectory = client, ssoProtection = null
+    • Root `.vercel/project.json` ko wapas combined `qiststore` project par
+      set kiya, aur subfolder ke `.vercel` links hata diye (CLI unhe use nahi
+      karta — wo root link hi uthata hai).
+
+  STEP 3 — Environment variables (production + preview)
+    REST API `POST /v10/projects/<id>/env` se bulk push kiya, values
+    `server/.env` file se read ki gayin — terminal par kabhi print nahi hui.
+    (Vercel par type = encrypted.)
+
+  STEP 4 — API deploy (pehle API, kyunki web ko us ka URL chahiye)
+      VERCEL_ORG_ID=team_ePxAgD4tb0DAMMa8JGcUcdkx \
+      VERCEL_PROJECT_ID=prj_QTc7mT6DbRFpYTq2cbhkfsUP2Kgq \
+      npx vercel deploy --prod --yes
+    Build: npm install (server deps) → `npm run build`
+           (tsc -p tsconfig.build.json && node scripts/write-dist-manifest.mjs)
+           → lambda dist/index.js, ESM (dist/package.json = {"type":"module"})
+    Result: READY, aliased → https://qiststore-api.vercel.app
+
+  STEP 5 — Web deploy
+      VERCEL_ORG_ID=team_ePxAgD4tb0DAMMa8JGcUcdkx \
+      VERCEL_PROJECT_ID=prj_5Jn0vWBzxQbaW2RHREEEYOOU8UWe \
+      npx vercel deploy --prod --yes
+    Build: npm install → `next build` (32 routes: 10 static, 22 dynamic)
+    Result: READY, aliased → https://qiststore-web.vercel.app
+
+  STEP 6 — Verification (neeche section 7 mein poora evidence)
+  STEP 7 — Docs update (README §12 + DEPLOYMENT_VERCEL.txt §10)
+
+  ⚠️ CLI note: `vercel` command repo root ki `.vercel/project.json` use karta
+     hai, is liye har project ke liye VERCEL_PROJECT_ID / VERCEL_ORG_ID pass
+     karna zaroori hai. Sirf `cd server && vercel` karne se wo combined project
+     par deploy kar deta (yeh test kiya gaya).
+
+--------------------------------------------------------------------------------
+4. WHY IDs / ENV OVERRIDE (CLI behaviour)
+--------------------------------------------------------------------------------
+  Vercel CLI project association ke liye cwd se upar `.vercel/project.json`
+  dhoondta hai. Repo root par `.vercel` maujood hai (combined project), is liye
+  `server/` ya `client/` ke andar se chalane par bhi wo root link hi use karta
+  hai. Isi liye:
+      VERCEL_ORG_ID + VERCEL_PROJECT_ID  → explicitly target project select
+  Verify: `VERCEL_PROJECT_ID=<id> npx vercel project inspect` → wahi project
+  dikhata hai.
+
+--------------------------------------------------------------------------------
+5. ENVIRONMENT VARIABLES (key-wise; secrets masked)
+--------------------------------------------------------------------------------
+  qiststore-api  (Production + Preview, encrypted):
+    MONGO_URI                 = mongodb+srv://***@cluster0.i28pafi.mongodb.net/qiststore
+    JWT_ACCESS_SECRET         = <set, server/.env se>
+    JWT_REFRESH_SECRET        = <set, server/.env se>
+    CORS_ORIGIN               = https://qiststore-web.vercel.app
+    CLOUDINARY_CLOUD_NAME     = <set>
+    CLOUDINARY_API_KEY        = <set>
+    CLOUDINARY_API_SECRET     = <set>
+    CLOUDINARY_FOLDER         = <set>
+    (NODE_ENV manually set NAHI — Vercel production par khud deta hai, aur
+     isi se refresh cookie `Secure` banti hai. PORT bhi platform deta hai.)
+
+  qiststore-web  (Production + Preview):
+    API_PROXY_URL             = https://qiststore-api.vercel.app     [build-time]
+    NEXT_PUBLIC_API_URL       = https://qiststore-api.vercel.app/api/v1
+    NEXT_PUBLIC_SITE_URL      = https://qiststore-web.vercel.app     [build-time]
+
+  ⚠️ NEXT_PUBLIC_* aur API_PROXY_URL build ke waqt inline hote hain → badalne
+     par web ko redeploy karna zaroori hai. API ke runtime vars badalne par bhi
+     naya deployment chahiye (existing instances purani values hold karte hain).
+
+--------------------------------------------------------------------------------
+6. REQUEST FLOW + CORS (kaise wire kiya)
+--------------------------------------------------------------------------------
+  Browser:
+      GET/POST https://qiststore-web.vercel.app/api/v1/...
+        ↓ (same-origin — koi preflight nahi, cookie bhi same-site)
+      Next.js rewrite (client/next.config.ts):
+        source      /api/v1/:path*
+        destination ${API_PROXY_URL}/api/v1/:path*   → qiststore-api
+        ↓
+      Express  /api/v1/*   (mongo/mongoose)
+
+  SSR (client/src/lib/api.ts):
+      NEXT_PUBLIC_API_URL set hai → server-to-server direct API call
+      (CORS is path par lagu nahi hota).
+
+  CORS (server side, create-app.ts):
+      cors({ origin: env.CORS_ORIGIN.split(','), credentials: true })
+      CORS_ORIGIN = https://qiststore-web.vercel.app
+      → sirf usi origin ko allow karta hai, koi bhi doosra browser origin block.
+
+  Auth cookies:
+      qb_rt — HttpOnly, Secure, SameSite=Lax, Path=/api/v1/auth
+      Same-origin proxy hone ki wajah se set/read dono theek chalte hain
+      (cross-site cookie ki problem nahi aati).
+
+--------------------------------------------------------------------------------
+7. VERIFICATION — EVIDENCE
+--------------------------------------------------------------------------------
+  A. API (direct)
+     GET  /health                          → 200 {"status":"ok","db":"connected"}
+     GET  /api/v1/products?limit=1         → 200 (total 61)
+     GET  /api/v1/categories/tree          → 200 (17 roots ke saath tree)
+     GET  /api/v1/admin/stats  (no token)  → 401
+     POST /api/v1/auth/login  (bad body)   → 400
+     GET  /api/v1/nope                     → 404 JSON envelope
+     Health stability: 15/15 consecutive hits = ok/connected
+
+  B. Web (through the proxy)
+     /  /shop  /search  /cart  /checkout  /admin  /blogs  /stores
+     /page/verification-process  /product/latitude-5420
+     /product-category/mobiles  /sitemap.xml  /robots.txt      → sab 200
+     /api/v1/products (web domain se)                          → 200
+     /sitemap.xml ke URLs naye domain par (NEXT_PUBLIC_SITE_URL inline) ✓
+
+  C. CORS
+     Origin: https://qiststore-web.vercel.app
+        → Access-Control-Allow-Origin: https://qiststore-web.vercel.app
+          Access-Control-Allow-Credentials: true
+        → OPTIONS preflight: 204 + Allow-Methods/Allow-Headers
+     Origin: https://evil.example.com
+        → koi Access-Control-Allow-Origin header nahi (blocked) ✓
+
+  D. Auth flow (web domain ke through, proxy)
+     POST /api/v1/auth/login (admin) → 200 + accessToken
+        Set-Cookie: qb_rt=...; Max-Age=604800; Path=/api/v1/auth;
+                    HttpOnly; Secure; SameSite=Lax
+     GET  /api/v1/admin/stats (Bearer) → 200 (totals/statusCounts...)
+
+  E. Automated suites
+     node scripts/verify-live.mjs https://qiststore-web.vercel.app https://qiststore-api.vercel.app
+        → 25/25 checks PASS, 3 consecutive runs (exit code 0)
+     BASE_URL=https://qiststore-web.vercel.app npm run check:console
+        → 14/14 routes CLEAN, 0 console errors / 0 page errors / 0 failed requests
+     image probe (/, /shop, /product/*, /cart)
+        → 0 failing requests (Cloudinary loader, koi /_next/image 404 nahi)
+     npm run typecheck  → exit 0
+     npm test           → 41 passed | 2 skipped
+     npm run build -w server → exit 0
+
+  F. Upload security (deployment files audit)
+     qiststore-api : 148 files, .env files = sirf .env.example
+     qiststore-web : 221 files, .env files = sirf .env.example / .env.local.example
+     .next = 0, dist = 0, node_modules = 0  → koi secret/build artifact upload nahi
+
+--------------------------------------------------------------------------------
+8. DEPLOYMENTS (Vercel par record)
+--------------------------------------------------------------------------------
+  qiststore-api (production)
+    19:12Z  dpl_8n28…  READY  qiststore-3z40x0wc6-…  (first deploy = prod)
+    19:20Z  dpl_FPCZ…  READY  qiststore-2jjn8p1k8-…  (cold-start hardening #1)
+    19:26Z  dpl_DvGk…  READY  qiststore-pghzxn1ij-…  (reconnect + /health wait)
+    19:32Z  dpl_9Dap…  READY  qiststore-c3p081wrl-…  (serverless pool tuning) ◄ current
+  qiststore-web (production)
+    19:13Z  dpl_Gasx…  READY  qiststore-f1gvmyodr-…  ◄ current
+
+  Aliases: qiststore-api.vercel.app → latest API prod deployment
+           qiststore-web.vercel.app → latest web prod deployment
+
+--------------------------------------------------------------------------------
+9. ISSUES FOUND & FIXED (deployment ke doran)
+--------------------------------------------------------------------------------
+  1) `vercel link` ne subfolder se chalne par bhi repo ROOT ko project root
+     maan liya → naya project framework=services ban gaya.
+     FIX: REST API se framework=express + rootDirectory=server set kiya; root
+          link wapas combined project par; subfolder .vercel links hata diye.
+
+  2) API par pehli requests 503 DB_UNAVAILABLE / /health "degraded" de rahi
+     thin (uptime seconds mein, ya idle-resume ke baad).
+     Wajah: Vercel process ko Mongo handshake se pehle listen karwa deta hai,
+            aur idle (frozen) instance resume hone par socket dead hoti hai.
+     FIX (server code):
+       • config/db.ts: connectDbOnce() + waitForDb() — initial handshake ka
+         intezar (bounded), wake par bounded reconnect, readyState 2 ho to
+         driver ka reconnect poll karna.
+       • create-app.ts: request-level waitForDb() middleware (max 1.5s) aur
+         /health par 3s tak settled state.
+       • mongoose pool serverless-friendly: maxPoolSize=10, minPoolSize=0,
+         maxIdleTimeMS=30s.
+     RESULT: 15/15 health hits ok, 3 full verify runs clean.
+
+  3) Build warning "The vercel.json file should be inside of the provided root
+     directory." — ERROR nahi; matlab root ka services config in standalone
+     projects par apply nahi ho raha (jo desired hai). Ignore karein.
+
+--------------------------------------------------------------------------------
+10. FILES (repo)
+--------------------------------------------------------------------------------
+  Naye:
+    server/.vercelignore            local .env / dist upload rokta hai
+    client/.vercelignore            local .env / .next upload rokta hai
+    DEPLOYMENT_REPORT.txt           yeh report
+  Modified (deployment ke liye):
+    server/src/config/db.ts         connectDbOnce / waitForDb / pool settings
+    server/src/create-app.ts        DB wait middleware + /health settled state
+    server/src/index.ts             bootstrap connectDbOnce() use karta hai
+    scripts/verify-live.mjs         split mode: API base doosra argument
+    README.md  §12                  naye split URLs + summary
+    DEPLOYMENT_VERCEL.txt  §10      split deployment guide (env map, commands)
+    .gitignore                      .vercel / .env.vercel
+
+  NOTE: yeh changes local repo mein UNCOMMITTED hain (jaan bujh kar commit nahi
+        kiye gaye). Vercel par deployed content isi working tree se gaya hai.
+
+--------------------------------------------------------------------------------
+11. REDEPLOY / ROLLBACK
+--------------------------------------------------------------------------------
+  Redeploy (repo root se):
+    # API
+    VERCEL_ORG_ID=team_ePxAgD4tb0DAMMa8JGcUcdkx \
+    VERCEL_PROJECT_ID=prj_QTc7mT6DbRFpYTq2cbhkfsUP2Kgq \
+    npx vercel deploy --prod --yes
+    # WEB
+    VERCEL_ORG_ID=team_ePxAgD4tb0DAMMa8JGcUcdkx \
+    VERCEL_PROJECT_ID=prj_5Jn0vWBzxQbaW2RHREEEYOOU8UWe \
+    npx vercel deploy --prod --yes
+
+  Logs:  npx vercel logs --deployment qiststore-api.vercel.app
+         npx vercel inspect <deployment-url> --logs
+  Rollback (dashboard): Project → Deployments → purana READY deployment →
+         "Promote to Production" (ya `vercel rollback <url>`).
+  Env change: Project → Settings → Environment Variables (ya REST API), phir
+         redeploy (web ke liye NEXT_PUBLIC_*/API_PROXY_URL par mandatory).
+  Git auto-deploy band karna ho: Settings → Git → Disconnect (phir sirf CLI).
+
+--------------------------------------------------------------------------------
+12. LIMITATIONS / NOTES
+--------------------------------------------------------------------------------
+  • Vercel serverless body limit ~4.5 MB (app ki 5 MB image limit se chhota).
+  • Serverless cold start ~1–3 s (Fluid compute; Mongo handshake ke saath).
+    waitForDb() is window ko gracefully handle karta hai.
+  • MongoDB Atlas par connections serverless instances ke saath share hote hain;
+    pool 10/instance rakha gaya hai. Traffic barhe to Atlas connection limit
+    (M0: 500) dekhna hoga.
+  • API aur web alag domains par hain: `/health` sirf API domain par hai.
+  • NEXT_PUBLIC_* / API_PROXY_URL build-time inline → change par rebuild.
+  • Purana combined project `qiststore` (https://qiststore.vercel.app) abhi
+    bhi live hai; dono setups ek hi Atlas DB use karte hain.
+  • Seed/migration scripts Vercel par nahi chalti — local se chalayein
+    (`npm run seed -w server` etc.), DB wahi Atlas.
+  • Deploy ke waqt Vercel ne pehli deployment ko automatically production
+    assign kiya (CLI ka standard behaviour pehli baar).
+
+================================================================================
+END OF REPORT
+================================================================================

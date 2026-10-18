@@ -1,0 +1,12 @@
+# Deployed as its own Vercel project (root directory = client/).
+# Vercel does not apply .gitignore to CLI uploads: .env.local must never ship
+# (it points at localhost), and .next is rebuilt on the build machine.
+.env
+.env.*
+!/.env.local.example
+
+.next
+out
+**/node_modules
+*.tsbuildinfo
+*.log

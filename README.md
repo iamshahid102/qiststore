@@ -431,7 +431,15 @@ everything else to the storefront, so each service receives the original request
 no server route has to change. The client's SSR fetches resolve the API from the incoming
 request's own origin, so no `NEXT_PUBLIC_API_URL` is needed.
 
-**Live:** <https://qiststore.vercel.app> (project `qiststore`, deployed 18 Oct 2026 with the Vercel
+**Live (split setup, two Vercel projects):** storefront <https://qiststore-web.vercel.app> ·
+API <https://qiststore-api.vercel.app> — project `qiststore-web` (root `client/`, Next.js) and
+`qiststore-api` (root `server/`, Express). The browser talks to `/api/v1` on the web origin, which
+Next rewrites to the API (`API_PROXY_URL`), so auth cookies stay same-origin; `CORS_ORIGIN` on the
+API allows the web domain for direct calls. Section 10 of **`DEPLOYMENT_VERCEL.txt`** has the env map,
+deploy commands and CORS checks. The earlier single-project services deployment
+(<https://qiststore.vercel.app>) is still live as a fallback.
+
+**Single project alternative:** <https://qiststore.vercel.app> (project `qiststore`, deployed 18 Oct 2026 with the Vercel
 CLI). `vercel link` on this repo sets the framework to `services` by itself — the dashboard step
 (Framework Preset = `Services`, Root Directory = repo root) is only needed when creating the project
 by hand. Env vars: `MONGO_URI`, `JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET`, `CORS_ORIGIN`, the three

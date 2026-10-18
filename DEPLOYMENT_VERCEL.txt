@@ -310,5 +310,94 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
   hai. Is case mein root vercel.json use nahi hoga.
 
 ================================================================================
+10. SPLIT DEPLOYMENT — DO ALAG VERCEL PROJECTS (live setup)
+================================================================================
+  Section 1-9 ek hi project (Vercel Services) ke liye hain. Yeh section do alag
+  projects wala setup document karta hai, jo is repo par live hai:
+
+  LIVE URLS
+    Storefront (web) : https://qiststore-web.vercel.app
+    API (server)     : https://qiststore-api.vercel.app
+    (Purana combined project `qiststore` bhi https://qiststore.vercel.app par
+     mojood hai — fallback ke tor par; jab chahein delete kar sakte hain.)
+
+  PROJECT SETTINGS (dono team muhammad-shahids-projects-79212103 mein)
+    ┌───────────────┬────────────────────┬───────────┬─────────────┐
+    │ Project       │ Root Directory     │ Framework │ Domain      │
+    ├───────────────┼────────────────────┼───────────┼─────────────┤
+    │ qiststore-api │ server             │ express   │ -api.vercel │
+    │ qiststore-web │ client             │ nextjs    │ -web.vercel │
+    └───────────────┴────────────────────┴───────────┴─────────────┘
+    Dono par Deployment Protection (Vercel Authentication) OFF hai — public
+    storefront ke liye zaroori. Dono GitHub repo se linked hain
+    (production branch main) — push par dono apne root directory se build hote
+    hain.
+
+  ENV VARS (production + preview)
+    qiststore-api:
+      MONGO_URI, JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, CLOUDINARY_CLOUD_NAME,
+      CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_FOLDER
+      CORS_ORIGIN = https://qiststore-web.vercel.app      ← browser origin
+      (NODE_ENV set NA karein — Vercel production par khud set karta hai
+       aur isi se refresh cookie `Secure` hoti hai.)
+    qiststore-web:
+      API_PROXY_URL        = https://qiststore-api.vercel.app   (build-time!)
+      NEXT_PUBLIC_API_URL  = https://qiststore-api.vercel.app/api/v1
+      NEXT_PUBLIC_SITE_URL = https://qiststore-web.vercel.app   (build-time!)
+
+  REQUEST FLOW (why CORS + proxy dono)
+    Browser → https://qiststore-web.vercel.app/api/v1/...   (same origin)
+           → Next rewrite (API_PROXY_URL) → https://qiststore-api.vercel.app
+    • Same-origin rehne se refresh cookie (qb_rt, Path=/api/v1/auth,
+      HttpOnly+Secure+SameSite=Lax) browser mein theek set/read hoti hai —
+      cross-site cookie ki samasya nahi aati.
+    • SSR (client/src/lib/api.ts) NEXT_PUBLIC_API_URL se seedha API ko call
+      karta hai (server-to-server, CORS lagu nahi hota).
+    • CORS sirf tab lagu hota hai jab koi API ko seedha browser se call kare;
+      isi liye CORS_ORIGIN = web domain hai (credentials: true).
+
+  DEPLOY (CLI)
+    ⚠️ CLI repo root ki `.vercel/project.json` (combined project) uthata hai,
+       is liye har project ke liye VERCEL_PROJECT_ID/VERCEL_ORG_ID pass karein:
+
+    # API
+    VERCEL_ORG_ID=team_ePxAgD4tb0DAMMa8JGcUcdkx \
+    VERCEL_PROJECT_ID=prj_QTc7mT6DbRFpYTq2cbhkfsUP2Kgq \
+    npx vercel deploy --prod --yes
+
+    # WEB
+    VERCEL_ORG_ID=team_ePxAgD4tb0DAMMa8JGcUcdkx \
+    VERCEL_PROJECT_ID=prj_5Jn0vWBzxQbaW2RHREEEYOOU8UWe \
+    npx vercel deploy --prod --yes
+
+    Dono commands repo root se chalti hain (root .vercelignore .env/dist/.next
+    upload se rokta hai). `The vercel.json file should be inside of the provided
+    root directory` warning expected hai — matlab root ka services config in
+    projects par apply nahi ho raha (jo sahi hai).
+    ⚠️ NEXT_PUBLIC_* aur API_PROXY_URL build-time inline hote hain: unhe badalne
+       ke baad WEB ko redeploy karna zaroori hai. API ke runtime vars badalne
+       par bhi redeploy (ya naya deployment) chahiye.
+
+  VERIFY
+    node scripts/verify-live.mjs https://qiststore-web.vercel.app https://qiststore-api.vercel.app
+       → 26 checks (web pages + API + auth guards + admin login/stats)
+    curl -s https://qiststore-api.vercel.app/health
+    # CORS allowed / blocked:
+    curl -si -H "Origin: https://qiststore-web.vercel.app" \
+      https://qiststore-api.vercel.app/api/v1/products?limit=1 | grep -i access-control-allow-origin
+    curl -si -H "Origin: https://evil.example.com" \
+      https://qiststore-api.vercel.app/api/v1/products?limit=1 | grep -i access-control-allow-origin
+      (doosri command se koi line nahi aani chahiye = blocked)
+
+  NOTES
+    • API cold start: platform process ko pehle listen karwa deta hai, is liye
+      server/src/config/db.ts ka waitForDb() pehle requests ko handshake ka
+      intezar karwata hai (aur wake-from-idle par reconnect karta hai) — warna
+      pehli requests 503 DB_UNAVAILABLE deti thin.
+    • Dono projects Node 24.x par hain; API ka upload body limit ~4.5 MB.
+    • Agar Git auto-deploy nahi chahiye: Project → Settings → Git → Disconnect
+      (phir sirf CLI deploys chalenge).
+
+================================================================================
 END OF GUIDE
 ================================================================================

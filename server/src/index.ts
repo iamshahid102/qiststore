@@ -1,5 +1,5 @@
 import { createApp } from './create-app.js';
-import { connectDb } from './config/db.js';
+import { connectDb, connectDbOnce } from './config/db.js';
 import { env } from './config/env.js';
 import { logger } from './utils/logger.js';
 
@@ -20,7 +20,9 @@ const IS_SERVERLESS = Boolean(process.env.VERCEL);
  */
 async function bootstrapDb(): Promise<void> {
   try {
-    await connectDb();
+    // connectDbOnce() exposes the attempt to waitForDb() so requests that land
+    // before the handshake finishes wait for it instead of answering 503.
+    await connectDbOnce();
   } catch (err) {
     if (env.NODE_ENV === 'production' && !IS_SERVERLESS) {
       logger.error({ err }, 'Failed to connect to MongoDB — refusing to start in production');

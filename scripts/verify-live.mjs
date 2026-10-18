@@ -1,13 +1,20 @@
 /**
  * Live deployment smoke test.
  *
+ *   # web + api on one domain (single project with Vercel services)
  *   node scripts/verify-live.mjs https://qiststore.vercel.app
  *
- * Checks both Vercel services (web = Next.js, api = Express) end to end:
- * public pages render, the API routes answer, auth guards reject anonymous and
- * bad requests, and SEO routes exist. Exits non-zero if any check fails.
+ *   # split projects: web domain + api domain
+ *   node scripts/verify-live.mjs https://qiststore-web.vercel.app https://qiststore-api.vercel.app
+ *
+ * Checks the web app (Next.js) and the API (Express) end to end: public pages
+ * render, the API routes answer, auth guards reject anonymous and bad requests,
+ * and SEO routes exist. `/health` is checked on the API host when one is given,
+ * otherwise on the web host (same-origin setup).
+ * Exits non-zero if any check fails.
  */
 const BASE = (process.argv[2] || 'https://qiststore.vercel.app').replace(/\/$/, '');
+const API_BASE = (process.argv[3] || BASE).replace(/\/$/, '');
 const ADMIN = { phone: '03000000001', password: 'Admin@123' };
 
 let failures = 0;
@@ -16,15 +23,15 @@ const record = (ok, label, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${label}${detail ? `  ${detail}` : ''}`);
 };
 
-const get = async (path, init) => {
-  const res = await fetch(`${BASE}${path}`, { redirect: 'manual', ...init });
+const get = async (path, init, base = BASE) => {
+  const res = await fetch(`${base}${path}`, { redirect: 'manual', ...init });
   const text = await res.text();
   return { status: res.status, text, headers: res.headers };
 };
 
-const expectStatus = async (path, expected, label = path, init) => {
+const expectStatus = async (path, expected, label = path, init, base = BASE) => {
   try {
-    const { status, text } = await get(path, init);
+    const { status, text } = await get(path, init, base);
     record(status === expected, `${label} → ${expected}`, `got ${status}${status !== expected ? ` ${text.slice(0, 120)}` : ''}`);
     return { status, text };
   } catch (err) {
@@ -37,7 +44,13 @@ const main = async () => {
   console.log(`Verifying ${BASE}\n`);
 
   // --- api service -----------------------------------------------------------
-  const health = await expectStatus('/health', 200, 'GET /health (api service)');
+  const health = await expectStatus(
+    '/health',
+    200,
+    `GET ${API_BASE}/health (api service)`,
+    undefined,
+    API_BASE,
+  );
   if (health.status === 200) {
     const body = JSON.parse(health.text);
     record(body.data?.db === 'connected', 'health reports db=connected', JSON.stringify(body.data));

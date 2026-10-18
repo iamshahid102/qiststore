@@ -4,7 +4,7 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import { env } from './config/env.js';
-import { isDbConnected } from './config/db.js';
+import { isDbConnected, waitForDb } from './config/db.js';
 import { globalLimiter } from './middlewares/rateLimit.js';
 import { errorHandler, notFoundHandler } from './middlewares/error.js';
 import { apiRouter } from './routes/index.js';
@@ -20,8 +20,18 @@ export function createApp() {
   app.use(cookieParser());
   app.use(globalLimiter);
 
-  app.get('/health', (_req, res) => {
-    const connected = isDbConnected();
+  // Serverless cold start: the platform can start serving before the MongoDB
+  // handshake finishes. Give that first attempt a short window so the first
+  // few requests do not fail with 503 DB_UNAVAILABLE.
+  app.use(async (_req, _res, next) => {
+    await waitForDb();
+    next();
+  });
+
+  app.get('/health', async (_req, res) => {
+    // A health probe may afford a slightly longer wait than a normal request:
+    // report the settled state instead of a momentary "reconnecting" blip.
+    const connected = isDbConnected() || (await waitForDb(3000));
     res.json({
       success: true,
       data: {

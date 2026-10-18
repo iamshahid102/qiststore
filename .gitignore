@@ -18,3 +18,4 @@ preview/
 .vercel
 # created by `vercel link` (holds VERCEL_OIDC_TOKEN)
 .env.vercel
+.env*
