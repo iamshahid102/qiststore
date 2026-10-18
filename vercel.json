@@ -1,16 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm install --no-audit --no-fund",
-  "buildCommand": "npm run build -w server && npm run build -w client",
-  "outputDirectory": "client/.next",
-  "rewrites": [
-    { "source": "/api/v1/:path*", "destination": "/api/index" },
-    { "source": "/health", "destination": "/api/index" }
-  ],
-  "functions": {
-    "api/index.ts": {
-      "maxDuration": 30,
-      "memory": 1024
+  "services": {
+    "web": {
+      "root": "client/",
+      "framework": "nextjs"
+    },
+    "api": {
+      "root": "server/",
+      "framework": "express"
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/health", "destination": { "service": "api" } },
+    { "source": "/api/v1/(.*)", "destination": { "service": "api" } },
+    { "source": "/(.*)", "destination": { "service": "web" } }
+  ]
 }

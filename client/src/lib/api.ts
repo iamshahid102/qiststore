@@ -5,8 +5,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000/api/v1
 /**
  * Where should SERVER-side fetches (SSR) hit the API?
  *  1. `NEXT_PUBLIC_API_URL` when explicitly configured (e.g. a dedicated API host)
- *  2. otherwise the SAME origin the request arrived on — on Vercel the API is a
- *     serverless function of this very project (see /vercel.json), and locally
+ *  2. otherwise the SAME origin the request arrived on — on Vercel the API is
+ *     the `api` service of this very project (see /vercel.json), and locally
  *     the Next rewrite proxies /api/v1 to Express on :5000
  *  3. localhost fallback for build-time / non-request contexts
  */

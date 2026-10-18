@@ -421,14 +421,20 @@ npm run check:console         # needs the web app running
 
 ## 12. Deployment Notes
 
-**One Vercel project (storefront + API) — default setup.**
-The repo is ready for a single-project Vercel deploy: `vercel.json` (root) builds both
-workspaces and rewrites `/api/v1/*` + `/health` into the serverless Express handler
-`api/index.mjs`. The client's SSR fetches resolve the API from the incoming request's own
-origin, so no `NEXT_PUBLIC_API_URL` is needed. Env vars to set on Vercel: `MONGO_URI`,
-`JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET`, `CORS_ORIGIN`, the three `CLOUDINARY_*`
-values and `NEXT_PUBLIC_SITE_URL`. Step-by-step commands, route map and troubleshooting:
-see **`DEPLOYMENT_VERCEL.txt`**.
+**One Vercel project with two services (storefront + API) — default setup.**
+`vercel.json` (root) declares the project as [Vercel Services](https://vercel.com/docs/services):
+a `web` service (`client/`, framework `nextjs`) and an `api` service (`server/`, framework
+`express`). Top-level rewrites send `/health` and `/api/v1/*` to the API service and
+everything else to the storefront, so each service receives the original request path and
+no server route has to change. The client's SSR fetches resolve the API from the incoming
+request's own origin, so no `NEXT_PUBLIC_API_URL` is needed.
+
+Setup requires one dashboard step: set the project's **Framework Preset to `Services`**
+(Settings → Build and Deployment) and keep Root Directory at the repo root; without it
+Vercel ignores the `services` block. Env vars: `MONGO_URI`, `JWT_ACCESS_SECRET`,
+`JWT_REFRESH_SECRET`, `CORS_ORIGIN`, the three `CLOUDINARY_*` values and
+`NEXT_PUBLIC_SITE_URL`. Step-by-step deploy commands, the full route map and
+troubleshooting: see **`DEPLOYMENT_VERCEL.txt`**.
 
 **Alternative — split hosts.**
 
@@ -442,8 +448,9 @@ see **`DEPLOYMENT_VERCEL.txt`**.
 Production hardening checklist: rotate JWT secrets, enable TLS + secure cookies (Vercel
 provides both), set `CORS_ORIGIN` to the deployed domain, configure Redis for caching and
 BullMQ for installment reminders, wire Sentry, and put a CDN in front of static assets.
-On Vercel, `NODE_ENV=production` is forced — the API then **fails fast** if MongoDB is
-unreachable.
+Locally the API **fails fast** in production mode if MongoDB is unreachable, but on Vercel
+(`VERCEL` env set) it starts in degraded mode and keeps retrying, because exiting would
+kill the serverless instance — `/health` reports `degraded` and DB routes answer 503.
 
 ---
 
