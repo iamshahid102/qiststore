@@ -3,13 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    // Product/catalogue imagery is delivered from Cloudinary's CDN.
-    remotePatterns: [
-      { protocol: 'https', hostname: 'res.cloudinary.com' },
-      { protocol: 'https', hostname: '*.cloudinary.com' },
-      { protocol: 'http', hostname: 'localhost' },
-    ],
-    formats: ['image/avif', 'image/webp'],
+    // Product/catalogue imagery lives on Cloudinary's CDN, so image sizing is
+    // delegated to Cloudinary's own transformation API instead of Vercel's
+    // optimizer — `/_next/image` is not served for a Next.js service in
+    // services mode (it 404s), which broke every optimized image in production.
+    loader: 'custom',
+    loaderFile: './src/lib/image-loader.ts',
   },
   async rewrites() {
     // On Vercel the API is the `api` service of this same project (see

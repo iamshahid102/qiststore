@@ -14,3 +14,7 @@ mongo-data/
 
 # generated UI previews (scripts/capture-previews.mjs)
 preview/
+
+.vercel
+# created by `vercel link` (holds VERCEL_OIDC_TOKEN)
+.env.vercel

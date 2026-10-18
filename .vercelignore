@@ -1,0 +1,21 @@
+# Files Vercel must not upload (source is built on the build machine instead).
+# NOTE: Vercel does not apply .gitignore to `vercel deploy`, so local env files
+# have to be excluded explicitly — otherwise secrets ship inside the deployment.
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.local.example
+
+# build output / caches (regenerated during `vercel build`)
+dist
+client/.next
+**/node_modules
+**/*.tsbuildinfo
+coverage
+preview
+
+# local dev data + capture artifacts
+mongo-data
+*.log

@@ -313,6 +313,8 @@ call through the Next proxy, ready for the admin UI upload form.
 | `npm run check:brand` | Real-browser theme/brand audit: tokens, cream surface, CTA colour, logo, banner, mobile header |
 | `npm run check:console` | Real-browser runtime audit: console errors/warnings, page errors, failed requests, 5xx across 14 routes |
 | `node scripts/capture-previews.mjs` | Saves desktop/mobile screenshots of key pages into `preview/` |
+| `node scripts/push-vercel-env.mjs` | Push `server/.env` values to the linked Vercel project (production + preview) without echoing them |
+| `node scripts/verify-live.mjs <url>` | Live deployment smoke test: API, auth guards, storefront pages, SEO routes (25 checks, non-zero exit on failure) |
 
 Both checkers drive the locally installed Chrome through `puppeteer-core` (no browser download) and
 expect the app to be running on `http://localhost:3000` (`BASE_URL` / `CHROME_PATH` overridable).
@@ -429,12 +431,21 @@ everything else to the storefront, so each service receives the original request
 no server route has to change. The client's SSR fetches resolve the API from the incoming
 request's own origin, so no `NEXT_PUBLIC_API_URL` is needed.
 
-Setup requires one dashboard step: set the project's **Framework Preset to `Services`**
-(Settings → Build and Deployment) and keep Root Directory at the repo root; without it
-Vercel ignores the `services` block. Env vars: `MONGO_URI`, `JWT_ACCESS_SECRET`,
-`JWT_REFRESH_SECRET`, `CORS_ORIGIN`, the three `CLOUDINARY_*` values and
-`NEXT_PUBLIC_SITE_URL`. Step-by-step deploy commands, the full route map and
+**Live:** <https://qiststore.vercel.app> (project `qiststore`, deployed 18 Oct 2026 with the Vercel
+CLI). `vercel link` on this repo sets the framework to `services` by itself — the dashboard step
+(Framework Preset = `Services`, Root Directory = repo root) is only needed when creating the project
+by hand. Env vars: `MONGO_URI`, `JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET`, `CORS_ORIGIN`, the three
+`CLOUDINARY_*` values and `NEXT_PUBLIC_SITE_URL` — `node scripts/push-vercel-env.mjs` pushes them
+from `server/.env` without printing values. Deployment Protection (Vercel Authentication) must be
+turned off for a public storefront. Step-by-step deploy commands, the full route map and
 troubleshooting: see **`DEPLOYMENT_VERCEL.txt`**.
+
+Two build details are load-bearing (both are easy to break, see the troubleshooting section of the
+deploy guide): the API service entry is `server/index.mjs` and `npm run build -w server` writes
+`dist/package.json` (`{"type":"module"}`) — without these the Express lambda is bundled as ESM but
+loaded as CommonJS and every API route returns 500. `.vercelignore` keeps `.env`, `dist/`, `.next/`
+and `node_modules/` out of the upload, because the Vercel CLI does **not** apply `.gitignore` on
+deploy. Verify a deployment with `node scripts/verify-live.mjs https://qiststore.vercel.app`.
 
 **Alternative — split hosts.**
 

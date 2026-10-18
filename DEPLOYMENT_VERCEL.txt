@@ -33,9 +33,19 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
   aur Express app pehle se /api/v1 par mounted hai — is liye server code mein
   koi path change nahi karna pada.
 
-  Express service = ek Vercel Function (Fluid compute). `server/src/index.ts`
-  hi entrypoint hai (Express preset isi file ko auto-detect karta hai —
-  app.{js,ts} / index.{js,ts} / server.{js,ts} / src/* allowed hain).
+  Express service = ek Vercel Function (Fluid compute).
+  Service entrypoint = `server/index.mjs` (root par, .mjs) — iska kaam sirf
+  Express preset ko satisfy karna aur compiled server ko boot karna hai.
+  ASLI server `server/src/index.ts` hai → `npm run build -w server` (tsc) se
+  `server/dist/index.js` banta hai; service lambda ke files `dist/` se aate
+  hain aur handler `index.js` hota hai. Isi liye:
+     • root `src/app.ts` ko `src/create-app.ts` rename kiya gaya (warna Express
+       preset `dist/app.js` ko entry maan kar bundle karta tha — jo sirf app
+       factory hai, listen nahi karta),
+     • `server/scripts/write-dist-manifest.mjs` build ke baad
+       `dist/package.json = {"type":"module"}` likhta hai, warna lambda root par
+       package.json na hone se Node `dist/*.js` ko CommonJS samajh kar
+       "Cannot use import statement outside a module" par crash kar deta hai.
   Mongo connection process ke saath ek baar banta hai aur warm instance par
   reuse hota hai.
 
@@ -47,9 +57,18 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
 2. FILES JO IS DEPLOYMENT KE LIYE HAIN
 --------------------------------------------------------------------------------
   vercel.json (root)            services + public rewrites (route table)
-  server/src/index.ts           Express entrypoint (listen + DB bootstrap);
-                                Vercel par DB fail hone par process.exit nahi,
-                                DEGRADED mode + retry (function zinda rehta hai)
+  server/index.mjs              service entrypoint (express preset detection +
+                                compiled server boot; .mjs = ESM guarantee)
+  server/scripts/
+    write-dist-manifest.mjs     dist/package.json ({"type":"module"}) — lambda
+                                ESM ke liye
+  .vercelignore                 .env / dist / .next / node_modules upload se
+                                bahar (Vercel yahan .gitignore APPLY NAHI karta)
+  server/src/create-app.ts      Express app factory (pehle src/app.ts — naam
+                                badla, warna galat entrypoint detect hota tha)
+  server/src/index.ts           Asli server: listen + DB bootstrap; Vercel par
+                                DB fail hone par process.exit nahi, DEGRADED
+                                mode + retry (function zinda rehta hai)
   server/src/config/env.ts      saare secrets env se (zod validated)
   client/next.config.ts         local dev proxy rewrite; Vercel par skip
                                 (VERCEL env set hone par) — API wahan service hai
@@ -94,19 +113,26 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
   theek chalte hain.
 
 --------------------------------------------------------------------------------
-4. DEPLOY — STEP BY STEP
+4. DEPLOY — STEP BY STEP (CLI se kiya gaya)
 --------------------------------------------------------------------------------
-  STEP 1 (zaroori) — project ka framework "Services" set karein
-    Vercel project → Settings → Build and Deployment → Framework Preset
-    → "Services" → Save.
-    ⚠️ Agar yeh Services par set nahi hoga to Vercel services config IGNORE kar
-      dega aur default detection (root package.json = koi Next nahi) chalegi —
-      deployment to banega lekin site/API theek se serve nahi hongi.
+  STEP 0 — CLI login (ek dafa)
+      npx vercel login            # device flow: link par ja kar Approve
+      npx vercel whoami
 
-  Root Directory: khali / repo root hi rakhein (client/ ya server/ NAHI).
+  STEP 1 — Project link (framework auto = services)
+      npx vercel link --yes --project qiststore
+    `vercel link` root vercel.json padh kar project banata hai aur framework
+    khud `services` set karta hai — output mein "Detected services: web
+    [Next.js], api [Express]" aata hai. Project Settings mein check:
+      framework = services, root directory = repo root (client/ ya server/ NAHI)
+    (Agar aap dashboard se kar rahe hain to Framework Preset "Services"
+    zaroori hai, warna `services` block IGNORE ho jayega.)
 
-  STEP 2 — Environment Variables (Settings → Environment Variables, teeno
-  environments: Production + Preview + Development)
+  STEP 2 — Environment Variables (ek command se)
+      node scripts/push-vercel-env.mjs --dry     # kaunse keys jayenge (no values)
+      node scripts/push-vercel-env.mjs           # server/.env se push (values
+                                                 # kabhi terminal par print nahi
+                                                 # hoti), target = prod+preview
       MONGO_URI              Atlas srV connection string
       JWT_ACCESS_SECRET      >= 8 chars random (local .env se alag)
       JWT_REFRESH_SECRET     >= 8 chars random, access se different
@@ -120,11 +146,20 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
       (NEXT_PUBLIC_API_URL set NA karein — same-origin use hota hai)
 
   STEP 3 — Deploy
-    Dashboard: vercel.com/new → repo import → Framework: Services → env vars
-               add karein → Deploy.
-    CLI:       npx vercel          (preview)
-               npx vercel --prod   (production)
-               (CLI 47.0.5+ chahiye Express service ke liye; `npx vercel -v`)
+    npx vercel                     # preview (pehle isi par test karein)
+    npx vercel --prod              # production → alias https://qiststore.vercel.app
+    Build logs: npx vercel inspect <deployment-url> --logs
+    Runtime logs: npx vercel logs --deployment <deployment-url>
+    (CLI 47.0.5+ chahiye Express service ke liye; yahan 64.5.0 chala)
+
+  STEP 3b — Deployment Protection OFF (public storefront ke liye)
+    Naya project by default "Vercel Authentication" ke saath aata hai
+    (ssoProtection = all_except_custom_domains) — public site par har visit
+    login maangti hai. Ek dafa OFF karein:
+      Vercel → Project → Settings → Deployment Protection → Vercel
+      Authentication → Disabled
+    (ya REST API: PATCH /v9/projects/<id> { "ssoProtection": null } — yehi
+     kiya gaya, phir live URL publicly 200 deta hai.)
 
   STEP 4 — Atlas access
     MongoDB Atlas → Network Access → Vercel ke IPs allow karein
@@ -137,8 +172,17 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
     CLI scripts Vercel par nahi chalti — local se hi chalayen, DB wahi Atlas.
 
 --------------------------------------------------------------------------------
-5. DEPLOY KE BAAD VERIFY (5 commands)
+5. DEPLOY KE BAAD VERIFY (ek command)
 --------------------------------------------------------------------------------
+  node scripts/verify-live.mjs https://qiststore.vercel.app
+    → 25 checks: /health (db=connected), /api/v1/products,
+      /categories/tree, admin stats without token → 401, bad login payload
+      → 400, unknown route → 404, storefront pages (/, /shop, /search, /cart,
+      /checkout, /blogs, /stores, /admin, /page/<slug>, /product/<slug>,
+      /product-category/<cat>), /sitemap.xml, /robots.txt, aur admin login
+      → token → /admin/stats 200. Non-zero exit = koi check fail.
+
+  Manual (agar script ke bagair dekhna ho):
   curl -s https://<domain>/health                    → {"success":true,... "db":"connected"}
   curl -s https://<domain>/api/v1/products?limit=1   → products JSON
   curl -s -o /dev/null -w "%{http_code}\n" https://<domain>/shop        → 200
@@ -146,6 +190,23 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
   curl -s -o /dev/null -w "%{http_code}\n" https://<domain>/api/v1/nope → 404
   Browser: /admin par login (admin phone/password seed se), /account/register,
   ek product page, cart → checkout (installment quote).
+
+--------------------------------------------------------------------------------
+5b. LIVE DEPLOYMENT (18 October 2026)
+--------------------------------------------------------------------------------
+  Production URL : https://qiststore.vercel.app
+  Project        : qiststore (team muhammad-shahids-projects-79212103)
+  Framework      : services (web = client/ Next.js, api = server/ Express)
+  Env vars       : MONGO_URI, JWT_ACCESS_SECRET, JWT_REFRESH_SECRET,
+                   CORS_ORIGIN, CLOUDINARY_{CLOUD_NAME,API_KEY,API_SECRET,
+                   FOLDER}, NEXT_PUBLIC_SITE_URL — sab prod + preview par
+  Result         : node scripts/verify-live.mjs → ALL CHECKS PASSED (25/25)
+
+  ⚠️ PURANI DEPLOYMENT NOTE: pehli (fail hui) build se pehle `.vercelignore`
+     maujood nahi tha, is liye us deployment mein `server/.env` source files
+     ke saath chala gaya tha. Ab .vercelignore usse rokta hai, lekin safety ke
+     liye Atlas password + JWT secrets rotate karna behtar hai, aur us purane
+     deployment ko delete kar sakte hain (Vercel → Deployments).
 
 --------------------------------------------------------------------------------
 6. LOCAL VERIFICATION (jo is repo par run ho chuki hai)
@@ -165,9 +226,16 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
     npm run typecheck    → exit 0
     npm test             → exit 0  (41 passed | 2 skipped)
     npm run build -w client → exit 0 (32 routes: 10 static, 22 dynamic)
+    npm run build -w server → exit 0 (tsc + dist/package.json manifest)
+    node server/dist/index.js + curl /health + /api/v1/products → 200 (local,
+                           real Atlas DB — wahi file jo Vercel chalata hai)
     vercel.json          → published Vercel schema ke hisaab se fields check
                            (services.root required, framework slug, rewrite
                            destination { service } — sab match)
+
+  Vercel par (real deployment):
+    preview deploy → API + pages 200 → phir --prod → 25/25 checks pass
+    (dekhein section 5b).
 
 --------------------------------------------------------------------------------
 7. TROUBLESHOOTING
@@ -191,6 +259,24 @@ Important: yeh guide "Vercel Services" use karti hai (1 project = 2 services).
       upload karein.
   Sitemap/canonical mein localhost
     → NEXT_PUBLIC_SITE_URL set karein, phir redeploy.
+  Build fail: "TypeError: Cannot read properties of undefined (reading 'readFile')"
+  (api service, message "Using TypeScript 7.0.2 (local user-provided)")
+    → Vercel ke Express builder ka typecheck TypeScript 7 ke saath crash karta
+      hai. Fix: server workspace mein TypeScript 5.9 pin karein
+      (`npm i -w server -D typescript@5.9.3`). Client Next build TS 7 par
+      theek chalta hai, is liye wahan change ki zaroorat nahi.
+  Build pass, lekin har API route 500 / FUNCTION_INVOCATION_FAILED aur log mein
+  "SyntaxError: Cannot use import statement outside a module /var/task/*.js"
+    → lambda ko ESM chahiye tha. Do cheezein zaroori hain: (1) service
+      entrypoint `.mjs` ho (server/index.mjs) aur (2) build `dist/package.json`
+      mein {"type":"module"} likhe — `server/scripts/write-dist-manifest.mjs`.
+  API 500 aur log mein entrypoint `app.ts` ho raha ho
+    → `server/src/app.ts` ka naam aisa na rakhein jo Vercel entry detection
+      pakad le (app/index/server/main). Renamed to `src/create-app.ts`.
+  Deployment mein .env upload ho gaya
+    → .vercelignore add karein; Vercel CLI .gitignore ko deploy par APPLY NAHI
+      karta (log mein "Uploading 7.7MB" se pata chalta hai). Verify:
+      REST API /v6/deployments/<id>/files → koi `.env` file nahi honi chahiye.
   Build logs: Vercel → Deployments → (deployment) → Build Logs (per service).
   Runtime logs: Vercel → Logs (service = api), pino JSON lines.
 
