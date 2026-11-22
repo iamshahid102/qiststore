@@ -10,7 +10,12 @@ import type { AdminProduct } from '@/types/admin';
 
 export default function EditProductPage() {
   const params = useParams<{ slug: string }>();
-  const slug = params?.slug;
+  // Remount per slug so switching products starts from a clean loading state
+  // instead of resetting state synchronously inside the fetch effect.
+  return <ProductEditor key={params?.slug} slug={params?.slug} />;
+}
+
+function ProductEditor({ slug }: { slug?: string }) {
   const [product, setProduct] = useState<AdminProduct | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -18,7 +23,6 @@ export default function EditProductPage() {
   useEffect(() => {
     if (!slug) return;
     let cancelled = false;
-    setLoading(true);
     adminGet<AdminProduct>(`/products/${encodeURIComponent(slug)}`)
       .then((res) => {
         if (!cancelled) setProduct(res.data);

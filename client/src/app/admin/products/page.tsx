@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   LuArchive,
   LuCheck,
@@ -41,6 +42,15 @@ const STATUS_TABS = [
 ];
 
 export default function AdminProductsPage() {
+  return (
+    <Suspense fallback={<Spinner label="Loading products…" />}>
+      <ProductsView />
+    </Suspense>
+  );
+}
+
+function ProductsView() {
+  const searchParams = useSearchParams();
   const [rows, setRows] = useState<AdminProductRow[]>([]);
   const [meta, setMeta] = useState<PaginationMeta | null>(null);
   const [categories, setCategories] = useState<AdminCategory[]>([]);
@@ -49,61 +59,74 @@ export default function AdminProductsPage() {
   const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
-  const [status, setStatus] = useState('all');
+  const [search, setSearch] = useState(() => searchParams.get('q')?.trim() ?? '');
+  const [query, setQuery] = useState(() => searchParams.get('q')?.trim() ?? '');
+  const [status, setStatus] = useState(() => {
+    const initial = searchParams.get('status');
+    return initial && STATUS_TABS.some((tab) => tab.value === initial) ? initial : 'all';
+  });
   const [category, setCategory] = useState('');
-  const [stock, setStock] = useState('');
+  const [stock, setStock] = useState(() => searchParams.get('stock') ?? '');
   const [sort, setSort] = useState('newest');
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [archiveTarget, setArchiveTarget] = useState<AdminProductRow | null>(null);
 
-  // Read deep-link filters once (dashboard links to ?stock=low).
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const s = params.get('status');
-    if (s && STATUS_TABS.some((tab) => tab.value === s)) setStatus(s);
-    const st = params.get('stock');
-    if (st) setStock(st);
-    const q = params.get('q');
-    if (q) {
-      setSearch(q);
-      setQuery(q);
-    }
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setQuery(search.trim()), 350);
-    return () => clearTimeout(timer);
-  }, [search]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [query, status, category, stock, sort]);
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const params = new URLSearchParams({ page: String(page), limit: '20', status, sort });
-      if (query) params.set('q', query);
-      if (category) params.set('category', category);
-      if (stock) params.set('stock', stock);
-      const res = await adminGet<AdminProductRow[]>(`/products?${params.toString()}`);
-      setRows(res.data);
-      setMeta(res.meta ?? null);
-      setSelected(new Set());
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load products');
-    } finally {
-      setLoading(false);
-    }
+  const fetchProducts = useCallback(() => {
+    const params = new URLSearchParams({ page: String(page), limit: '20', status, sort });
+    if (query) params.set('q', query);
+    if (category) params.set('category', category);
+    if (stock) params.set('stock', stock);
+    return adminGet<AdminProductRow[]>(`/products?${params.toString()}`);
   }, [page, status, sort, query, category, stock]);
 
+  const applyProducts = useCallback((data: AdminProductRow[], meta?: PaginationMeta | null) => {
+    setRows(data);
+    setMeta(meta ?? null);
+    setSelected(new Set());
+  }, []);
+
+  // Refetch after a bulk action — user initiated, spinner allowed.
+  const load = useCallback(async () => {
+    try {
+      const res = await fetchProducts();
+      applyProducts(res.data, res.meta);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load products');
+    }
+  }, [applyProducts, fetchProducts]);
+
+  // Debounced search: only refetch (and reset to page 1) when the value changes.
   useEffect(() => {
-    void load();
-  }, [load]);
+    const next = search.trim();
+    if (next === query) return;
+    const timer = setTimeout(() => {
+      setLoading(true);
+      setPage(1);
+      setQuery(next);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [search, query]);
+
+  // Initial + filter driven fetch. State moves only inside promise callbacks.
+  useEffect(() => {
+    let cancelled = false;
+    fetchProducts()
+      .then((res) => {
+        if (cancelled) return;
+        applyProducts(res.data, res.meta);
+        setError('');
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load products');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [applyProducts, fetchProducts]);
 
   useEffect(() => {
     adminGet<AdminCategory[]>('/categories')
@@ -218,7 +241,12 @@ export default function AdminProductsPage() {
             <button
               key={tab.value}
               type="button"
-              onClick={() => setStatus(tab.value)}
+              onClick={() => {
+                if (tab.value === status) return;
+                setLoading(true);
+                setPage(1);
+                setStatus(tab.value);
+              }}
               className={cn(
                 'relative rounded-t-lg px-3 py-2 text-xs font-bold transition',
                 status === tab.value ? 'text-brand-700' : 'text-ink-900/50 hover:text-ink-900',
@@ -246,7 +274,16 @@ export default function AdminProductsPage() {
             />
           </div>
           <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
-            <select value={category} onChange={(event) => setCategory(event.target.value)} className={`${selectClass} sm:w-44`} aria-label="Filter by category">
+            <select
+              value={category}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setCategory(event.target.value);
+              }}
+              className={`${selectClass} sm:w-44`}
+              aria-label="Filter by category"
+            >
               <option value="">All categories</option>
               {groupedCategories.map((parent) => (
                 <optgroup key={parent.id} label={parent.name}>
@@ -259,12 +296,30 @@ export default function AdminProductsPage() {
                 </optgroup>
               ))}
             </select>
-            <select value={stock} onChange={(event) => setStock(event.target.value)} className={`${selectClass} sm:w-36`} aria-label="Filter by stock">
+            <select
+              value={stock}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setStock(event.target.value);
+              }}
+              className={`${selectClass} sm:w-36`}
+              aria-label="Filter by stock"
+            >
               <option value="">Any stock</option>
               <option value="low">Low stock (≤5)</option>
               <option value="out">Out of stock</option>
             </select>
-            <select value={sort} onChange={(event) => setSort(event.target.value)} className={`${selectClass} sm:w-40`} aria-label="Sort products">
+            <select
+              value={sort}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setSort(event.target.value);
+              }}
+              className={`${selectClass} sm:w-40`}
+              aria-label="Sort products"
+            >
               <option value="newest">Newest first</option>
               <option value="oldest">Oldest first</option>
               <option value="name">Name A–Z</option>
@@ -444,7 +499,18 @@ export default function AdminProductsPage() {
           </div>
         )}
 
-        {meta && <Pagination page={meta.page} pages={meta.pages} total={meta.total} onPage={setPage} label="products" />}
+        {meta && (
+          <Pagination
+            page={meta.page}
+            pages={meta.pages}
+            total={meta.total}
+            onPage={(next) => {
+              setLoading(true);
+              setPage(next);
+            }}
+            label="products"
+          />
+        )}
       </Card>
 
       <div className="flex flex-wrap items-center gap-2 text-[11px] text-ink-900/45">

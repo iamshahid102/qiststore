@@ -93,6 +93,7 @@ export function Header({ categories }: { categories: CategoryNode[] }) {
             width={900}
             height={490}
             priority
+            unoptimized
             className="h-8 w-auto sm:h-10 lg:h-11"
           />
         </Link>

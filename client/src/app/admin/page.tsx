@@ -24,22 +24,42 @@ export default function AdminDashboardPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
+  const fetchStats = useCallback(() => adminGet<AdminStats>('/stats'), []);
+
+  // Manual refresh / retry path: user initiated, so it may flip the spinner.
   const load = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await adminGet<AdminStats>('/stats');
+      const res = await fetchStats();
       setStats(res.data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [fetchStats]);
 
+  // Initial fetch. State is only touched from the promise callbacks so the
+  // effect body never triggers a synchronous cascading render.
   useEffect(() => {
-    void load();
-  }, [load]);
+    let cancelled = false;
+    fetchStats()
+      .then((res) => {
+        if (cancelled) return;
+        setStats(res.data);
+        setError('');
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load dashboard');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchStats]);
 
   if (loading && !stats) {
     return <Spinner label="Loading your store overview…" />;

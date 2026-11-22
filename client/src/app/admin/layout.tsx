@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import {
   LuArrowUpRight,
   LuClipboardList,
@@ -46,6 +46,10 @@ const NAV: { section: string; items: NavItem[] }[] = [
   },
 ];
 
+// localStorage is unavailable while the route is prerendered, so the gate is
+// revealed only after hydration (server snapshot says "not mounted").
+const subscribeToNothing = () => () => {};
+
 function isActive(pathname: string, item: NavItem): boolean {
   if (item.exact) return pathname === item.href;
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -68,22 +72,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const auth = useMemo(() => parseAuth(raw), [raw]);
   const pathname = usePathname();
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(subscribeToNothing, () => true, () => false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [verifiedRole, setVerifiedRole] = useState<string | null>(null);
   const [denied, setDenied] = useState(false);
 
   const isStaff = auth?.user.role === 'admin' || auth?.user.role === 'staff';
 
-  // Avoid rendering the wrong gate during hydration (auth lives in localStorage).
+  // An expired session is reported by the API client; the shell owns the redirect.
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Close the mobile drawer on navigation.
-  useEffect(() => {
-    setDrawerOpen(false);
-  }, [pathname]);
+    function onSessionExpired(event: Event) {
+      const next = (event as CustomEvent<{ next?: string }>).detail?.next ?? '/admin';
+      router.push(`/account/login?next=${encodeURIComponent(next)}`);
+    }
+    window.addEventListener('admin:session-expired', onSessionExpired);
+    return () => window.removeEventListener('admin:session-expired', onSessionExpired);
+  }, [router]);
 
   // Confirm the token with the API (a stale/forged role in localStorage is not trusted).
   useEffect(() => {
@@ -172,7 +176,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       >
         <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
           <Link href="/admin" className="flex min-w-0 items-center gap-2.5">
-            <Image src="/brand/logo.png" alt="Qist Store" width={900} height={490} className="h-8 w-auto rounded bg-white/95 px-1.5 py-1" />
+            <Image
+              src="/brand/logo.png"
+              alt="Qist Store"
+              width={900}
+              height={490}
+              unoptimized
+              className="h-8 w-auto rounded bg-white/95 px-1.5 py-1"
+            />
           </Link>
           <span className="ml-auto rounded-md bg-white/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white/70">
             Admin
@@ -200,6 +211,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     <Link
                       key={item.href}
                       href={item.href}
+                      onClick={() => setDrawerOpen(false)}
                       className={cn(
                         'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition',
                         active

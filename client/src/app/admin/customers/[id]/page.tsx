@@ -49,12 +49,15 @@ export default function AdminCustomerDetailPage() {
   const [confirmBlock, setConfirmBlock] = useState(false);
   const [role, setRole] = useState('');
 
+  const fetchCustomer = useCallback(() => adminGet<AdminCustomerDetail>(`/customers/${id}`), [id]);
+
+  // Refetch after a role / block change — user initiated, spinner allowed.
   const load = useCallback(async () => {
     if (!id) return;
     setLoading(true);
     setError('');
     try {
-      const res = await adminGet<AdminCustomerDetail>(`/customers/${id}`);
+      const res = await fetchCustomer();
       setData(res.data);
       setRole(res.data.customer.role);
     } catch (err) {
@@ -62,11 +65,29 @@ export default function AdminCustomerDetailPage() {
     } finally {
       setLoading(false);
     }
-  }, [id]);
+  }, [id, fetchCustomer]);
 
+  // Initial fetch. State is only touched from the promise callbacks.
   useEffect(() => {
-    void load();
-  }, [load]);
+    if (!id) return;
+    let cancelled = false;
+    fetchCustomer()
+      .then((res) => {
+        if (cancelled) return;
+        setData(res.data);
+        setRole(res.data.customer.role);
+        setError('');
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load customer');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [id, fetchCustomer]);
 
   async function toggleBlock() {
     if (!data) return;

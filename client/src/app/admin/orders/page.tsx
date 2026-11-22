@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { LuClipboardList, LuDownload, LuEye, LuSearch, LuX } from 'react-icons/lu';
 import { adminDownloadCsv, adminGet } from '@/lib/admin-api';
 import { formatDate, formatRs } from '@/lib/format';
@@ -36,6 +37,15 @@ const STATUS_TABS = [
 ];
 
 export default function AdminOrdersPage() {
+  return (
+    <Suspense fallback={<Spinner label="Loading orders…" />}>
+      <OrdersView />
+    </Suspense>
+  );
+}
+
+function OrdersView() {
+  const searchParams = useSearchParams();
   const [rows, setRows] = useState<AdminOrderRow[]>([]);
   const [meta, setMeta] = useState<OrdersMeta | null>(null);
   const [loading, setLoading] = useState(true);
@@ -43,57 +53,64 @@ export default function AdminOrdersPage() {
   const [notice, setNotice] = useState('');
   const [exporting, setExporting] = useState(false);
 
-  const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
-  const [status, setStatus] = useState('all');
+  const [search, setSearch] = useState(() => searchParams.get('q')?.trim() ?? '');
+  const [query, setQuery] = useState(() => searchParams.get('q')?.trim() ?? '');
+  const [status, setStatus] = useState(() => {
+    const initial = searchParams.get('status');
+    return initial && STATUS_TABS.includes(initial) ? initial : 'all';
+  });
   const [paymentMethod, setPaymentMethod] = useState('');
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [sort, setSort] = useState('newest');
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const s = params.get('status');
-    if (s && STATUS_TABS.includes(s)) setStatus(s);
-    const q = params.get('q');
-    if (q) {
-      setSearch(q);
-      setQuery(q);
-    }
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setQuery(search.trim()), 350);
-    return () => clearTimeout(timer);
-  }, [search]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [query, status, paymentMethod, from, to, sort]);
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const params = new URLSearchParams({ page: String(page), limit: '20', status, sort });
-      if (query) params.set('q', query);
-      if (paymentMethod) params.set('paymentMethod', paymentMethod);
-      if (from) params.set('from', from);
-      if (to) params.set('to', to);
-      const res = await adminGet<AdminOrderRow[]>(`/orders?${params.toString()}`);
-      setRows(res.data);
-      setMeta((res.meta as OrdersMeta) ?? null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load orders');
-    } finally {
-      setLoading(false);
-    }
+  const fetchOrders = useCallback(() => {
+    const params = new URLSearchParams({ page: String(page), limit: '20', status, sort });
+    if (query) params.set('q', query);
+    if (paymentMethod) params.set('paymentMethod', paymentMethod);
+    if (from) params.set('from', from);
+    if (to) params.set('to', to);
+    return adminGet<AdminOrderRow[]>(`/orders?${params.toString()}`);
   }, [page, status, sort, query, paymentMethod, from, to]);
 
+  const applyOrders = useCallback((res: { data: AdminOrderRow[]; meta?: PaginationMeta }) => {
+    setRows(res.data);
+    setMeta((res.meta as OrdersMeta) ?? null);
+  }, []);
+
+  // Debounced search: only refetch (and reset to page 1) when the value changes.
   useEffect(() => {
-    void load();
-  }, [load]);
+    const next = search.trim();
+    if (next === query) return;
+    const timer = setTimeout(() => {
+      setLoading(true);
+      setPage(1);
+      setQuery(next);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [search, query]);
+
+  // Initial + filter driven fetch. State moves only inside promise callbacks,
+  // so the effect body never triggers a synchronous cascading render.
+  useEffect(() => {
+    let cancelled = false;
+    fetchOrders()
+      .then((res) => {
+        if (cancelled) return;
+        applyOrders(res);
+        setError('');
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load orders');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [applyOrders, fetchOrders]);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -124,6 +141,7 @@ export default function AdminOrdersPage() {
   }
 
   function clearFilters() {
+    setLoading(true);
     setSearch('');
     setQuery('');
     setStatus('all');
@@ -131,6 +149,7 @@ export default function AdminOrdersPage() {
     setFrom('');
     setTo('');
     setSort('newest');
+    setPage(1);
   }
 
   return (
@@ -163,7 +182,12 @@ export default function AdminOrdersPage() {
               <button
                 key={tab}
                 type="button"
-                onClick={() => setStatus(tab)}
+                onClick={() => {
+                  if (tab === status) return;
+                  setLoading(true);
+                  setPage(1);
+                  setStatus(tab);
+                }}
                 className={cn(
                   'relative flex shrink-0 items-center gap-1.5 rounded-t-lg px-3 py-2 text-xs font-bold transition',
                   status === tab ? 'text-brand-700' : 'text-ink-900/50 hover:text-ink-900',
@@ -200,7 +224,11 @@ export default function AdminOrdersPage() {
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:flex">
             <select
               value={paymentMethod}
-              onChange={(event) => setPaymentMethod(event.target.value)}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setPaymentMethod(event.target.value);
+              }}
               className={`${selectClass} lg:w-40`}
               aria-label="Filter by payment method"
             >
@@ -214,7 +242,11 @@ export default function AdminOrdersPage() {
             <input
               type="date"
               value={from}
-              onChange={(event) => setFrom(event.target.value)}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setFrom(event.target.value);
+              }}
               className={inputClass}
               aria-label="From date"
               title="From date"
@@ -222,12 +254,25 @@ export default function AdminOrdersPage() {
             <input
               type="date"
               value={to}
-              onChange={(event) => setTo(event.target.value)}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setTo(event.target.value);
+              }}
               className={inputClass}
               aria-label="To date"
               title="To date"
             />
-            <select value={sort} onChange={(event) => setSort(event.target.value)} className={`${selectClass} lg:w-40`} aria-label="Sort orders">
+            <select
+              value={sort}
+              onChange={(event) => {
+                setLoading(true);
+                setPage(1);
+                setSort(event.target.value);
+              }}
+              className={`${selectClass} lg:w-40`}
+              aria-label="Sort orders"
+            >
               <option value="newest">Newest first</option>
               <option value="oldest">Oldest first</option>
               <option value="value-desc">Highest value</option>
@@ -331,7 +376,18 @@ export default function AdminOrdersPage() {
           </div>
         )}
 
-        {meta && <Pagination page={meta.page} pages={meta.pages} total={meta.total} onPage={setPage} label="orders" />}
+        {meta && (
+          <Pagination
+            page={meta.page}
+            pages={meta.pages}
+            total={meta.total}
+            onPage={(next) => {
+              setLoading(true);
+              setPage(next);
+            }}
+            label="orders"
+          />
+        )}
       </Card>
     </div>
   );

@@ -35,7 +35,6 @@ import {
   PageHeader,
   Spinner,
   StatusBadge,
-  cn,
   inputClass,
   selectClass,
 } from '@/components/admin/ui';
@@ -68,12 +67,18 @@ export default function AdminOrderDetailPage() {
 
   const [paymentTarget, setPaymentTarget] = useState<AdminScheduleEntry | null>(null);
 
+  const fetchOrder = useCallback(
+    () => adminGet<AdminOrderDetail>(`/orders/${encodeURIComponent(orderNumber ?? '')}`),
+    [orderNumber],
+  );
+
+  // Refetch after a workflow action — user initiated, spinner allowed.
   const load = useCallback(async () => {
     if (!orderNumber) return;
     setLoading(true);
     setError('');
     try {
-      const res = await adminGet<AdminOrderDetail>(`/orders/${encodeURIComponent(orderNumber)}`);
+      const res = await fetchOrder();
       setOrder(res.data);
       setNotes(res.data.notes ?? '');
       setNextStatus(res.data.allowedTransitions[0] ?? '');
@@ -82,11 +87,30 @@ export default function AdminOrderDetailPage() {
     } finally {
       setLoading(false);
     }
-  }, [orderNumber]);
+  }, [orderNumber, fetchOrder]);
 
+  // Initial fetch. State is only touched from the promise callbacks.
   useEffect(() => {
-    void load();
-  }, [load]);
+    if (!orderNumber) return;
+    let cancelled = false;
+    fetchOrder()
+      .then((res) => {
+        if (cancelled) return;
+        setOrder(res.data);
+        setNotes(res.data.notes ?? '');
+        setNextStatus(res.data.allowedTransitions[0] ?? '');
+        setError('');
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load order');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [orderNumber, fetchOrder]);
 
   async function run(action: () => Promise<unknown>, successMessage: string) {
     setBusy(true);

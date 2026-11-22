@@ -12,7 +12,9 @@
  *
  * Anything that is not a Cloudinary image (brand assets in `client/public`,
  * admin-pasted URLs from other hosts) is returned untouched, so those request
- * the file/CDN URL directly.
+ * the file/CDN URL directly. Local `/public` assets are marked `unoptimized` at
+ * the call site: a custom loader cannot resize a static file, and Next warns
+ * about exactly that when the loader output does not depend on the width.
  */
 export interface ImageLoaderArgs {
   src: string;

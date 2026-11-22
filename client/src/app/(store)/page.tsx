@@ -90,6 +90,7 @@ export default async function HomePage() {
               width={1600}
               height={873}
               priority
+              unoptimized
               sizes="(max-width: 1023px) 100vw, 50vw"
               className="h-auto w-full rounded-2xl shadow-[0_24px_60px_-30px_rgba(11,27,57,0.55)]"
             />

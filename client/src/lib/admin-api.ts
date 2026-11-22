@@ -73,8 +73,14 @@ async function request<T>(
     }
     clearAuth();
     if (typeof window !== 'undefined') {
-      const next = window.location.pathname;
-      window.location.assign(`/account/login?next=${encodeURIComponent(next)}`);
+      // The admin shell owns routing, so it performs the redirect (no raw
+      // location write from a data layer, which also keeps the Next.js lint
+      // contract for internal navigation intact).
+      window.dispatchEvent(
+        new CustomEvent<{ next: string }>('admin:session-expired', {
+          detail: { next: window.location.pathname },
+        }),
+      );
     }
     throw new AdminApiError('Your session expired. Please log in again.', 401, 'UNAUTHORIZED');
   }

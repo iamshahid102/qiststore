@@ -55,7 +55,14 @@ export function Footer() {
         {/* Brand + contact */}
         <div className="lg:col-span-4">
           <div className="inline-flex rounded-xl bg-white px-3 py-2">
-            <Image src="/brand/logo.png" alt="Qist Store" width={900} height={490} className="h-9 w-auto" />
+            <Image
+              src="/brand/logo.png"
+              alt="Qist Store"
+              width={900}
+              height={490}
+              unoptimized
+              className="h-9 w-auto"
+            />
           </div>
           <p className="mt-4 max-w-sm text-sm leading-6 text-brand-200">
             Buy now, pay monthly. Electronics and home essentials on easy, transparent installment plans —

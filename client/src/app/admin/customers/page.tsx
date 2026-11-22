@@ -34,34 +34,56 @@ export default function AdminCustomersPage() {
   const [page, setPage] = useState(1);
   const [blockTarget, setBlockTarget] = useState<AdminCustomerRow | null>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setQuery(search.trim()), 350);
-    return () => clearTimeout(timer);
-  }, [search]);
+  const fetchCustomers = useCallback(() => {
+    const params = new URLSearchParams({ page: String(page), limit: '20', status });
+    if (query) params.set('q', query);
+    return adminGet<AdminCustomerRow[]>(`/customers?${params.toString()}`);
+  }, [page, status, query]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [query, status]);
-
+  // Refetch after a mutation (block / unblock) — user initiated, spinner allowed.
   const load = useCallback(async () => {
-    setLoading(true);
-    setError('');
     try {
-      const params = new URLSearchParams({ page: String(page), limit: '20', status });
-      if (query) params.set('q', query);
-      const res = await adminGet<AdminCustomerRow[]>(`/customers?${params.toString()}`);
+      const res = await fetchCustomers();
       setRows(res.data);
       setMeta(res.meta ?? null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load customers');
-    } finally {
-      setLoading(false);
     }
-  }, [page, status, query]);
+  }, [fetchCustomers]);
 
+  // Debounced search: only refetch (and reset to page 1) when the value changes.
   useEffect(() => {
-    void load();
-  }, [load]);
+    const next = search.trim();
+    if (next === query) return;
+    const timer = setTimeout(() => {
+      setLoading(true);
+      setPage(1);
+      setQuery(next);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [search, query]);
+
+  // Initial + filter driven fetch. State is only touched from the promise
+  // callbacks, keeping the effect body free of synchronous renders.
+  useEffect(() => {
+    let cancelled = false;
+    fetchCustomers()
+      .then((res) => {
+        if (cancelled) return;
+        setRows(res.data);
+        setMeta(res.meta ?? null);
+        setError('');
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load customers');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchCustomers]);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -118,7 +140,11 @@ export default function AdminCustomersPage() {
           </div>
           <select
             value={status}
-            onChange={(event) => setStatus(event.target.value)}
+            onChange={(event) => {
+              setLoading(true);
+              setPage(1);
+              setStatus(event.target.value);
+            }}
             className={`${selectClass} sm:w-44`}
             aria-label="Filter by account status"
           >
@@ -221,7 +247,18 @@ export default function AdminCustomersPage() {
           </div>
         )}
 
-        {meta && <Pagination page={meta.page} pages={meta.pages} total={meta.total} onPage={setPage} label="customers" />}
+        {meta && (
+          <Pagination
+            page={meta.page}
+            pages={meta.pages}
+            total={meta.total}
+            onPage={(next) => {
+              setLoading(true);
+              setPage(next);
+            }}
+            label="customers"
+          />
+        )}
       </Card>
 
       <div className="flex items-center gap-2 text-[11px] text-ink-900/45">
