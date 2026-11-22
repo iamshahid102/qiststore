@@ -21,7 +21,8 @@
     "check:brand": "node scripts/check-brand.mjs",
     "check:console": "node scripts/check-console.mjs",
     "check:images": "node scripts/check-images.mjs",
-    "check:admin": "node scripts/check-admin.mjs"
+    "check:admin": "node scripts/check-admin.mjs",
+    "verify:live": "node scripts/verify-live.mjs"
   },
   "devDependencies": {
     "concurrently": "^10.0.6",

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { Category } from '../../models/Category.js';
 import { Brand } from '../../models/Category.js';
-import { Product, type ProductDoc } from '../../models/Product.js';
+import { Product } from '../../models/Product.js';
 import { Deal, HomeSection } from '../../models/Content.js';
 import { ok, paginationMeta } from '../../utils/response.js';
 import { ApiError, asyncHandler } from '../../utils/errors.js';
@@ -133,7 +133,6 @@ catalogRouter.get(
     const { page, limit, skip } = parsePagination(q as unknown as Record<string, unknown>);
 
     const filter: Record<string, unknown> = { status: 'active' };
-    const and: Record<string, unknown>[] = [];
 
     if (q.category) {
       const cat = await Category.findOne({ slug: q.category });

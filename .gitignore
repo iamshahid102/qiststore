@@ -12,8 +12,11 @@ coverage/
 *.tsbuildinfo
 mongo-data/
 
-# generated UI previews (scripts/capture-previews.mjs)
+# generated UI previews (scripts/check-admin.mjs)
 preview/
+
+# scratch files (audit dumps, probe output)
+.tmp/
 
 .vercel
 # created by `vercel link` (holds VERCEL_OIDC_TOKEN)
